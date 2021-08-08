@@ -1,0 +1,76 @@
+:root {
+
+  /**
+     * Dark Theme
+     */
+  &[theme="dark"] {
+    --text: rgba(222, 222, 222, 1);
+    --text-primary: rgba(139, 207, 222, 1);
+    --text-secondary: rgba(190, 190, 190, 1);
+    /* rgba(32, 32, 32, 1);*/
+    --header: rgba(0, 0, 0, .5);
+    --background: rgba(0, 0, 0, .33);
+    // 阴影
+    --shadow: rgba(0, 0, 0, 0.15);
+    // 阴影-扩散
+    --shadow-active: rgba(0, 0, 0, 0.3);
+    --border: rgba(127, 127, 127, .6);
+    --card: rgba(48, 48, 48, 1);
+    --card-active: rgba(64, 64, 64, 1);
+    // 卡片-透明
+    --card-alpha: rgba(48, 48, 48, .8);
+    --tags: rgba(64, 64, 64, 1);
+    --theme: rgba(139, 207, 222, 1);
+    --theme-primary: rgba(49, 98, 135, 1);
+    /*
+      --primary: rgba(139, 207, 222, 1);
+      --primary-dark: rgba(49, 98, 135, 1);
+      --secondary: rgba(215, 171, 214, 1);
+      --secondary-dark: rgba(178, 143, 206, 1);
+      --primary-text: rgba(204, 205, 196, 1);
+      --secondary-text: rgba(200, 206, 198, 1);
+      */
+
+    img {
+      filter: brightness(.8);
+    }
+
+    /**
+     * Markdown覆盖样式
+     *
+     */
+    .markdown-body {
+      color: var(--text-secondary) !important;
+      background: var(--card) !important;
+
+      font-family: InfoDisplay;
+
+      .v-show-content {
+        background: none !important;
+      }
+
+      h1,
+      h2 {
+        border-bottom: 1px solid #2a2a2f !important;
+      }
+
+      hr {
+        background-color: #2a2a2f !important;
+      }
+
+      pre {
+        padding: 0 !important;
+        background-color: #0a0806 !important;
+      }
+
+      tr {
+        background-color: var(--card) !important;
+      }
+
+      blockquote {
+        color: #aab3bd
+      }
+
+    }
+  }
+}
