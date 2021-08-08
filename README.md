@@ -1,7 +1,6 @@
 # Watora
 
 一个单页面博客应用
-test
 
 ## Build Setup
 
