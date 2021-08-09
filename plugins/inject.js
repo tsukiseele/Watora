@@ -1,5 +1,6 @@
-import Cookie from 'js-cookie'
+// import Cookie from 'js-cookie'
 import Md5 from 'blueimp-md5'
+import ImagesResource from '../assets/resource/images.json'
 
 export default ({
   app
@@ -28,4 +29,21 @@ export default ({
     }
     return false;
   });
+
+  inject("imgs", initResource());
+}
+
+function initResource() {
+  const resource = {};
+  Object.keys(ImagesResource.src).forEach(key => {
+    const value = ImagesResource.src[key];
+    if (!value) return;
+    if (value instanceof Array) {
+      resource[key] = []
+      value.forEach(item => resource[key].push(`${ImagesResource.prefix}${item}`))
+    } else {
+      resource[key] = `${ImagesResource.prefix}${value}`;
+    }
+  })
+  return resource;
 }

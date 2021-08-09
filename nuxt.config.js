@@ -39,12 +39,28 @@ export default {
     baseURL: process.env.BASE_URL || "http://localhost",
     // 请求重试次数
     retry: {
-      retries: 3
+      retries: 2
     },
+    // prefix: "/api/",
     // 证书
     credentials: true,
     // 启用代理
     proxy: true
+  },
+  proxy: {
+    "/api": {
+      // 使用本地API
+      target: "http://localhost:10737/",
+      // 使用远程API
+      // target: "https://www.tsukiseele.com/api/",
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": ""
+      }
+    },
+    "*": {
+      changeOrigin: true,
+    }
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -77,10 +93,7 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    "@nuxtjs/axios"
-    // '@nuxtjs/proxy'
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/proxy"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

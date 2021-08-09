@@ -9,6 +9,8 @@
                 i.fa.fa-tag(style="padding: 0 .2rem;") 
                 span {{ item.articleType || '未分类'}} 
               span.timeline-item-title {{ item.articleTitle }}
+    div adasdasd{{$imgs.avatar}}
+    img(:src="$imgs.avatar")
 
 </template>
 
