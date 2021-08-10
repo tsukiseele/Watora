@@ -1,4 +1,8 @@
 export default {
+  server: {
+    host: process.env.BASE_HOST || "localhost",
+    port: process.env.BASE_PORT || 80
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "Watora - TsukiSeele的个人小站",
@@ -35,31 +39,29 @@ export default {
     ]
   },
   axios: {
-    // 接口域名定义
-    baseURL: process.env.BASE_URL || "http://localhost",
+    // 接口域名
+    baseURL: `http://${process.env.BASE_HOST || "localhost"}:${process.env.BASE_PORT || 80}`,
     // 请求重试次数
     retry: {
       retries: 2
     },
+    // 接口前缀
     // prefix: "/api/",
     // 证书
     credentials: true,
-    // 启用代理
+    // 使用代理
     proxy: true
   },
   proxy: {
     "/api": {
       // 使用本地API
-      target: "http://localhost:10737/",
+      target: process.env.API_URL || "http://localhost/",
       // 使用远程API
       // target: "https://www.tsukiseele.com/api/",
       changeOrigin: true,
       pathRewrite: {
         "^/api": ""
       }
-    },
-    "*": {
-      changeOrigin: true,
     }
   },
   // Global CSS: https://go.nuxtjs.dev/config-css

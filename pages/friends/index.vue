@@ -25,7 +25,10 @@ export default {
   async asyncData({ app }) {
     let links = [];
     try {
-      links = await app.$api.getAllLink();
+      const res = await app.$api.getAllLink();
+      if (res.success) {
+        links = res.data;
+      }
     } catch (e) {
       console.log(e);
     }

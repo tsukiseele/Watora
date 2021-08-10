@@ -23,17 +23,14 @@ export default {
   fetch() {
     this.$store.commit("header", { title: "『时间线』" });
   },
-  async asyncData({app, isDev, route, store, env, params, query, req, res, redirect}) {
+  async asyncData({app, isDev, route, store, env, params, query, redirect}) {
     let archives;
-    let error;
-    try {
-      archives = await app.$api.getAllArticles();
-    } catch(e) {
-      error = `Failed: ${e}`
+    const res = await app.$api.getAllArticles();
+    if (res.success) {
+      archives = res.data;
     }
     return {
-      archives,
-      error
+      archives
     }
   },
   computed: {

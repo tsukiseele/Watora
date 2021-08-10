@@ -14,7 +14,7 @@
       li(@click="$router.push('/timeline')")
         i.fa.fa-list 
         | 归档
-      li(@click="$router.push('/links')") 
+      li(@click="$router.push('/friends')") 
         i.fa.fa-at 
         | 友链
       li(@click="$router.push('/about')")

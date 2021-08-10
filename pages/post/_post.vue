@@ -9,7 +9,7 @@
         :class="asideClasses",
         :style="asideStyles"
       )
-      TheArchives(:articles="articleArch")
+      TheArchives(:articles="arch")
     .post
       .error(v-if="error") {{ error }}
       .post-item-wrap(
@@ -39,7 +39,7 @@ export default {
   data: () => ({
     page: null,
     articles: null,
-    articleArch: null,
+    arch: null,
     error: null,
     itemActive: null,
     // 侧栏
@@ -130,13 +130,15 @@ export default {
     }
   },
   async asyncData({ app, params }) {
-    let articles = [];
-    let articleArch = [];
+    let articles = null;
+    let arch = null;
     let error = null;
     const page = params.post;
     try {
-      articles = await app.$api.getArticlePage(page || 1, 6);
-      articleArch = await app.$api.getAllArticles();
+      const artRes = await app.$api.getArticlePage(page || 1, 6);
+      const archRes = await app.$api.getAllArticles();
+      articles = artRes.success ? artRes.data : []
+      arch = archRes.success ? archRes.data : []
     } catch (e) {
       error = "获取数据失败！";
       console.error(e);
@@ -144,7 +146,7 @@ export default {
     return {
       page,
       articles,
-      articleArch,
+      arch,
       error
     };
   },
