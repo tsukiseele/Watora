@@ -2,6 +2,8 @@
 #footer
   .footer-wrap
     .footer-info
+      div
+        img(src="https://count.getloli.com/get/@nlo.li?theme=rule34" alt="counter")
       p © {{ new Date().getFullYear() }} by 
         a.info--developer(href="https://github.com/tsukiseele" target="_blank") TsukiSeele 
         | All Rights Reserved.
@@ -25,7 +27,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  // height: 100px;
+  padding: 0.5rem 0;
   font-family: InfoDisplay;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;

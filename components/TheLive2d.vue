@@ -10,7 +10,7 @@
         >
         </dialogue>
         <live2d
-          v-show="isLive2d"
+          v-if="isLive2d"
           :height="height"
           :width="width"
           :modelPath="modelPath"
@@ -39,19 +39,19 @@ import Live2dTools from "~/components/TheLive2dTools";
 
 export default {
   components: {
-    Live2dTools,
+    Live2dTools
   },
   data: () => ({
     // 模型资源
     models: [
       {
         src:
-          "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@1.0.0/model/HyperdimensionNeptunia/nepgearswim/index.json",
+          "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@1.0.0/model/HyperdimensionNeptunia/nepgearswim/index.json"
       },
       {
         src:
-          "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@1.0.0/model/HyperdimensionNeptunia/nepswim/index.json",
-      },
+          "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@1.0.0/model/HyperdimensionNeptunia/nepswim/index.json"
+      }
     ],
     modelIndex: 0,
 
@@ -66,37 +66,37 @@ export default {
       {
         icon: "fa-home",
         color: "",
-        on: "home",
+        on: "home"
       },
       {
         icon: "fa-refresh",
-        on: "change",
+        on: "change"
       },
       {
         icon: "fa-camera",
-        on: "save",
+        on: "save"
       },
       {
         icon: "fa-info",
-        on: "about",
-      },
+        on: "about"
+      }
     ],
     // 显示Live2D
     isLive2d: true,
     // 显示对话框
     isDialogue: true,
     //
-    message: "",
+    message: ""
   }),
   computed: {
     modelPath() {
       return this.models[this.modelIndex].src;
-    },
+    }
   },
   watch: {
     message(newVal, oldVal) {
       this.$refs.dialogue.showMessage(newVal, 10000);
-    },
+    }
   },
   mounted() {
     setInterval(async () => {
@@ -129,8 +129,8 @@ export default {
     },
     showMessage(message) {
       this.message = message;
-    },
-  },
+    }
+  }
 };
 </script>
 

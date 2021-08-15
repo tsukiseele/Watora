@@ -1,7 +1,7 @@
 <template lang="pug">
 .post-item(@click="$router.push(to)")
   .item-cover-box
-    img.item-cover(v-lazy="item.articleCover || placeholder")
+    img.item-cover(v-lazy="placeholder || item.articleCover || placeholder")
   .item-info 
     .item-title {{ item.articleTitle }}
     span.item-preview {{ preview }}
@@ -24,8 +24,8 @@ export default {
     item: Object,
     placeholder: {
       type: String,
-      default: "",
-    },
+      default: ""
+    }
   },
   computed: {
     tags() {
@@ -47,14 +47,13 @@ export default {
         }
         return content;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @media screen and(max-width: 768px) {
-
 }
 .post-item {
   position: relative;
@@ -63,12 +62,12 @@ export default {
   padding: 0.5rem;
   margin: 1rem;
   background: var(--card);
-  transition: all .3s;
+  transition: all 0.3s;
   box-shadow: 0 1px 6px var(--shadow);
   cursor: pointer;
   border-radius: 5px;
   backdrop-filter: blur(10px);
-  
+
   &:hover {
     background: var(--card-active);
     .item-cover {
@@ -181,9 +180,9 @@ export default {
       border-bottom-left-radius: 0;
       border-top-right-radius: 5px;
     }
-    
+
     .item-info {
-      padding: .5rem 1rem .5rem 1rem;
+      padding: 0.5rem 1rem 0.5rem 1rem;
     }
 
     .item-type {

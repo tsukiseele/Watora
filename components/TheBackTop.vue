@@ -13,8 +13,7 @@ img#back-top(
 <script>
 export default {
   data: () => ({
-    img:
-      "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/assets/back-top.png",
+    img: "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/assets/back-top.png",
   }),
   computed: {
     scroll() {
@@ -33,11 +32,10 @@ export default {
 #back-top {
   position: fixed;
   right: 2rem;
-  bottom: 10%;
+  bottom: 33%;
   transition: bottom 0.3s ease;
   animation: float 3s linear infinite;
   cursor: pointer;
-  opacity: 0.8;
   z-index: 99;
   user-select: none;
   &.hide {

@@ -9,8 +9,8 @@
                 i.fa.fa-tag(style="padding: 0 .2rem;") 
                 span {{ item.articleType || '未分类'}} 
               span.timeline-item-title {{ item.articleTitle }}
-    div adasdasd{{$imgs.avatar}}
-    img(:src="$imgs.avatar")
+    //- div adasdasd{{$imgs.avatar}}
+    //- img(:src="$imgs.avatar")
 
 </template>
 
@@ -23,22 +23,22 @@ export default {
   fetch() {
     this.$store.commit("header", { title: "『时间线』" });
   },
-  async asyncData({app, isDev, route, store, env, params, query, redirect}) {
+  async asyncData({ app }) {
     let archives;
     const res = await app.$api.getAllArticles();
-    if (res.success) {
+    if (res.ok) {
       archives = res.data;
     }
     return {
       archives
-    }
+    };
   },
   computed: {
     timeline() {
       if (this.archives) {
-        let timeline = {}
-        for(let article of this.archives) {
-          let date = new Date(article.articleDate)
+        let timeline = {};
+        for (let article of this.archives) {
+          let date = new Date(article.articleDate);
           let group = `${date.getFullYear()}年${date.getMonth()}月`;
           if (group in timeline) {
             timeline[group].push(article);
@@ -49,13 +49,13 @@ export default {
         console.log(timeline);
         return timeline;
       } else {
-        return []
+        return [];
       }
     }
   },
   mounted() {
     console.log(this.timeline);
-  },
+  }
 };
 </script>
 
@@ -72,16 +72,15 @@ export default {
 #main {
   margin: 1rem auto;
   background: var(--card);
-  border-radius: .5rem;
-  
+  border-radius: 0.5rem;
 }
 
 .timeline {
   padding: 2rem;
-  transition: .3s;
+  transition: 0.3s;
 
   .timeline-group {
-    padding: .33rem 0;
+    padding: 0.33rem 0;
     .timeline-group-title {
       color: var(--text-secondary);
     }
@@ -92,8 +91,8 @@ export default {
     padding-left: 2rem;
     line-height: 2rem;
     border-radius: 5px;
-    transition: background .3s ease;
-    
+    transition: background 0.3s ease;
+
     &:hover {
       background: var(--card-active);
       .timeline-item-title {
@@ -106,8 +105,8 @@ export default {
     color: var(--text-primary);
     font-weight: 300;
     font-family: InfoDisplay;
-    padding: 0 .33rem;
-    transition: padding .3s;
+    padding: 0 0.33rem;
+    transition: padding 0.3s;
   }
 
   .timeline-item-tags {
@@ -115,9 +114,8 @@ export default {
     border-radius: 3px;
     color: var(--text);
     font-weight: 300;
-    font-size: .8rem;
-    padding: .125rem;
+    font-size: 0.8rem;
+    padding: 0.125rem;
   }
 }
 </style>
-

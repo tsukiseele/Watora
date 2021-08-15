@@ -11,7 +11,8 @@
       //-         i.tag-icon.fa.fa-tags
       //-         span.tag-text {{ tag }}
       .markdown.card
-        MarkdownPreview(v-model="article.articleContent")
+        client-only
+          MarkdownPreview(:content="article.articleContent")
       .comments.card
         .comment-header {{ comments.length == 0 ? '暂无评论' : '评论' }}
         .comment-edit
@@ -28,52 +29,51 @@ export default {
   data: () => ({
     markdown: {
       toolbars: {
-        fullscreen: false,
-      },
+        fullscreen: false
+      }
     },
     article: {},
-    comments: {},
+    comments: {}
   }),
   fetch() {
     this.$store.commit("header", {
       title: this.article.articleTitle || "无题",
       isHideSubtitle: true,
-      // isHide: true,
+      isHide: true
     });
   },
   methods: {
-    handleReply() {
-      
-    }
+    handleReply() {}
   },
   async asyncData({ app, params }) {
     let id = params.id || 0;
-    let article = {};
-    let comments = {};
+    let article;
+    let comments;
     try {
       const articleRes = await app.$api.getArticleById(id);
       const commentRes = await app.$api.getCommentTree(id);
-      article = articleRes;
-      comments = commentRes;
+      article = articleRes.ok ? articleRes.data : null;
+      comments = commentRes.ok ? commentRes.data : null;
     } catch (e) {
       console.log(e);
     }
     return {
       article,
-      comments,
+      comments
     };
   },
   computed: {
     tags() {
       if (this.article.articleTags) return this.article.articleTags.split(" ");
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @media screen and(max-width: 768px) {
-  .markdown, .comments {
+  .markdown,
+  .comments {
     border-radius: 0;
   }
 }

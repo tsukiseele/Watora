@@ -1,8 +1,9 @@
 export default {
+  /*
   server: {
     host: process.env.BASE_HOST || "localhost",
-    port: process.env.BASE_PORT || 80
-  },
+    port: process.env.BASE_PORT || 3000
+  },*/
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "Watora - TsukiSeele的个人小站",
@@ -16,7 +17,7 @@ export default {
       {
         name: "viewport",
         content:
-          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          "width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no"
       },
       {
         hid: "description",
@@ -39,39 +40,30 @@ export default {
     ]
   },
   axios: {
-    // 接口域名
-    baseURL: `http://${process.env.BASE_HOST || "localhost"}:${process.env.BASE_PORT || 80}`,
+    // 接口域名定义
+    baseURL: process.env.BASE_URL || "http://localhost",
     // 请求重试次数
     retry: {
-      retries: 2
+      retries: 3
     },
-    // 接口前缀
-    // prefix: "/api/",
     // 证书
-    credentials: true,
-    // 使用代理
-    proxy: true
-  },
-  proxy: {
-    "/api": {
-      // 使用本地API
-      target: process.env.API_URL || "http://localhost/",
-      // 使用远程API
-      // target: "https://www.tsukiseele.com/api/",
-      changeOrigin: true,
-      pathRewrite: {
-        "^/api": ""
-      }
-    }
+    credentials: true
+    // 启用代理
+    // proxy: true
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "ress",
-    "~/assets/css/styles.scss",
-    "~/assets/css/transitions.scss",
-    "~/assets/css/theme/light.scss",
-    "~/assets/css/theme/dark.scss"
+    "~/styles/main.scss",
+    "~/styles/transitions.scss",
+    "~/styles/theme/light.scss",
+    "~/styles/theme/dark.scss"
   ],
+
+  // Global variables, mixins and function
+  styleResources: {
+    scss: ["~/styles/app/app.variables.scss", "~/styles/app/app.mixins.scss"]
+  },
 
   // Plugins to run before rendering pasge: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -80,12 +72,13 @@ export default {
     "~/plugins/filter.js",
     "~/plugins/inject.js",
     "~/plugins/ascii.client.js",
-    "~/plugins/lib-aos.client.js",
-    "~/plugins/lib-vuex-persistedstate.client.js",
-    "~/plugins/lib-mavon-editor.client.js",
-    "~/plugins/lib-vue-lazyload.client.js",
-    "~/plugins/lib-live2d.client.js",
-    "~/plugins/lib-aplayer.client.js"
+    "~/plugins/libs/lib-aos.client.js",
+    "~/plugins/libs/lib-vuex-persistedstate.client.js",
+    "~/plugins/libs/lib-mavon-editor.client.js",
+    "~/plugins/libs/lib-ckeditor.client.js",
+    "~/plugins/libs/lib-vue-lazyload.client.js",
+    "~/plugins/libs/lib-live2d.client.js",
+    "~/plugins/libs/lib-aplayer.client.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -95,7 +88,7 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "@nuxtjs/proxy"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

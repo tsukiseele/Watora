@@ -6,7 +6,7 @@ header#header(ref="header", :class="{ full: isFull, hide: isHide }", :style="{ '
     .header--subtitle(v-if="!isHideSubtitle")
       span {{ input.show }}
       span.subtitle--cursor(:class="{ 'subtitle--cursor-vague': input.vague }")
-  .btn-scroll(v-show="!isHide")
+  .btn-scroll(v-show="!isHide && isFull")
     i.fa.fa-chevron-down.fa-lg(@click="scrollToContent()")
 </template>
 
@@ -167,18 +167,22 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  height: 33vh;
   width: 100%;
-  background: var(--header);
+  background-color: var(--header);
   overflow: hidden;
+  transition: all 0.3s ease;
 
   &.full {
     height: 100vh;
+    background-color: transparent;
   }
+
   &.hide {
-    height: 4rem;
+    height: 3rem;
   }
-  @media screen and(max-width: 768px) {
+
+  @media screen and(max-width: $mobileWidth) {
     height: 33vh;
   }
 }
@@ -196,6 +200,7 @@ export default {
     font-size: 2.2rem;
     font-weight: 500;
     cursor: pointer;
+    text-shadow: 0 0 0.5rem var(--shadow);
     span {
       transition: color 0.3s ease;
     }

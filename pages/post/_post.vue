@@ -23,12 +23,12 @@
           :to="`/archives/${item.articleId}`",
           :placeholder="res.placeholder",
           :data-aos="index % 2 == 0 ? 'fade-left' : 'fade-right'",
-          data-aos-once="true"
+          :data-aos-once="isAosOnce"
         )
       .post-btn-next(
         v-if="page > 0",
         :class="{ 'post-btn-bottom': page < 0 }",
-        @click="handleNextPage()"
+        @click="loadNext()"
       ) 
         span {{ page > 0 ? 'NEXT' : '已到底部' }}
     //- .aside-wrap
@@ -42,42 +42,13 @@ export default {
     arch: null,
     error: null,
     itemActive: null,
+    isAosOnce: false,
     // 侧栏
     asideStyles: {},
     asideClasses: {},
     asidePos: null
   }),
   watch: {
-    // 监听路由改变
-    /*
-    $route: {
-      handler(to, from) {
-        // 仅客户端执行
-        if (process.client) {
-          // 等待视图渲染
-          this.$nextTick(() => {
-            // 首次被加载，设置flag，不做任何动作
-            if (window.name == "") {
-              window.name = "viewed";
-            } else if (window.name == "viewed") {
-              // 延迟执行
-              setTimeout(() => {
-                const ele = document.getElementById("container");
-                this.$store.commit("scroll", {
-                  pos: ele.offsetTop,
-                  change: ele.offsetTop,
-                });
-                ele.scrollIntoView();
-              });
-            }
-          });
-        }
-      },
-      // 深度观察监听
-      deep: true,
-      // 路由改变后立即执行
-      immediate: true,
-    },*/
     itemActive(newVal, oldVal) {
       if (newVal) {
         this.$store.commit("live2dText", `要阅读『${newVal} 』吗?`);
@@ -93,13 +64,15 @@ export default {
     },
     res() {
       const icon = `${this.$static}/icon/icon.png`;
-      const placeholder = `${this.$static}/icon/akarin.png`;
+      const placeholder = `${this.$static}/icon/icon.png`;
       return {
         icon,
         placeholder
       };
     },
     clientHeight() {
+      // return document.body.clientHeight;
+
       var clientHeight = 0;
       if (document.body.clientHeight && document.documentElement.clientHeight) {
         var clientHeight =
@@ -117,28 +90,32 @@ export default {
   },
 
   methods: {
-    async handleNextPage() {
+    async loadNext() {
       if (this.page < 0) return;
-      const art = await this.$api.getArticlePage(++this.page, 6);
-      if (art) {
-        if (art.length === 0) {
+      const resp = await this.$api.getArticlePage(++this.page, 8);
+      if (resp.ok) {
+        // 结尾
+        if (resp.data.length === 0) {
           this.page = -1;
           return;
         }
-        this.articles.push.apply(this.articles, art);
+        // this.articles.push(resp.data);
+        this.articles = (this.articles || []).concat(resp.data);
+        console.log(resp.data);
+        console.log(resp.data);
       }
     }
   },
   async asyncData({ app, params }) {
+    const page = params.post || 1;
     let articles = null;
     let arch = null;
     let error = null;
-    const page = params.post;
     try {
-      const artRes = await app.$api.getArticlePage(page || 1, 6);
+      const artRes = await app.$api.getArticlePage(page, 6);
       const archRes = await app.$api.getAllArticles();
-      articles = artRes.success ? artRes.data : []
-      arch = archRes.success ? archRes.data : []
+      articles = artRes.ok ? artRes.data : [];
+      arch = archRes.ok ? archRes.data : [];
     } catch (e) {
       error = "获取数据失败！";
       console.error(e);
@@ -181,12 +158,12 @@ export default {
     margin-top: 1rem;
   }
   &.down {
-    padding-top: 4.5rem;
+    // padding-top: 4.5rem;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: $mobileWidth) {
   .aside-wrap {
-    position: static;
+    position: relative;
     align-self: stretch;
   }
 

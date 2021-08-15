@@ -17,7 +17,7 @@
 <script>
 export default {
   data: {
-    links: [],
+    links: []
   },
   fetch() {
     this.$store.commit("header", { title: "『友链』" });
@@ -26,16 +26,16 @@ export default {
     let links = [];
     try {
       const res = await app.$api.getAllLink();
-      if (res.success) {
+      if (res.ok) {
         links = res.data;
       }
     } catch (e) {
       console.log(e);
     }
     return {
-      links,
+      links
     };
-  },
+  }
 };
 </script>
 

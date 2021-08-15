@@ -2,8 +2,9 @@
 .nav-wrap
   //- 仅滑到顶部时显示工具栏
   //- :class="{ 'nav-hide': scroll.change > 100 }"
+  //- 'nav-hide': scroll.change > 0,
   nav#nav(
-    :class="{ 'nav-hide': scroll.change > 0, 'nav-bg': scroll.pos > 100 }"
+    :class="{'nav-hide': scroll.pos > 0, 'nav-bg': scroll.pos > 100 }"
   )
     .nav-title(@click="$router.push('/')") {{ title }}
     .nav-spacer
@@ -34,7 +35,7 @@
         li(@click="$router.push('/timeline')")
           i.fa.fa-list 
           | 归档
-        li(@click="$router.push('/links')") 
+        li(@click="$router.push('/friends')") 
           i.fa.fa-at 
           | 友链
         li(@click="$router.push('/about')")
@@ -64,23 +65,24 @@ export default {
 }
 #nav {
   position: fixed;
-  top: 0;
   display: flex;
-  color: var(--theme);
+  top: 0;
   width: 100%;
+  height: 3rem;
   padding: 0 2rem;
+  color: var(--text);
   background: transparent;
-  transition: all 0.3s linear;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
   z-index: 9;
-  line-height: 3rem;
-  align-items: center;
-
+  // backdrop-filter: blur(10px);
   &:hover {
-    background: var(--background);
+    // background: var(--background);
   }
 
   &.nav-hide {
     transform: translateY(-100%);
+    opacity: 0;
   }
 
   &.nav-bg {
@@ -149,8 +151,6 @@ export default {
     display: none;
     height: 100%;
     width: 100%;
-    // top: 0;
-    // right: -100%;
     z-index: 99;
     transition: background 0.3s ease;
   }
@@ -165,13 +165,6 @@ export default {
       background-color: rgba(0, 0, 0, 0.67);
     }
   }
-
-  /*
-  .drawer-blank {
-
-    transition: 0.3s ease;
-    // background-color: var(--shadow);
-  }*/
 }
 
 .nav-title {
@@ -180,6 +173,7 @@ export default {
   font-weight: 500;
   padding-right: 2rem;
   cursor: pointer;
+  align-self: center;
 }
 
 .nav-menu {
@@ -192,14 +186,15 @@ export default {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.33rem 0.33rem 0 0;
+    // border-radius: 0.33rem 0.33rem 0 0;
     padding: 0.25rem 1rem;
     height: 100%;
     cursor: pointer;
-    transition: background 0.2s ease-in-out;
+    transition: all 0.2s ease;
 
     &:hover {
-      background: var(--shadow);
+      color: var(--theme);
+      background-color: var(--active-background);
       &::after {
         width: 100%;
         left: 0;
@@ -211,7 +206,7 @@ export default {
       bottom: 0;
       right: 0;
       width: 0;
-      border-bottom: var(--theme-primary) solid 2px;
+      border-bottom: var(--theme) solid 2px;
       transition: width 0.2s ease-in-out;
     }
     i {

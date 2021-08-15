@@ -9,14 +9,17 @@
     :isHide="header.isHide",
     :isHideSubtitle="header.isHideSubtitle"
   )
-  Nuxt
+  main
+    Nuxt
+
+  //- 页脚
+  TheFooter
+  //- 播放器
   TheAPlayer(:musics="musics")
   //- Live2d，仅PC端
   TheLive2d(v-if="!isMobile", ref="live2d")
-  //- 返回顶部，已废弃
-  //- TheBackTop
-  //- 页脚
-  TheFooter
+  //- 返回顶部
+  TheBackTop
 </template>
 
 <script>
@@ -77,7 +80,7 @@ export default {
       /** 歌曲API列表 */
       // 文档参见：https://api.imjad.cn/cloudmusic.md
       const apis = [
-        `http://www.hjmin.com/playlist/detail?id=${this.playlistId}`,
+        // `http://www.hjmin.com/playlist/detail?id=${this.playlistId}`,
         `https://api.imjad.cn/cloudmusic/?type=playlist&id=${this.playlistId}`
       ];
       for (const api of apis) {
@@ -132,10 +135,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: $mobileWidth) {
+  #app {
+    overflow-x: hidden;
+  }
+}
 #app {
   position: relative;
   background: var(--background);
-  flex-direction: col;
 }
 #background {
   position: absolute;
@@ -149,5 +156,6 @@ export default {
   background-position: center;
   background-size: cover;
   transition: background 1s;
+  overflow: hidden;
 }
 </style>

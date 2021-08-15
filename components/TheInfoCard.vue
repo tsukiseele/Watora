@@ -16,11 +16,11 @@
 <script>
 export default {
   props: {
-    icon: String,
+    icon: String
   },
   data: () => ({}),
   computed: {},
-  mounted() {},
+  mounted() {}
 };
 </script>
 
@@ -65,6 +65,7 @@ export default {
 
   .card-links {
     color: var(--text);
+    cursor: pointer;
     i {
       padding: 0.33rem 1rem;
     }
