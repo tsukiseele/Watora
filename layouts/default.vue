@@ -134,7 +134,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media screen and (max-width: $mobileWidth) {
+@media screen and (max-width: $mobile) {
   #app {
     overflow-x: hidden;
   }

@@ -56,52 +56,70 @@ export default {
 };
 </script>
 
-<style lang="scss">
-*::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
-  height: 10px;
-}
-*::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 10px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background: #535353;
-}
-*::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  background: #ededed;
-}
+<style lang="scss" >
 $md-text: #abb2bf;
 
-$md-bg: #333333; //#292c34;
+$md-bg: #202124; //#292c34;
+$md-link: #f596aa;
+$md-hr: #f596aa;
+
+$md-h1-border: #f596aa;
+$md-blockquote-bg: #484d5c;
+$md-blockquote-left: #f596aa;
+
 :root[theme="dark"] .markdown-preview {
+  font-family: inherit !important;
+
   border: none !important;
   color: $md-text !important;
   background-color: $md-bg !important;
-  > div {
+  code {
+    font-family: Menlo, Consolas, "Courier New", Courier, FreeMono, monospace;
+  }
+  div {
     color: $md-text !important;
     background-color: $md-bg !important;
   }
+
+  a {
+    color: $md-link !important;
+  }
+
   p,
   li {
     color: $md-text !important;
   }
   li::after {
-    background-color: #abb2bf !important;
+    background-color: $md-text !important;
   }
   blockquote {
-    background-color: #484d5c !important;
+    display: flex;
+    flex-direction: column;
+
+    background-color: $md-blockquote-bg !important;
+    // border-left: 5px solid $md-blockquote-left;
+    border-left: 0;
+    box-shadow: inset 0 10px 10px -10px #ccc, inset 0 -10px 10px -10px #ccc;
     p {
       margin: 5px 0;
+    }
+
+    &::after {
+      content: "\f10d";
+      font-family: Fontello;
+      align-self: flex-end;
+    }
+
+    &::before {
+      content: "\f10e";
+      font-family: Fontello;
+      align-self: flex-start;
     }
   }
 
   hr {
-    color: gray;
-    border-top: gray;
+    color: $md-hr;
+    border-top: 3px dashed $md-hr;
   }
 
   input[type="checkbox"]:before {
@@ -126,6 +144,9 @@ $md-bg: #333333; //#292c34;
   h5,
   h6 {
     color: $md-text !important;
+  }
+  h1 {
+    border-bottom: none; //1px solid $md-h1-border;
   }
 }
 </style>

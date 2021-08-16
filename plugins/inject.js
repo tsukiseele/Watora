@@ -1,6 +1,6 @@
 // import Cookie from 'js-cookie'
 import Md5 from "blueimp-md5";
-import Statics from "../assets/resource/statics.json";
+import Statics from "@/assets/resource/statics.js";
 
 export default ({ app }, inject) => {
   // 静态资源位置

@@ -64,7 +64,7 @@ export default {
     },
     res() {
       const icon = `${this.$static}/icon/icon.png`;
-      const placeholder = `${this.$static}/icon/icon.png`;
+      const placeholder = this.$statics.images.placeholder;
       return {
         icon,
         placeholder
@@ -110,7 +110,7 @@ export default {
     let arch = null;
     let error = null;
     try {
-      const artRes = await app.$api.getArticlePage(page, 6);
+      const artRes = await app.$api.getArticlePage(page, 8);
       const archRes = await app.$api.getAllArticles();
       articles = artRes.ok ? artRes.data : [];
       arch = archRes.ok ? archRes.data : [];
@@ -159,7 +159,7 @@ export default {
     // padding-top: 4.5rem;
   }
 }
-@media (max-width: $mobileWidth) {
+@media (max-width: $mobile) {
   .aside-wrap {
     position: relative;
     align-self: stretch;

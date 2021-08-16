@@ -3,16 +3,17 @@
   main#main
     .article
       .banner
-        img.bg(:src="article.articleCover|| $statics.images.backgrounds[0]") 
-        .header
-          .title(v-text="article.articleTitle")
-          ul.tags
-            li.tag(v-for="(tag, i) in tags", :key="i") 
-              i.tag-icon.fa.fa-tags
+        img.bg(:src="article.articleCover || $statics.images.backgrounds[0]") 
+        .post-header
+          .post-title(v-text="article.articleTitle")
+          ul.post-tags
+            li.post-tag(v-for="(tag, i) in tags", :key="i") 
+              //- i.tag-icon.fa.fa-tags
+              SvgIcon(type="mdi", :path="mdiTag")
               span.tag-text {{ tag }}
-      .markdown.card
+      .markdown
         client-only
-          MarkdownPreview(:content="article.articleContent")
+          MdPreview(:content="article.articleContent")
       .comments.card
         .comment-header {{ comments.length == 0 ? '暂无评论' : '评论' }}
         .comment-edit
@@ -20,30 +21,32 @@
           .comment-username
           .comment-email
           .comment-domain
-            
-        Comment(:comments="comments" :reply="handleReply()")
+
+        Comment(:comments="comments", :reply="handleReply()")
 </template>
 
 <script>
+import { mdiTag } from "@mdi/js";
+
 export default {
   data: () => ({
     markdown: {
       toolbars: {
-        fullscreen: false
-      }
+        fullscreen: false,
+      },
     },
     article: {},
-    comments: {}
+    comments: {},
   }),
   fetch() {
     this.$store.commit("header", {
       title: this.article.articleTitle || "无题",
       isHideSubtitle: true,
-      isHide: true
+      isHide: true,
     });
   },
   methods: {
-    handleReply() {}
+    handleReply() {},
   },
   async asyncData({ app, params }) {
     let id = params.id || 0;
@@ -59,26 +62,21 @@ export default {
     }
     return {
       article,
-      comments
+      comments,
     };
   },
   computed: {
     tags() {
       if (this.article.articleTags) return this.article.articleTags.split(" ");
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@media screen and(max-width: 768px) {
-  .markdown,
-  .comments {
-    border-radius: 0;
-  }
-}
+
 #main {
-  // padding: 2rem 0;
+  margin-top: 0rem;
 }
 
 .article {
@@ -155,6 +153,15 @@ export default {
         }
       }
     }
+  }
+}
+@media screen and(max-width: $mobile) {
+  .markdown,.comments {
+    border-radius: 0;
+    margin: 0 !important;
+  }
+  #main {
+    margin-top: -3rem;
   }
 }
 </style>

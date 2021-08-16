@@ -1,5 +1,7 @@
+export default 
 {
-  "prefix": "https://cdn.jsdelivr.net/gh/tsukiseele/statics/watora/",
+  // "prefix": "https://cdn.jsdelivr.net/gh/tsukiseele/statics/watora/",
+  "prefix": "https://raw.githubusercontent.com/tsukiseele/statics/master/watora/",
   "resource": {
     "images": {
       "avatar": "images/avatar.png",

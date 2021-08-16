@@ -39,7 +39,7 @@ export default {
         var rs = "";
         for (var i = 0; i < content.length; i++) {
             rs = rs + content.substr(i, 1).replace(pattern, '');
-        }
+         
         content = rs;
         */
         if (content.length > 96) {

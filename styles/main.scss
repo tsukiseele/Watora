@@ -13,15 +13,37 @@
   -moz-osx-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   line-height: 1.8;
-  //cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAZCAMAAAAL146mAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAASNQTFRFAAAAAAAAAAAAAAAAAAAAGSQmGCUnDRoaAAAAGCUon6SlFyQmDhsbAAAAAAAAFyQnlJqcFyMlDw8PAAAAFyMmi5GSFiInERERAAAAFyMm+/v7gYiJFyQmABUV+vr6d36AFiMl+Pn5b3d5FyMlAAAA9vf3ZW5wFiIkAAAA9fX1XGVnFyIkAAAA8vPzVV5gFiEkAAAA8PDwTlhaFSEk7O3tRlFTFyEl1NfXGCQm6OnpQUtNEx0gAAAAQEpMERodAAAAP0lLERkcAAAAAAAAFyMmAAAAAAAAFiEjFiIlFiIln6SlFyMmAAAAAAAAAAAAAAAABQoKFSEjAAAAAAAABgwMFSEjoKSm09XWFyImBg0NFCAiFiEjERkZAAAA/Pz8+/v7////3+LoFQAAAF50Uk5TAAECAwVydxQKoc6FEwQOpMyCERCmyX4PEaf+xXkM/sJ0/b5uCfy7aQj7uGMH+rVcBviyVvawTeqU9bJPC7VZFLZaGA2pHA99q6zWqBUeISMxlBITK5LV6pspf4o9F3yyPVgAAAABYktHRGDFt3wQAAAACW9GRnMAAAAAAAAAAgDoHNRMAAAACXBIWXMAAADIAAAAyABj+uetAAAACXZwQWcAAAAgAAAAIACH+pydAAAA8klEQVQY013R6VbCMBAF4E4SJYoBtILFDdCKVREr4IKirCIq4oI7Mr7/W1hoqInz8zs5Se5cwzCAUAKGOsCmpkNUNaB8ZjY8pxqISBRj8wuKATMX8SeeWPozYFYScXlldS0wn3A9leYTk4SZjU1b/mVCuJXddnwLCHd293JEJ9zPH7hEJzwsFEemEpaOjhnohCenNtGpfHZeoRqVLy6r/07V6o3m+C4vtpzWVXv8oohctzqdm1uP7roO9VfYve89PD55lnx2ZSLetvqNl9e39w+TyeBUMLfS//wafDdFsDMAYZvDoeUQrRWX85xW1KhNWecvqKk8tzJNk4wAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTgtMTItMTZUMDM6NTY6MzYrMDA6MDAqAmTNAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE4LTEyLTE2VDAzOjU2OjM1KzAwOjAwarfG7AAAAABJRU5ErkJggg==), auto !important;
   @media (max-width: 768px) {
     font-size: 14px;
   }
 }
+
 /** 全局英文字体 **/
+@font-face {
+  font-family: "Fontello";
+  src: url("/fonts/fontello.woff2");
+}
 @font-face {
   font-family: "InfoDisplay";
   src: url("https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/fonts/InfoDisplay.woff");
+}
+
+*::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #535353;
+}
+*::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #ededed;
 }
 
 /** MD编辑器调整 **/

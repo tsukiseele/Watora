@@ -182,7 +182,7 @@ export default {
     height: 3rem;
   }
 
-  @media screen and(max-width: $mobileWidth) {
+  @media screen and(max-width: $mobile) {
     height: 33vh;
   }
 }
