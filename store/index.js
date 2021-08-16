@@ -11,11 +11,12 @@ export const state = () => ({
     subtitle: "",
     isHideSubtitle: false,
     isFull: false,
-    isHide: false,
+    isHide: false
   }
-})
+});
 
 export const getters = {
+
   user(state) {
     return state.user;
   },
@@ -34,7 +35,7 @@ export const getters = {
   isMobile(state) {
     return state.clientWidth < 768;
   }
-}
+};
 
 export const mutations = {
   user(state, user) {
@@ -50,6 +51,6 @@ export const mutations = {
     state.header = header;
   },
   clientWidth(state, clientWidth) {
-    state.clientWidth = clientWidth
+    state.clientWidth = clientWidth;
   }
-}
+};

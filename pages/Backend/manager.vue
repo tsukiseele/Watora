@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  layout: "admin",
+  layout: "backend",
   data: () => ({
     articles: []
   }),

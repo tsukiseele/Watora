@@ -35,7 +35,13 @@ export default ({ app }, inject) => {
   });
 
   inject("statics", initResource());
+  inject("isNight", isNight);
 };
+
+function isNight() {
+  var hour = new Date().getHours();
+  return hour < 7 || hour > 18;
+}
 
 function initResource() {
   const res = {};

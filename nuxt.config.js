@@ -1,9 +1,8 @@
 export default {
-  /*
   server: {
     host: process.env.BASE_HOST || "localhost",
     port: process.env.BASE_PORT || 3000
-  },*/
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "Watora - TsukiSeele的个人小站",
@@ -40,16 +39,11 @@ export default {
     ]
   },
   axios: {
-    // 接口域名定义
     baseURL: process.env.BASE_URL || "http://localhost",
-    // 请求重试次数
     retry: {
       retries: 3
     },
-    // 证书
     credentials: true
-    // 启用代理
-    // proxy: true
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -72,11 +66,11 @@ export default {
     "~/plugins/filter.js",
     "~/plugins/inject.js",
     "~/plugins/ascii.client.js",
-    "~/plugins/libs/lib-aos.client.js",
-    "~/plugins/libs/lib-vuex-persistedstate.client.js",
-    "~/plugins/libs/lib-mavon-editor.client.js",
-    "~/plugins/libs/lib-ckeditor.client.js",
     "~/plugins/libs/lib-vue-lazyload.client.js",
+    "~/plugins/libs/lib-vuex-persistedstate.client.js",
+    "~/plugins/libs/lib-meditor.client.js",
+    "~/plugins/libs/lib-aos.client.js",
+    "~/plugins/libs/lib-svgicon.client.js",
     "~/plugins/libs/lib-live2d.client.js",
     "~/plugins/libs/lib-aplayer.client.js"
   ],

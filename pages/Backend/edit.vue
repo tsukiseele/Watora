@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  layout: "admin",
+  layout: "backend",
   data: () => ({
     loading: false,
     preview: null,

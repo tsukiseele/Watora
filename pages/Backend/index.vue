@@ -12,7 +12,7 @@
 import Cookies from "js-cookie";
 
 export default {
-  layout: "admin",
+  layout: "backend",
   computed: {
     user() {
       return this.$store.state.user;

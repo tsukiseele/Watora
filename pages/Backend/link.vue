@@ -1,5 +1,5 @@
 <script>
 export default {
-  layout: "admin"
+  layout: "backend"
 }
 </script>

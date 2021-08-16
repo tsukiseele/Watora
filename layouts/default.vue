@@ -111,8 +111,7 @@ export default {
     },
     // 夜晚改变主题
     changeTheme() {
-      var hour = new Date().getHours();
-      if (hour < 7 || hour > 18) {
+      if (this.$isNight()) {
         document.getElementsByTagName("html")[0].setAttribute("theme", "dark");
       }
     }

@@ -1,57 +1,61 @@
-<template>
-  <client-only>
-    <div class="live2d">
-      <div class="live2d-panel">
-        <dialogue
-          class="dialogue-live2d"
-          v-show="isDialogue"
-          :customDialogue="customDialogue"
-          ref="dialogue"
-        >
-        </dialogue>
-        <live2d
-          v-if="isLive2d"
-          :height="height"
-          :width="width"
-          :modelPath="modelPath"
-          ref="l2dMange"
-        ></live2d>
-      </div>
+<template lang="pug">
+client-only
+  .live2d
+    .live2d-panel
+      dialogue.dialogue-live2d(
+        v-show='isDialogue'
+        :customDialogue='customDialogue'
+        ref='dialogue')
 
-      <div class="tools-panel" :class="{ show: !isLive2d }">
-        <live2d-tools
-          :btns="btns"
-          :hidden="!isLive2d"
-          @home="home()"
-          @change="change()"
-          @save="save()"
-          @about="about()"
-          @hide="hide()"
-        ></live2d-tools>
-      </div>
-    </div>
-  </client-only>
+      live2d(
+        v-if='isLive2d'
+        :height='height'
+        :width='width'
+        :modelPath='modelPath'
+        ref= 'l2dMange')
+
+    .tools-panel(:class="{ show: !isLive2d }")
+      live2d-tools(
+        :hidden="!isLive2d",
+        :btns="tools.btns",
+        :options="tools.options",
+        iconType="mdi"
+        @home="home()",
+        @change="change()",
+        @save="save()",
+        @about="about()",
+        @hide="hide()"
+      )
 </template>
 
 <script>
 import custom from "~/assets/data/custom.json";
 import Live2dTools from "~/components/TheLive2dTools";
 
+import {
+  mdiEye,
+  mdiEyeOff,
+  mdiHome,
+  mdiOrbitVariant,
+  mdiCamera,
+  mdiInformation,
+} from "@mdi/js";
+
 export default {
   components: {
-    Live2dTools
+    Live2dTools,
   },
   data: () => ({
     // 模型资源
     models: [
       {
         src:
-          "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@1.0.0/model/HyperdimensionNeptunia/nepgearswim/index.json"
+          "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@1.0.0/model/HyperdimensionNeptunia/nepgearswim/index.json",
       },
       {
         src:
-          "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@1.0.0/model/HyperdimensionNeptunia/nepswim/index.json"
-      }
+          "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@1.0.0/model/HyperdimensionNeptunia/nepswim/index.json",
+      },
     ],
     modelIndex: 0,
 
@@ -61,42 +65,50 @@ export default {
     // 模型宽高
     width: 200,
     height: 200,
-
-    btns: [
-      {
-        icon: "fa-home",
-        color: "",
-        on: "home"
+    tools: {
+      iconType: "mdi",
+      btns: [
+        {
+          icon: mdiHome,
+          on: "home",
+        },
+        {
+          icon: mdiOrbitVariant,
+          on: "change",
+        },
+        {
+          icon: mdiCamera,
+          on: "save",
+        },
+        {
+          icon: mdiInformation,
+          on: "about",
+        },
+      ],
+      options: {
+        icon: {
+          hidden: mdiEyeOff,
+          show: mdiEye,
+        },
+        on: "hide",
       },
-      {
-        icon: "fa-refresh",
-        on: "change"
-      },
-      {
-        icon: "fa-camera",
-        on: "save"
-      },
-      {
-        icon: "fa-info",
-        on: "about"
-      }
-    ],
+    },
     // 显示Live2D
     isLive2d: true,
     // 显示对话框
     isDialogue: true,
     //
-    message: ""
+    message: "",
   }),
   computed: {
     modelPath() {
       return this.models[this.modelIndex].src;
-    }
+    },
   },
   watch: {
     message(newVal, oldVal) {
       this.$refs.dialogue.showMessage(newVal, 10000);
-    }
+    },
   },
   mounted() {
     setInterval(async () => {
@@ -129,8 +141,8 @@ export default {
     },
     showMessage(message) {
       this.message = message;
-    }
-  }
+    },
+  },
 };
 </script>
 

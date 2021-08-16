@@ -2,14 +2,14 @@
 #container
   main#main
     .article
-      //- .banner
-      //-   img.bg(v-if="article.articleCover", :src="article.articleCover") 
-      //-   .header
-      //-     .title(v-text="article.articleTitle")
-      //-     ul.tags
-      //-       .tag(v-for="(tag, i) in tags", :key="i") 
-      //-         i.tag-icon.fa.fa-tags
-      //-         span.tag-text {{ tag }}
+      .banner
+        img.bg(:src="article.articleCover|| $statics.images.backgrounds[0]") 
+        .header
+          .title(v-text="article.articleTitle")
+          ul.tags
+            li.tag(v-for="(tag, i) in tags", :key="i") 
+              i.tag-icon.fa.fa-tags
+              span.tag-text {{ tag }}
       .markdown.card
         client-only
           MarkdownPreview(:content="article.articleContent")
@@ -78,7 +78,7 @@ export default {
   }
 }
 #main {
-  padding: 2rem 0;
+  // padding: 2rem 0;
 }
 
 .article {

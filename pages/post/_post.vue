@@ -101,8 +101,6 @@ export default {
         }
         // this.articles.push(resp.data);
         this.articles = (this.articles || []).concat(resp.data);
-        console.log(resp.data);
-        console.log(resp.data);
       }
     }
   },
