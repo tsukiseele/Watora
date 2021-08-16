@@ -1,7 +1,13 @@
 export default {
+  mode: "universal",
   server: {
+<<<<<<< Updated upstream
     host: process.env.BASE_HOST || "localhost",
     port: process.env.BASE_PORT || 3000
+=======
+    host: process.env.SERVER_HOST,
+    port: process.env.SERVER_PORT
+>>>>>>> Stashed changes
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -38,12 +44,44 @@ export default {
       }
     ]
   },
+  env: {
+    SERVER_HOST: process.env.SERVER_HOST || "localhost",
+    SERVER_PORT: process.env.SERVER_PORT || 80,
+    BASE_URL: process.env.BASE_URL || "http://localhost:10737"
+  },
   axios: {
+<<<<<<< Updated upstream
     baseURL: process.env.BASE_URL || "http://localhost",
+=======
+    // 接口域名
+    baseURL: process.env.BASE_URL,
+    // 请求重试次数
+>>>>>>> Stashed changes
     retry: {
       retries: 3
     },
+<<<<<<< Updated upstream
     credentials: true
+=======
+    // 接口前缀
+    // prefix: "/api/",
+    // 证书
+    credentials: true,
+    // 使用代理
+    proxy: true
+  },
+  proxy: {
+    "/api": {
+      // 使用本地API
+      target: process.env.BASE_URL,
+      // 使用远程API
+      // target: "https://www.tsukiseele.com/api/",
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": ""
+      }
+    }
+>>>>>>> Stashed changes
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+<<<<<<< Updated upstream
     "dev": "cross-env NODE_ENV=development BASE_URL=http://localhost/ nuxt",
+=======
+    "dev": "cross-env NODE_ENV=development BASE_URL=http://localhost:10737/ nuxt",
+>>>>>>> Stashed changes
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production BASE_URL=https://www.tsukiseele.com/ nuxt start ",
+    "start": "cross-env NODE_ENV=production SERVER_PORT=3000 BASE_URL=https://www.tsukiseele.com/ nuxt start ",
     "generate": "nuxt generate"
   },
   "dependencies": {
