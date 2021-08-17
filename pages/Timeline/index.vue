@@ -36,17 +36,10 @@ export default {
   computed: {
     timeline() {
       if (this.archives) {
-<<<<<<< Updated upstream
-        let timeline = {};
-        for (let article of this.archives) {
-          let date = new Date(article.articleDate);
-          let group = `${date.getFullYear()}年${date.getMonth()}月`;
-=======
         const timeline = {}
         for(const article of this.archives) {
           const date = new Date(article.articleDate)
           const group = `${date.getFullYear()}年${date.getMonth()}月`;
->>>>>>> Stashed changes
           if (group in timeline) {
             timeline[group].push(article);
           } else {
