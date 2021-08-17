@@ -180,6 +180,7 @@ export default {
 
   &.hide {
     height: 3rem;
+    background-color: var(--card);
   }
 
   @media screen and(max-width: $mobile) {
@@ -221,7 +222,7 @@ export default {
       animation: cursor-vague 1s ease infinite;
     }
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: $mobile) {
     .header--title {
       font-size: 1.8rem;
     }

@@ -92,7 +92,7 @@ export default {
     color: var(--text-secondary);
   }
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: $mobile) {
   .card {
     // width: calc(100% / 2 - 1rem);
     width: 100%;

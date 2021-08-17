@@ -67,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 .comment-reply {
   padding-left: 3rem;
-  @media screen and(max-width: 768px) {
+  @media screen and(max-width: $mobile) {
     padding-left: 0;
     .comment-body {
       padding-left: 2rem;

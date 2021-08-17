@@ -159,7 +159,7 @@ export default {
     // padding-top: 4.5rem;
   }
 }
-@media (max-width: $mobile) {
+@media screen and (max-width: $mobile) {
   .aside-wrap {
     position: relative;
     align-self: stretch;

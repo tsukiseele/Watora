@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $mobile) {
   .card-icon {
     height: 8rem;
     width: 8rem;

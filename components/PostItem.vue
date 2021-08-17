@@ -53,8 +53,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media screen and(max-width: 768px) {
-}
 .post-item {
   position: relative;
   display: flex;
@@ -170,7 +168,7 @@ export default {
     }
   }
   /** Mobile兼容 */
-  @media (max-width: 768px) {
+  @media screen and (max-width: $mobile) {
     /* A方案-下方显示*/
     flex-direction: column;
     padding: 0rem;

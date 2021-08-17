@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   line-height: 1.8;
-  @media (max-width: 768px) {
+  @media screen and (max-width: $mobile) {
     font-size: 14px;
   }
 }
@@ -176,8 +176,8 @@ a {
   width: 100%;
   padding: 0;
 
-  @media (min-width: 768px) {
-    width: 960px;
+  @media screen and (min-width: $mobile) {
+    width: $mobile;
   }
 }
 
