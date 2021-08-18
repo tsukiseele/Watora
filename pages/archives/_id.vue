@@ -14,7 +14,7 @@
       .markdown
         client-only
           MdPreview(:content="article.articleContent")
-      .comments.card
+      .comments
         .comment-header {{ comments.length == 0 ? '暂无评论' : '评论' }}
         .comment-edit
           .comment-content
@@ -88,11 +88,11 @@ export default {
 
 .comments {
   overflow: hidden;
-  margin-top: 2rem;
-  padding: 2rem;
+  padding: 1rem;
+  background-color: var(--card);
   .comment-header {
     color: var(--text);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 }
 

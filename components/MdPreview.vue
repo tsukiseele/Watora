@@ -12,7 +12,7 @@
     :value="content",
     :isPreview="true",
     theme="oneDark",
-    height="auto",
+    :height="-1",
     :bordered="false"
   )
 </template>
@@ -57,7 +57,8 @@ export default {
 </script>
 
 <style lang="scss" >
-
+@import "@/styles/theme/markdown/light.scss";
+@import "@/styles/theme/markdown/dark.scss";
 </style>
 
 <style lang="scss" scoped>

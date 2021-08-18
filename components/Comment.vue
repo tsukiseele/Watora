@@ -2,24 +2,29 @@
 .comment-wrap
   .comment(v-for="(item, index) in comments", :key="index")
     .comment-body
-      img.comment-avater(:src="item.visitor.visitorIcon || res.akarin")
+      img.comment-avater(:src="item.visitor.visitorIcon || defaultIcon")
       .comment-info
-        .comment-username {{ item.visitor.visitorName }}
+        .comment-title
+          span.comment-name {{ item.visitor.visitorName }}
           span.comment-date {{ item.comment.commentDatetime | formatDate('yyyy-MM-dd hh:mm') }}
-          input.comment-btn-reply(type="button", value="回复")
+          .spacer(style="flex-grow: 1")
+          SvgIcon.comment-reply-btn(type="mdi", :path="icons.mdiReply")
+
+        CommentChild(v-if="item.childs", :comments="item.childs")
         .comment-content 
           span.comment-at(v-if="at && at !== item.visitor.visitorName") @{{ at }}
           span {{ item.comment.commentContent }}
-    .comment-reply(v-if="item.childs", :class="{ child: isIndent(99) }")
-      Comment(
-        :deep="deep + 1",
-        :comments="item.childs",
-        :reply="reply",
-        :at="item.visitor.visitorName"
-      )
+    //- .comment-reply(v-if="item.childs", :class="{ child: isIndent(99) }")
+      //- Comment(
+      //-   :deep="deep + 1",
+      //-   :comments="item.childs",
+      //-   :reply="reply",
+      //-   :at="item.visitor.visitorName"
+      //- )
 </template>
 
 <script>
+import { mdiReply } from "@mdi/js";
 export default {
   name: "Comment",
   props: {
@@ -32,11 +37,14 @@ export default {
     },
   },
   data: () => ({
+    icons: {
+      mdiReply,
+    },
     hover: false,
-    defaultIcon:
-      "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/icon/akarin.png",
   }),
   computed: {
+    
+    defaultIcon () {return this.$statics.images.avatar},
     res() {
       return {
         akarin: `${this.$static}/icon/akarin.png`,
@@ -86,27 +94,44 @@ export default {
 .comment {
   padding-top: 1rem;
   font-family: InfoDisplay;
-
   .comment-body {
     position: relative;
     display: flex;
+
     // border-bottom: 0.1rem dotted var(--theme-primary);
 
     .comment-avater {
       object-fit: cover;
-      margin-left: 1rem;
-      width: 64px;
-      height: 64px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+      // border: 1px solid var(--border);
+      border-radius: 0;
+      
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+      transition: .3s ease;
+      &:hover {
+        transform: rotate(360deg);
+        border-radius: 50%;
+      }
+    }
+
+    .comment-name {
+      color: var(--theme);
     }
 
     .comment-info {
+      flex: 1;
       display: flex;
+      background-color: var(--card);
+      padding: 1rem;
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.06);
+      border-radius: 0.33rem;
       flex-direction: column;
-      padding-left: 0.33rem;
 
-      .comment-username {
+      .comment-title {
+        display: flex;
+        align-items: baseline;
         color: var(--text-secondary);
       }
       .comment-date {
@@ -117,17 +142,11 @@ export default {
       .comment-at {
         color: var(--text-primary);
         padding-right: 0.33rem;
-   
       }
-      .comment-btn-reply {
+      .comment-reply-btn {
         color: var(--text-primary);
-        font-size: .9rem;
-        padding: 0 .2rem;
-        margin-left: .33rem;
-        &:hover {
-          background: var(--theme-primary);
-          color: var(--text);
-        }
+        height: 1.3rem;
+        border-radius: 50%;
       }
       .comment-content {
         color: var(--text);
