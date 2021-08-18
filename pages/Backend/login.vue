@@ -1,19 +1,31 @@
 <template lang="pug">
 #container 
-  main#dialog
-    .kanban
-      img.icon(:src="icon.current")
-      .error(v-show="error.show", :style="{ color: error.color }") {{ error.message }}
-    form#form
-      .input-box
-        span 账号：
-        input(v-model="user.email", type="text", name="username")
-      .input-box
-        span 密码：
-        input(v-model="user.password", type="password", name="paasword")
-      .option
-        input(value="取消", type="button", name="cancel", @click="handleCancel")
-        input(value="登录", type="button", name="submit", @click="handleSubmit")   
+  main#dialog.card
+    #board-wrap 
+      #board
+        //- .kanban
+        //-   img.icon(:src="icon.current")
+        //-   .error(v-show="error.show", :style="{ color: error.color }") {{ error.message }}
+        form#form
+          .input-box
+            span 账号：
+            input(v-model="user.email", type="text", name="username")
+          .input-box
+            span 密码：
+            input(v-model="user.password", type="password", name="paasword")
+          .option
+            input(
+              value="取消",
+              type="button",
+              name="cancel",
+              @click="handleCancel"
+            )
+            input(
+              value="登录",
+              type="button",
+              name="submit",
+              @click="handleSubmit"
+            ) 
 </template>
 
 <script>
@@ -43,23 +55,23 @@ export default {
       ok:
         "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/icon/login_icon.png",
       failed:
-        "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/icon/login_icon.png"
+        "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/icon/login_icon.png",
     },
     dialog: true,
     error: {
       show: false,
       message: "",
-      color: ""
+      color: "",
     },
     user: {
       email: "",
-      password: ""
-    }
+      password: "",
+    },
   }),
   methods: {
     async handleSubmit() {
       try {
-        let result = await this.$api.login(this.user.email, this.user.password);
+        let result = await this.$api.login({ userEmail: this.user.email, userPassword: this.user.password});
         if (result) {
           // 写入Cookie后跳转
           Cookies.set("token", result.token);
@@ -95,32 +107,86 @@ export default {
           }
         } catch (e) {}
       }
-    }
+    },
   },
   mounted() {
     this.checkLogin();
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 #container {
   height: 100vh;
-  background: var(--primary-dark);
 }
 #dialog {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 33vw;
-  box-shadow: 0px 0px 12px var(--primary);
+  width: 100%;
+  height: 100%;
+}
+
+#board-wrap {
+  position: relative;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: 100vh;
+    width: 5px;
+    bottom: 100%;
+    background-color: var(--theme);
+    box-shadow: 0px 0px 6px var(--theme);
+  }
+  &::before {
+    left: 20%;
+    animation: tran 10s linear infinite;
+  }
+  &::after {
+    right: 20%;
+    animation: tran 10s linear -5s infinite;
+  }
+
+  @keyframes tran {
+    0% {
+      transform: translate(2px) rotate(0.5deg);
+    }
+    50% {
+      transform: translate(-2px) rotate(-0.5deg);
+    }
+    100% {
+      transform: translate(2px) rotate(0.5deg);
+    }
+  }
+  @media screen and (max-width: $mobile) {
+    &::after {
+      display: none;
+    }
+    &::before {
+      display: none;
+    }
+  }
+}
+#board {
+  position: relative;
+  background-color: var(--theme);
+  box-shadow: 0px 0px 12px var(--theme);
   border-radius: 3px;
   padding: 1rem;
-  background-color: var(--primary);
+  animation: anim 10s linear infinite;
+  @keyframes anim {
+    0% {
+      transform: translate(2px) rotate(0.5deg);
+    }
+    50% {
+      transform: translate(-2px) rotate(-0.5deg);
+    }
+    100% {
+      transform: translate(2px) rotate(0.5deg);
+    }
+  }
 }
 
 .kanban {
@@ -145,7 +211,7 @@ export default {
   padding: 1rem;
 
   input {
-    border: 1px solid var(--primary-dark);
+    border: 1px solid var(--card);
     margin: 0.33rem;
     padding: 0.1rem 0.33rem;
     border-radius: 5px;

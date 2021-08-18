@@ -1,8 +1,8 @@
 export default ({ app, $axios }, inject) => {
   inject("api", {
     // 登录
-    async login(userEmail, userPassword) {
-      return await $axios.$post(`/api/login`, { userEmail, userPassword });
+    async login(params) {
+      return await $axios.$post(`/api/login`, params);
     },
     async auth() {
       return await $axios.$post(`/api/auth`);

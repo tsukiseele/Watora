@@ -20,11 +20,13 @@
   }
 }
 
-/** 全局英文字体 **/
+/** 全局图标字体 **/
 @font-face {
   font-family: "Fontello";
   src: url("/fonts/fontello.woff2");
 }
+
+/** 全局英文字体 **/
 @font-face {
   font-family: "InfoDisplay";
   src: url("https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/fonts/InfoDisplay.woff");
