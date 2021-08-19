@@ -25,7 +25,12 @@
           :data-aos="index % 2 == 0 ? 'fade-left' : 'fade-right'",
           :data-aos-once="isAosOnce"
         )
-      SPagination(v-model="page", @change="onChange", :size="10")
+      SPagination(
+        v-model="page",
+        @change="onChange",
+        :size="10",
+        :loading="isLoading"
+      )
       //- .post-btn-next(
       //-   v-if="page > 0",
       //-   :class="{ 'post-btn-bottom': page < 0 }",
@@ -48,6 +53,7 @@ export default {
     articles: null,
     arch: null,
     error: null,
+    isLoading: false,
     itemActive: null,
     isAosOnce: false,
     // 侧栏
@@ -112,6 +118,7 @@ export default {
     },
     async onChange(page) {
       try {
+        this.isLoading = true;
         const resp = await this.$api.getArticlePage(page, 8);
         if (resp.ok) {
           document
@@ -121,6 +128,8 @@ export default {
         }
       } catch (e) {
         console.error(e);
+      } finally {
+        this.isLoading = false;
       }
     },
   },
