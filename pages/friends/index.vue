@@ -56,7 +56,7 @@ export default {
   background: var(--card);
   transition: all 0.3s;
   border-radius: 5px;
-  box-shadow: 0 0 9px var(--shadow);
+  box-shadow: var(--shadow);
   max-height: 200px;
   overflow: hidden;
   padding: 1rem;
@@ -68,7 +68,7 @@ export default {
     height: 64px;
     width: 64px;
     border-radius: 50%;
-    box-shadow: 0 0 9px var(--shadow);
+    box-shadow: var(--shadow);
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease;

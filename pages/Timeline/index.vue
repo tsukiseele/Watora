@@ -38,7 +38,7 @@ export default {
       if (this.archives) {
         const timeline = {}
         for(const article of this.archives) {
-          const date = new Date(article.articleDate)
+          const date = new Date(article.articleDate);
           const group = `${date.getFullYear()}年${date.getMonth()}月`;
           if (group in timeline) {
             timeline[group].push(article);

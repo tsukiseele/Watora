@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "CommentChild",
+  name: "SCommentChild",
   props: {
     comments: {
       type: Array,

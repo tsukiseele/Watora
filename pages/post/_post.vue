@@ -17,7 +17,7 @@
         @mouseenter="itemActive = item.articleTitle",
         @mouseleave="itemActive = null"
       )
-        PostItem(
+        SPostItem(
           :key="index",
           :item="item",
           :to="`/archives/${item.articleId}`",
@@ -25,19 +25,26 @@
           :data-aos="index % 2 == 0 ? 'fade-left' : 'fade-right'",
           :data-aos-once="isAosOnce"
         )
-      .post-btn-next(
-        v-if="page > 0",
-        :class="{ 'post-btn-bottom': page < 0 }",
-        @click="loadNext()"
-      ) 
-        span {{ page > 0 ? 'NEXT' : '已到底部' }}
+      SPagination(v-model="page", @change="onChange", :size="10")
+      //- .post-btn-next(
+      //-   v-if="page > 0",
+      //-   :class="{ 'post-btn-bottom': page < 0 }",
+      //-   @click="loadNext()"
+      //- ) 
+      //-   .loading
+      //-     .rect
+      //-     .rect
+      //-     .rect
+      //-     .rect
+      //-     .rect
+      //-   span {{ page > 0 ? 'NEXT' : '已到底部' }}
     //- .aside-wrap
 </template>
 
 <script>
 export default {
   data: () => ({
-    page: null,
+    page: 1,
     articles: null,
     arch: null,
     error: null,
@@ -46,14 +53,14 @@ export default {
     // 侧栏
     asideStyles: {},
     asideClasses: {},
-    asidePos: null
+    asidePos: null,
   }),
   watch: {
     itemActive(newVal, oldVal) {
       if (newVal) {
         this.$store.commit("live2dText", `要阅读『${newVal} 』吗?`);
       }
-    }
+    },
   },
   computed: {
     scroll() {
@@ -67,7 +74,7 @@ export default {
       const placeholder = this.$statics.images.placeholder;
       return {
         icon,
-        placeholder
+        placeholder,
       };
     },
     clientHeight() {
@@ -86,7 +93,7 @@ export default {
             : document.documentElement.clientHeight;
       }
       return clientHeight;
-    }
+    },
   },
 
   methods: {
@@ -102,10 +109,24 @@ export default {
         // this.articles.push(resp.data);
         this.articles = (this.articles || []).concat(resp.data);
       }
-    }
+    },
+    async onChange(page) {
+      try {
+        const resp = await this.$api.getArticlePage(page, 8);
+        if (resp.ok) {
+          document
+            .getElementById("container")
+            .scrollIntoView({ behavior: "smooth" });
+          this.articles = resp.data;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
+
   async asyncData({ app, params }) {
-    const page = params.post || 1;
+    const page = parseInt(params.post || 1);
     let articles = null;
     let arch = null;
     let error = null;
@@ -122,13 +143,13 @@ export default {
       page,
       articles,
       arch,
-      error
+      error,
     };
   },
   fetch() {
     this.$store.commit("header", { title: "雫『Shizuku』", isFull: true });
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 
@@ -195,6 +216,13 @@ export default {
   z-index: 0;
   cursor: pointer;
   font-family: InfoDisplay;
+
+  .loading {
+    position: absolute;
+    &::before {
+      content: "";
+    }
+  }
 
   &::before {
     content: "";

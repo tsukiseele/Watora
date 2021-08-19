@@ -26,7 +26,7 @@
 <script>
 import { mdiReply } from "@mdi/js";
 export default {
-  name: "Comment",
+  name: "SComment",
   props: {
     comments: Array,
     at: String,

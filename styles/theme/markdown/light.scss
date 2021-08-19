@@ -44,6 +44,7 @@
     color: $md-text;
     padding: 0;
     margin: 8px 0;
+    font-family: zillaslab,palatino,"Palatino Linotype",serif;
   }
 
   h1 {
@@ -70,6 +71,7 @@
     margin: 16px 0 16px -8px;
     padding: 0 0 0 6px!important;
     background-color: $md-block-bg;
+    
     &:nth-of-type(7n) {
       border-left: 4px solid $md-colors-1;
     }

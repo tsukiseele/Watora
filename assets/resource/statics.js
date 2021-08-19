@@ -5,7 +5,7 @@ export default
   "resource": {
     "images": {
       "avatar": "images/avatar.png",
-      "placeholder": "images/placeholder.png",
+      "placeholder": "images/placeholder.jpg",
       "backgrounds": [
         "images/backgrounds/1.webp",
         "images/backgrounds/2.webp",

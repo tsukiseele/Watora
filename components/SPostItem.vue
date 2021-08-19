@@ -1,7 +1,7 @@
 <template lang="pug">
 .post-item(@click="$router.push(to)")
   .item-cover-box
-    img.item-cover(v-lazy="placeholder || item.articleCover || placeholder")
+    img.item-cover(v-lazy="item.articleCover || placeholder")
   .item-info 
     .item-title {{ item.articleTitle }}
     span.item-preview {{ preview }}
@@ -61,7 +61,7 @@ export default {
   margin: 1rem;
   background: var(--card);
   transition: all 0.3s;
-  box-shadow: 0 1px 6px var(--shadow);
+  box-shadow: var(--shadow);
   cursor: pointer;
   border-radius: 5px;
   backdrop-filter: blur(10px);
@@ -144,7 +144,7 @@ export default {
     border-radius: 0 3px 3px 0;
     top: 1rem;
     left: -0.6rem;
-    box-shadow: 3px 3px 8px var(--shadow);
+    box-shadow: var(--shadow);
     &::before {
       content: "";
       position: absolute;

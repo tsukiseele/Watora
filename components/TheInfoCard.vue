@@ -38,7 +38,7 @@ export default {
   align-items: center;
   background: var(--card);
   // border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 3px 3px 8px var(--shadow);
+  box-shadow: var(--shadow);
   .card-icon {
     object-fit: cover;
     height: 6.7rem;

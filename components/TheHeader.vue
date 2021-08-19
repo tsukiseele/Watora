@@ -201,7 +201,7 @@ export default {
     font-size: 2.2rem;
     font-weight: 500;
     cursor: pointer;
-    text-shadow: 0 0 0.5rem var(--shadow);
+    text-shadow: --shadow;
     span {
       transition: color 0.3s ease;
     }

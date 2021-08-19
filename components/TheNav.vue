@@ -94,7 +94,7 @@ export default {
   &.nav-bg {
     color: var(--text);
     background: var(--card);
-    box-shadow: 0 1px 6px var(--shadow);
+    box-shadow: var(--shadow);
   }
 }
 
@@ -111,7 +111,7 @@ export default {
     transition: 0.3s ease;
   }
   &:hover {
-    background-color: var(--shadow);
+    background-color: var(--card);
   }
 }
 
@@ -170,7 +170,7 @@ export default {
   &.open {
     .drawer-main {
       right: 0%;
-      box-shadow: 0 -3px 6px var(--shadow);
+      box-shadow: var(--shadow);
     }
     .drawer-blank {
       display: block;

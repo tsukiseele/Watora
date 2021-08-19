@@ -43,7 +43,7 @@ export default {
         const user = await app.$api.auth();
         if (user) {
           store.commit("setUser", user);
-          redirect("/admin");
+          redirect("/backend");
         }
       } catch (e) {}
     }
@@ -76,7 +76,7 @@ export default {
           // 写入Cookie后跳转
           Cookies.set("token", result.token);
           this.$store.commit("user", result.user);
-          this.$router.push("/admin");
+          this.$router.push("/backend");
           this.error.color = "green";
           this.error.message = "正在跳转中。。。";
           this.error.show = true;
@@ -103,7 +103,7 @@ export default {
           const user = await this.$api.auth();
           if (user) {
             this.$store.commit("user", user);
-            this.$router.replace("/admin");
+            this.$router.replace("/backend/");
           }
         } catch (e) {}
       }
@@ -178,13 +178,13 @@ export default {
   animation: anim 10s linear infinite;
   @keyframes anim {
     0% {
-      transform: translate(2px) rotate(0.5deg);
+      transform: translate(2px) rotate(1deg);
     }
     50% {
-      transform: translate(-2px) rotate(-0.5deg);
+      transform: translate(-2px) rotate(-1deg);
     }
     100% {
-      transform: translate(2px) rotate(0.5deg);
+      transform: translate(2px) rotate(1deg);
     }
   }
 }

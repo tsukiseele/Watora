@@ -129,7 +129,7 @@ a {
     padding: 0.1rem 0.25rem;
     border-radius: 3px;
     background: white;
-    box-shadow: 0 0 5px var(--shadow);
+    box-shadow: var(--shadow);
     transform: scale(0);
     transform-origin: left bottom;
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -189,13 +189,12 @@ a {
 
 .card {
   background: var(--card);
-  // backdrop-filter: blur(10px);
   border-radius: 0.5rem;
   transition: 0.3s ease;
   padding: 1rem;
+  box-shadow: var(--shadow);
   &hover:hover {
     background: var(--card-active);
-    box-shadow: 0 1px 6px var(--shadow);
   }
 }
 

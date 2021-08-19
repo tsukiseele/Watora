@@ -75,10 +75,12 @@ export default {
   right: 0;
   bottom: 0;
 }
+
 .error {
   font-family: Epilogue, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 4rem;
 }
+
 .details {
   font-size: 2rem;
 }
