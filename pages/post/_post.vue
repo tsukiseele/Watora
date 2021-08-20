@@ -133,7 +133,6 @@ export default {
       }
     },
   },
-
   async asyncData({ app, params }) {
     const page = parseInt(params.post || 1);
     let articles = null;
