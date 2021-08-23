@@ -1,12 +1,11 @@
-export default 
-{
-  // "prefix": "https://cdn.jsdelivr.net/gh/tsukiseele/statics/watora/",
-  "prefix": "https://raw.githubusercontent.com/tsukiseele/statics/master/watora/",
-  "resource": {
-    "images": {
-      "avatar": "images/avatar.png",
-      "placeholder": "images/placeholder.png",
-      "backgrounds": [
+export default {
+  prefix: "https://cdn.jsdelivr.net/gh/tsukiseele/statics/watora/",
+  // prefix: "https://raw.githubusercontent.com/tsukiseele/statics/master/watora/",
+  resource: {
+    images: {
+      avatar: "images/avatar.png",
+      placeholder: "images/placeholder.jpg",
+      backgrounds: [
         "images/backgrounds/1.webp",
         "images/backgrounds/2.webp",
         "images/backgrounds/3.webp",
@@ -15,8 +14,9 @@ export default
         "images/backgrounds/6.webp"
       ]
     },
-    "fonts": {
-      "default": "fonts/InfoDisplay.woff"
+    fonts: {
+      default: "fonts/InfoDisplay.woff",
+      chinese: "fonts/chinese.font.woff"
     }
   }
-}
+};

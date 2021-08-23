@@ -5,6 +5,7 @@ import Cookies from "js-cookie"
  */
 export default async function ({ app, route, store, env, redirect, req }) {
   const KEY_TOKEN = "token";
+  const LOGIN_PATH = "/backend/login"
   let token;
   
   if (process.server) {
@@ -19,7 +20,7 @@ export default async function ({ app, route, store, env, redirect, req }) {
   const redirectLogin = function () {
     Cookies.remove(KEY_TOKEN);
     store.commit("user", null);
-    redirect("/login");
+    redirect(LOGIN_PATH);
   }
   if (token) {
     try {

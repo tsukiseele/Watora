@@ -19,7 +19,6 @@
     "core-js": "^3.8.2",
     "js-cookie": "^3.0.0",
     "live2d-vue": "^0.2.5",
-    "mavon-editor": "^2.9.1",
     "nuxt": "^2.14.12",
     "ress": "^4.0.0",
     "vue-lazyload": "^1.3.3",

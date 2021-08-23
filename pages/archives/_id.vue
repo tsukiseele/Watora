@@ -13,8 +13,8 @@
               span.tag-text {{ tag }}
       .markdown
         client-only
-          MdPreview(:content="article.articleContent")
-      .comments.card
+          SMdPreview(:content="article.articleContent")
+      .comments
         .comment-header {{ comments.length == 0 ? '暂无评论' : '评论' }}
         .comment-edit
           .comment-content
@@ -22,7 +22,7 @@
           .comment-email
           .comment-domain
 
-        Comment(:comments="comments", :reply="handleReply()")
+        SComment(:comments="comments", :reply="handleReply()")
 </template>
 
 <script>
@@ -38,6 +38,13 @@ export default {
     article: {},
     comments: {},
   }),
+  created() {
+    this.$store.commit("header", {
+      title: this.article.articleTitle || "无题",
+      isHideSubtitle: true,
+      isHide: true,
+    });
+  },
   fetch() {
     this.$store.commit("header", {
       title: this.article.articleTitle || "无题",
@@ -49,7 +56,7 @@ export default {
     handleReply() {},
   },
   async asyncData({ app, params }) {
-    let id = params.id || 0;
+    let id = parseInt(params.id || 0);
     let article;
     let comments;
     try {
@@ -88,11 +95,11 @@ export default {
 
 .comments {
   overflow: hidden;
-  margin-top: 2rem;
-  padding: 2rem;
+  padding: 1rem;
+  background-color: var(--card);
   .comment-header {
     color: var(--text);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -102,8 +109,8 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 66vh;
-  @media screen and (max-width: 768px) {
+  height: 50vh;
+  @media screen and (max-width: $mobile) {
     height: 33vh;
   }
   /* 遮罩层*/
@@ -120,6 +127,7 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all .5s ease;
   }
   .header {
     z-index: 1;

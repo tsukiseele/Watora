@@ -1,6 +1,6 @@
 :root {
   // --background: rgba(0, 0, 0, 0.2);
-  --background: rgba(255, 255, 255, 0.2);
+  --background: rgba(255, 255, 255, 0.33);
   // 文本
   --text: rgba(32, 32, 32, 1);
   // 文本-强调
@@ -18,7 +18,7 @@
   // 头部背景
   --header: rgba(255, 255, 255, 0.3);
   // 阴影
-  --shadow: rgba(7, 19, 27, 0.24); /*0 3px 8px 6px rgba(7,19,27,0.06)*/
+  --shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);/*0 3px 8px 6px rgba(7,19,27,0.06)*/
   // 阴影-扩散
   --shadow-active: rgba(7, 19, 27, 0.15);
   // 卡片背景

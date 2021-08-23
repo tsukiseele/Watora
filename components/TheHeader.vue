@@ -180,6 +180,7 @@ export default {
 
   &.hide {
     height: 3rem;
+    background-color: var(--card);
   }
 
   @media screen and(max-width: $mobile) {
@@ -194,13 +195,14 @@ export default {
   flex-flow: column;
   text-align: center;
   color: var(--text);
-  font-family: InfoDisplay;
+  font-family: chinese, InfoDisplay;
 
   .header--title {
     font-size: 2.2rem;
     font-weight: 500;
+    font-family: chinese, InfoDisplay;
     cursor: pointer;
-    text-shadow: 0 0 0.5rem var(--shadow);
+    text-shadow: --shadow;
     span {
       transition: color 0.3s ease;
     }
@@ -221,7 +223,7 @@ export default {
       animation: cursor-vague 1s ease infinite;
     }
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: $mobile) {
     .header--title {
       font-size: 1.8rem;
     }

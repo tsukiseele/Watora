@@ -25,27 +25,27 @@ export default {
       {
         title: "仪表盘",
         icon: "fa-dashboard",
-        to: "/admin"
+        to: "/backend"
       },
       {
         title: "新想法",
         icon: "fa-pencil",
-        to: "/admin/edit"
+        to: "/backend/edit"
       },
       {
         title: "文章管理",
         icon: "fa-file-text-o",
-        to: "/admin/manager"
+        to: "/backend/manager"
       },
       {
         title: "评论管理",
         icon: "fa-comment-o",
-        to: "/admin/comment"
+        to: "/backend/comment"
       },
       {
         title: "友链管理",
         icon: "fa-at",
-        to: "/admin/link"
+        to: "/backend/link"
       },
       {
         title: "返回主页",

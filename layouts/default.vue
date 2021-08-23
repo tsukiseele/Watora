@@ -1,5 +1,6 @@
 <template lang="pug">
 #app
+  //- (:style="{ 'background-image': background }")
   #background(:style="{ 'background-image': background }")
   TheNav
   TheHeader(
@@ -31,8 +32,10 @@ export default {
   }),
   computed: {
     background() {
+      
       // 判断客户端，防止重复渲染；
       if (process.client) {
+        // return "linear-gradient(45deg, pink 20%, hotpink 20% 40%, pink 40% 60%, hotpink 60% 80%, pink 80%);"
         return `url(${this.$static}/bg/${this.getRandomNumber(1, 20)}.webp)`;
       }
     },
@@ -156,5 +159,10 @@ export default {
   background-size: cover;
   transition: background 1s;
   overflow: hidden;
+}
+@keyframes identifier {
+  100% {
+    transform: translate(100%, 100%);
+  }  
 }
 </style>

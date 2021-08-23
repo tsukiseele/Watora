@@ -3,51 +3,57 @@
   //- 仅滑到顶部时显示工具栏
   //- :class="{ 'nav-hide': scroll.change > 100 }"
   //- 'nav-hide': scroll.change > 0,
-  nav#nav(
-    :class="{'nav-hide': scroll.pos > 0, 'nav-bg': scroll.pos > 100 }"
-  )
+  nav#nav(:class="{ 'nav-hide': scroll.pos > 0, 'nav-bg': scroll.pos > 100 }")
     .nav-title(@click="$router.push('/')") {{ title }}
     .nav-spacer
     ul.nav-menu(v-if="!isMobile", :class="{ 'menu-dark': scroll.pos > 100 }")
       li(@click="$router.push('/')")
-        i.fa.fa-home 
-        | 主页
+        SvgIcon(type="mdi", :path="icons.mdiHome") 
+        .menu-title 主页
       li(@click="$router.push('/timeline')")
-        i.fa.fa-list 
-        | 归档
+        SvgIcon(type="mdi", :path="icons.mdiViewList") 
+        .menu-title 归档
       li(@click="$router.push('/friends')") 
-        i.fa.fa-at 
-        | 友链
+        SvgIcon(type="mdi", :path="icons.mdiAt") 
+        .menu-title 友链
       li(@click="$router.push('/about')")
-        i.fa.fa-info 
-        | 关于我
+        SvgIcon(type="mdi", :path="icons.mdiInformation") 
+        .menu-title 关于
     .nav-spacer
-    .nav-bars(v-if="isMobile" @click="drawer = !drawer")
-      i.fa.fa-bars
-  .nav-drawer(v-if="isMobile" :class="{ open: drawer }")
+    .nav-bars(v-if="isMobile", @click="drawer = !drawer")
+      SvgIcon(type="mdi", :path="icons.mdiMenu") 
+  .nav-drawer(v-if="isMobile", :class="{ open: drawer }")
     .drawer-blank(@click="drawer = !drawer")
     .drawer-main
       .drawer-banner 
       ul.drawer-menu(@click="drawer = !drawer")
         li(@click="$router.push('/')")
-          i.fa.fa-home 
-          | 主页
+          SvgIcon(type="mdi", :path="icons.mdiHome") 
+          .menu-title 主页
         li(@click="$router.push('/timeline')")
-          i.fa.fa-list 
-          | 归档
+          SvgIcon(type="mdi", :path="icons.mdiViewList") 
+          .menu-title 归档
         li(@click="$router.push('/friends')") 
-          i.fa.fa-at 
-          | 友链
+          SvgIcon(type="mdi", :path="icons.mdiAt") 
+          .menu-title 友链
         li(@click="$router.push('/about')")
-          i.fa.fa-info 
-          | 关于我
+          SvgIcon(type="mdi", :path="icons.mdiInformation") 
+          .menu-title 关于
 </template>
 
 <script>
+import { mdiHome, mdiViewList, mdiAt, mdiInformation, mdiMenu } from "@mdi/js";
 export default {
   data: () => ({
     title: "雫『Watora』",
-    drawer: false
+    drawer: false,
+    icons: {
+      mdiHome,
+      mdiViewList,
+      mdiAt,
+      mdiInformation,
+      mdiMenu,
+    },
   }),
   computed: {
     scroll() {
@@ -55,8 +61,8 @@ export default {
     },
     isMobile() {
       return this.$store.getters.isMobile;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -88,25 +94,24 @@ export default {
   &.nav-bg {
     color: var(--text);
     background: var(--card);
-    box-shadow: 0 1px 6px var(--shadow);
+    box-shadow: var(--shadow);
   }
 }
 
 .nav-bars {
   align-self: center;
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
   border-radius: 50%;
   transition: background 0.3s ease;
-  i {
-    align-self: center;
-    font-size: 1.3rem;
-    padding: 0.5rem;
+  svg {
     transition: 0.3s ease;
   }
   &:hover {
-    background-color: var(--shadow);
+    background-color: var(--card);
   }
 }
 
@@ -122,7 +127,7 @@ export default {
   }
 
   .drawer-banner {
-    height: 10rem;
+    height: 12rem;
     background-image: url(https://cdn.jsdelivr.net/gh/tsukiseele/ImageHosting/upload/826f66f94e3ebf1f62cff7c9109bb118.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -133,16 +138,23 @@ export default {
     color: var(--text);
 
     li {
-      i {
-        padding-right: 0.5rem;
-      }
-      cursor: pointer;
-      padding: 0.5rem 1rem;
+      display: flex;
       transition: all 0.2s ease;
+      cursor: pointer;
+      padding: .67rem 0;
+      align-items: center;
 
       &:hover {
         background-color: var(--theme-primary);
-        filter: brightness(1.2);
+      }
+
+      .menu-title {
+        margin-top: 3px;
+      }
+
+      svg {
+        transform: scale(0.9);
+        margin: 0 1rem;
       }
     }
   }
@@ -158,7 +170,7 @@ export default {
   &.open {
     .drawer-main {
       right: 0%;
-      box-shadow: 0 -3px 6px var(--shadow);
+      box-shadow: var(--shadow);
     }
     .drawer-blank {
       display: block;
@@ -209,9 +221,9 @@ export default {
       border-bottom: var(--theme) solid 2px;
       transition: width 0.2s ease-in-out;
     }
-    i {
-      padding-right: 0.33rem;
-      font-size: 1.1rem;
+    .menu-title {
+      margin-top: 3px;
+      margin-left: .5rem;
     }
   }
   &.menu-dark li {
@@ -227,10 +239,4 @@ export default {
 .nav-spacer {
   flex-grow: 1;
 }
-/*
-@media screen and (max-width: 768px) {
-  .nav-title {
-    display: none;
-  }
-}*/
 </style>

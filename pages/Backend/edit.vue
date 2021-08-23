@@ -9,9 +9,9 @@
       span 封面
       img.preview(:src="getObjectURL")
       input(type="file", @change="uploadImage()", ref="coverInput")
-      mavon-editor(ref="md", v-model="form.articleContent")
+      //- mavon-editor(ref="md", v-model="form.articleContent")
       input(:disable="loading", type="button", @click="onSubmit()", value="提交")
-  Dialog(:title="dialog.title", :text="dialog.text", :show="dialog.show")
+  SDialog(:title="dialog.title", :text="dialog.text", :show="dialog.show")
 </template>
 
 <script>

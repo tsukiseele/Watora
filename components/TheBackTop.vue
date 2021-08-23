@@ -13,7 +13,8 @@ img#back-top(
 <script>
 export default {
   data: () => ({
-    img: "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/assets/back-top.png",
+    img:
+      "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/assets/back-top.png",
   }),
   computed: {
     scroll() {
@@ -42,7 +43,7 @@ export default {
     bottom: 100%;
     animation: none;
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: $mobile) {
     display: none;
   }
 }
