@@ -21,8 +21,7 @@
           .comment-username
           .comment-email
           .comment-domain
-
-        SComment(:comments="comments", :reply="handleReply()")
+        SComment(:title="this.$route.path")
 </template>
 
 <script>
@@ -53,7 +52,6 @@ export default {
     });
   },
   methods: {
-    handleReply() {},
   },
   async asyncData({ app, params }) {
     let id = parseInt(params.id || 0);

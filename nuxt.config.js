@@ -1,5 +1,4 @@
 export default {
-  mode: "universal",
   server: {
     host: process.env.BASE_HOST || "localhost",
     port: process.env.BASE_PORT || 3000
@@ -78,7 +77,8 @@ export default {
     "~/plugins/libs/lib-aos.client.js",
     "~/plugins/libs/lib-svgicon.client.js",
     "~/plugins/libs/lib-live2d.client.js",
-    "~/plugins/libs/lib-aplayer.client.js"
+    "~/plugins/libs/lib-aplayer.client.js",
+    "~/plugins/libs/lib-vssue.client.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -97,8 +97,6 @@ export default {
         ["@babel/plugin-proposal-private-property-in-object", { loose: true }]
       ]
     },
-    //extractCSS: { allChunks: true },
-    //extractCSS: true,
     extractCSS: {
       ignoreOrder: true
     },
