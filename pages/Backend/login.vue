@@ -71,8 +71,10 @@ export default {
   methods: {
     async handleSubmit() {
       try {
-        let result = await this.$api.login({ userEmail: this.user.email, userPassword: this.user.password});
-        if (result) {
+        const resp = await this.$api.login({ userEmail: this.user.email, userPassword: this.user.password});
+        if (resp.ok) {
+          const result = resp.data;
+          console.log(result);
           // 写入Cookie后跳转
           Cookies.set("token", result.token);
           this.$store.commit("user", result.user);
@@ -85,7 +87,7 @@ export default {
       } catch (e) {
         // 弹出错误信息
         this.error.color = "red";
-        this.error.message = "用户名Orz密码错误";
+        this.error.message = "用户名或密码错误";
         this.error.show = true;
         this.icon.current = this.icon.failed;
       }
@@ -140,10 +142,12 @@ export default {
     background-color: var(--theme);
     box-shadow: 0px 0px 6px var(--theme);
   }
+
   &::before {
     left: 20%;
     animation: tran 10s linear infinite;
   }
+  
   &::after {
     right: 20%;
     animation: tran 10s linear -5s infinite;

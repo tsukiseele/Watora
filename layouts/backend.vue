@@ -2,54 +2,57 @@
 #app
   .header 
     span.header-icon Watora
-    span.header-title 博客管理系统
-  #root
-    aside#aside
-      ul.menu
-        ol.menu-item(   
-          v-for="(item, index) in menu",
-          :key="index",
-          @click="handleItemClick(item)"
-        )
-          i.menu-item-icon(:class="['fa', item.icon]") 
-          span.menu-item-title {{ item.title }}
-    main#wrap
-      Nuxt
+    span.header-title 管理系统
+  section
+    SNavigationDrawer(width="200px" :menu="menu")
+      //-aside#aside
+        ul.menu
+          ol.menu-item(   
+            v-for="(item, index) in menu",
+            :key="index",
+            @click="handleItemClick(item)"
+          )
+            i.menu-item-icon(:class="['fa', item.icon]") 
+            span.menu-item-title {{ item.title }}
+      main#wrap
+        Nuxt
 </template>
 
 <script>
+import { mdiViewDashboard, mdiNewBox, mdiPost, mdiMessage, mdiLink, mdiCarBack } from "@mdi/js";
+
 export default {
   middleware: "auth",
   data: () => ({
     menu: [
       {
         title: "仪表盘",
-        icon: "fa-dashboard",
+        icon: mdiViewDashboard,
         to: "/backend"
       },
       {
         title: "新想法",
-        icon: "fa-pencil",
+        icon: mdiNewBox,
         to: "/backend/edit"
       },
       {
         title: "文章管理",
-        icon: "fa-file-text-o",
+        icon: mdiPost,
         to: "/backend/manager"
       },
       {
         title: "评论管理",
-        icon: "fa-comment-o",
+        icon: mdiMessage,
         to: "/backend/comment"
       },
       {
         title: "友链管理",
-        icon: "fa-at",
+        icon: mdiLink,
         to: "/backend/link"
       },
       {
         title: "返回主页",
-        icon: "fa-reply",
+        icon: mdiCarBack,
         to: "/"
       }
     ]
@@ -68,6 +71,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+/*
 #root {
   height: 100%;
   display: flex;
@@ -75,25 +79,24 @@ export default {
   flex-grow: 1;
 }
 
-#aside {
-  min-width: 200px;
-  min-height: 100%;
-  border-right: 1px solid var(--border);
-}
-
 #wrap {
   flex-grow: 1;
   margin: 1rem;
 }
-
+*/
 .header {
-  background-color: var(--theme);
+  // background-color: var(--theme);
+  // background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.67) 1rem, transparent 1rem 2rem, rgba(255,255,255,.67) 2rem 3rem);
   line-height: 4rem;
   padding-left: 1rem;
-  box-shadow: 0 0 5px var(--theme);
+  // box-shadow: 0 0 5px var(--theme);
+  box-shadow: var(--shadow);
   z-index: 2;
+  font-family: zillaslab,  palatino, "Palatino Linotype","Microsoft YaHei", serif;
+  text-shadow: var(--shadow);
+  // font-weight: normal;
   .header-icon {
-    font-family: InfoDisplay;
+    // font-family: InfoDisplay;
     font-weight: bold;
     font-size: 1.5rem;
     padding: 0 0.33rem;
@@ -102,9 +105,10 @@ export default {
   .header-title {
     color: var(--text);
     font-size: 1.1rem;
+  
   }
 }
-
+/*
 .menu {
   .menu-item {
     padding: 1rem;
@@ -121,5 +125,5 @@ export default {
     .menu-item-title {
     }
   }
-}
+}*/
 </style>

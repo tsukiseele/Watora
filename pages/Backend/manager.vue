@@ -15,7 +15,10 @@ export default {
   async asyncData({app, isDev, route, store, env, params, query, req, res, redirect, error}) {
     let articles = []
     try {
-      articles = await app.$api.getAllArticles();
+      const resp = await app.$api.getAllArticles();
+      if (resp.ok) {
+        articles = resp.data;
+      }
     } catch(e) {
       console.log(e);
     }

@@ -55,12 +55,6 @@
   background: #ededed;
 }
 
-/** MD编辑器调整 **/
-.markdown-body {
-  z-index: 1 !important;
-  box-shadow: none !important;
-}
-
 /** 初始化样式 **/
 
 hr {
@@ -194,7 +188,7 @@ a {
 
 .card {
   background: var(--card);
-  border-radius: 0.5rem;
+  border-radius: 4px;
   transition: 0.3s ease;
   padding: 1rem;
   box-shadow: var(--shadow);

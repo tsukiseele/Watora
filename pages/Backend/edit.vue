@@ -122,8 +122,6 @@ export default {
         }
       } else {
         this.dialog.show = true;
-        this.dialog.title = "测试";
-        this.dialog.text = "tttttttttttt";
         // alert("标题和内容不可为空！");
       }
     },
