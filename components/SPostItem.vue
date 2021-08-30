@@ -3,7 +3,7 @@
   .item-cover-box
     img.item-cover(v-lazy="item.articleCover || placeholder")
   .item-info 
-    .item-title {{ item.articleTitle }}
+    .item-title {{ item.title }}
     span.item-preview {{ preview }}
     ul.item-tags
       li.item-tag.item-date
@@ -24,8 +24,8 @@ export default {
     item: Object,
     placeholder: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   computed: {
     tags() {
@@ -47,8 +47,8 @@ export default {
         }
         return content;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

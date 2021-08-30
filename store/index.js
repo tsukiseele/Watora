@@ -6,6 +6,7 @@ export const state = () => ({
     pos: 0,
     change: 0
   },
+  archives: null,
   header: {
     title: "",
     subtitle: "",
@@ -16,7 +17,6 @@ export const state = () => ({
 });
 
 export const getters = {
-
   user(state) {
     return state.user;
   },
@@ -34,6 +34,9 @@ export const getters = {
   },
   isMobile(state) {
     return state.clientWidth < 768;
+  },
+  archives(state) {
+    return state.archives;
   }
 };
 
@@ -52,5 +55,14 @@ export const mutations = {
   },
   clientWidth(state, clientWidth) {
     state.clientWidth = clientWidth;
+  },
+  archives(state, archives) {
+    state.archives = archives;
+  }
+};
+
+export const actions = {
+  async archives({ commit }, { page, count }) {
+    commit("archives", await this.$service.getArchives(page, count));
   }
 };

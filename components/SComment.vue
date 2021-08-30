@@ -10,15 +10,12 @@ export default {
   props: {
     title: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
-  data: () => ({
-  }),
-  computed: {
-  },
-  methods: {
-  },
+  data: () => ({}),
+  computed: {},
+  methods: {},
   mounted() {
     console.log(this.title);
   },
@@ -26,5 +23,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+::v-deep .vssue {
+  a {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
+.comment {
+  background-color: var(--card);
+}
 </style>

@@ -67,6 +67,8 @@ export default {
   // Plugins to run before rendering pasge: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "~/plugins/api.js",
+
+    "~/plugins/services.js",
     "~/plugins/utils.js",
     "~/plugins/filter.js",
     "~/plugins/inject.js",

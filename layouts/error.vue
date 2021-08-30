@@ -1,65 +1,65 @@
 <template lang="pug">
-  .__nuxt-error-page
-    div.error (╯°□°)╯︵ ┻━┻
-    div
-      div.details(v-if="statusCode === 404") Not Found
-      NuxtLink.back(class="error-link" to="/") 返回主页
-  //-   <div class="error">
-  //-     <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#DBE1EC" viewBox="0 0 48 48">
-  //-       <path d="M22 30h4v4h-4zm0-16h4v12h-4zm1.99-10C12.94 4 4 12.95 4 24s8.94 20 19.99 20S44 35.05 44 24 35.04 4 23.99 4zM24 40c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z" />
-  //-     </svg>
+.__nuxt-error-page
+  .error (╯°□°)╯︵ ┻━┻
+  div
+    .details(v-if="statusCode === 404") Not Found
+    NuxtLink.back.error-link(to="/") 返回主页
+//-   <div class="error">
+//-     <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#DBE1EC" viewBox="0 0 48 48">
+//-       <path d="M22 30h4v4h-4zm0-16h4v12h-4zm1.99-10C12.94 4 4 12.95 4 24s8.94 20 19.99 20S44 35.05 44 24 35.04 4 23.99 4zM24 40c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z" />
+//-     </svg>
 
-  //-     <div class="title">{{ message }}</div>
-  //-     <p v-if="statusCode === 404" class="description">
-  //-       <a v-if="typeof $route === 'undefined'" class="error-link" href="/">返回主页</a>
-  //-       <NuxtLink v-else class="error-link" to="/">返回主页</NuxtLink>
-  //-     </p>
-  //-     <p class="description" v-else>error</p>
+//-     <div class="title">{{ message }}</div>
+//-     <p v-if="statusCode === 404" class="description">
+//-       <a v-if="typeof $route === 'undefined'" class="error-link" href="/">返回主页</a>
+//-       <NuxtLink v-else class="error-link" to="/">返回主页</NuxtLink>
+//-     </p>
+//-     <p class="description" v-else>error</p>
 
-  //-     <div class="logo">
-  //-       <a href="https://nuxtjs.org" target="_blank" rel="noopener">NUXT.JS</a>
-  //-     </div>
-  //-   </div>
-  //- </div>
+//-     <div class="logo">
+//-       <a href="https://nuxtjs.org" target="_blank" rel="noopener">NUXT.JS</a>
+//-     </div>
+//-   </div>
+//- </div>
 </template>
 
 <script>
 export default {
-  layout: 'blank',
-  name: 'NuxtError',
+  layout: "blank",
+  name: "NuxtError",
   props: {
     error: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   computed: {
-    statusCode () {
-      return (this.error && this.error.statusCode) || 500
+    statusCode() {
+      return (this.error && this.error.statusCode) || 500;
     },
-    message () {
-      return this.error.message || '<%= messages.client_error %>'
-    }
+    message() {
+      return this.error.message || "<%= messages.client_error %>";
+    },
   },
-  head () {
+  head() {
     return {
       title: this.message,
       meta: [
         {
-          name: 'viewport',
-          content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0'
-        }
-      ]
-    }
-  }
-}
+          name: "viewport",
+          content: "width=device-width,initial-scale=1.0,minimum-scale=1.0",
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style>
 .__nuxt-error-page {
   padding: 1rem;
-  background: #F7F8FB;
-  color: #47494E;
+  background: #f7f8fb;
+  color: #47494e;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
@@ -77,7 +77,8 @@ export default {
 }
 
 .error {
-  font-family: Epilogue, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: Epilogue, ui-serif, Georgia, Cambria, "Times New Roman", Times,
+    serif;
   font-size: 4rem;
 }
 
@@ -88,29 +89,4 @@ export default {
 .back {
   font-size: 1.5rem;
 }
-
-/*
-.__nuxt-error-page .error {
-  max-width: 450px;
-}
-.__nuxt-error-page .title {
-  font-size: 1.5rem;
-  margin-top: 15px;
-  color: #47494E;
-  margin-bottom: 8px;
-}
-.__nuxt-error-page .description {
-  color: #7F828B;
-  line-height: 21px;
-  margin-bottom: 10px;
-}
-.__nuxt-error-page a {
-  color: #7F828B !important;
-  text-decoration: none;
-}
-.__nuxt-error-page .logo {
-  position: fixed;
-  left: 12px;
-  bottom: 12px;
-}*/
 </style>

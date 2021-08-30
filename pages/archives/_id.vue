@@ -1,27 +1,20 @@
 <template lang="pug">
 #container
   main#main
-    .article
+    .archive
       .banner
-        img.bg(:src="article.articleCover || $statics.images.backgrounds[0]") 
+        //- img.bg(:src="archive.archiveCover || $statics.images.backgrounds[0]") 
         .post-header
-          .post-title(v-text="article.articleTitle")
-          ul.post-tags
+          .post-title {{ archive.title || '' }}
+          //- ul.post-tags
             li.post-tag(v-for="(tag, i) in tags", :key="i") 
               //- i.tag-icon.fa.fa-tags
               SvgIcon(type="mdi", :path="mdiTag")
               span.tag-text {{ tag }}
       .markdown
         client-only
-          SMdPreview(:content="article.articleContent")
-      .comments
-        .comment-header {{ comments.length == 0 ? '暂无评论' : '评论' }}
-        .comment-edit
-          .comment-content
-          .comment-username
-          .comment-email
-          .comment-domain
-        SComment(:title="this.$route.path")
+          SMdPreview(:content="archive.body")
+      SComment(:title="this.$route.path")
 </template>
 
 <script>
@@ -34,57 +27,46 @@ export default {
         fullscreen: false,
       },
     },
-    article: {},
+    archive: {
+      title: "",
+      body: "",
+    },
     comments: {},
   }),
   created() {
     this.$store.commit("header", {
-      title: this.article.articleTitle || "无题",
+      title: this.archive.title || "无题",
       isHideSubtitle: true,
       isHide: true,
     });
   },
-  fetch() {
-    this.$store.commit("header", {
-      title: this.article.articleTitle || "无题",
-      isHideSubtitle: true,
-      isHide: true,
-    });
-  },
-  methods: {
-  },
-  async asyncData({ app, params }) {
-    let id = parseInt(params.id || 0);
-    let article;
-    let comments;
-    try {
-      const articleRes = await app.$api.getArticleById(id);
-      const commentRes = await app.$api.getCommentTree(id);
-      article = articleRes.ok ? articleRes.data : null;
-      comments = commentRes.ok ? commentRes.data : null;
-    } catch (e) {
-      console.log(e);
+  methods: {},
+  async asyncData({ app, params, store }) {
+    const id = parseInt(params.id || 0);
+    if (store.state.archives) {
+      return {
+        archive:
+          store.state.archives.find((item) => Number(item.number) === id) || {},
+      };
     }
     return {
-      article,
-      comments,
+      archive: (await app.$service.getArchiveById(id)) || {},
     };
   },
   computed: {
     tags() {
-      if (this.article.articleTags) return this.article.articleTags.split(" ");
+      if (this.archive.archiveTags) return this.archive.archiveTags.split(" ");
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 #main {
   margin-top: 0rem;
 }
 
-.article {
+.archive {
 }
 
 .markdown {
@@ -125,7 +107,7 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
   }
   .header {
     z-index: 1;
@@ -162,7 +144,8 @@ export default {
   }
 }
 @media screen and(max-width: $mobile) {
-  .markdown,.comments {
+  .markdown,
+  .comments {
     border-radius: 0;
     margin: 0 !important;
   }
