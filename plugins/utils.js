@@ -36,7 +36,7 @@ Date.prototype.format = function(fmt = "yyyy-MM-dd hh:mm:ss") {
  * @param {Date} time
  * @returns
  */
-Date.prototype.formatDateAgo = function(time) {
+Date.prototype.formatTimeAgo = function(time) {
   if (time) {
     var date = new Date(time);
     var difftime = Math.abs(new Date() - date);
@@ -70,7 +70,6 @@ Date.prototype.formatDateAgo = function(time) {
       difftime < yearAllday * 24 * 3600 * 1000
     ) {
       var monthNum = Math.floor(difftime / (monthAllday * 24 * 60 * 60 * 1000));
-      // 拼接
       return monthNum + " 个月前";
     } else if (
       difftime > 7 * 24 * 60 * 60 * 1000 &&
@@ -80,20 +79,16 @@ Date.prototype.formatDateAgo = function(time) {
       var weekNum = Math.floor(difftime / (7 * 24 * 3600 * 1000));
       return weekNum + " 周前";
     } else if (difftime < 7 * 24 * 3600 * 1000 && difftime > 24 * 3600 * 1000) {
-      // //注释("一周之内");
-      // var time = newData - diffTime;
       var dayNum = Math.floor(difftime / (24 * 60 * 60 * 1000));
       return dayNum + " 天前";
     } else if (difftime < 24 * 3600 * 1000 && difftime > 3600 * 1000) {
-      // //注释("一天之内");
-      // var time = newData - diffTime;
       var dayNum = Math.floor(difftime / (60 * 60 * 1000));
       return dayNum + " 小时前";
     } else if (difftime < 3600 * 1000 && difftime > 0) {
-      // //注释("一小时之内");
-      // var time = newData - diffTime;
       var dayNum = Math.floor(difftime / (60 * 1000));
       return dayNum + " 分钟前";
+    } else if (difftime < 60 * 1000 && difftime > 0) {
+      return "刚刚";
     }
   }
 };

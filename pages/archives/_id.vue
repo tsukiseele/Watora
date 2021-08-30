@@ -13,7 +13,8 @@
               span.tag-text {{ tag }}
       .markdown
         client-only
-          SMdPreview(:content="archive.body")
+          //- SMdPreview(:content="archive.body")
+          SMarked(:value="archive.body")
       SComment(:title="this.$route.path")
 </template>
 
