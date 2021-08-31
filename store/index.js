@@ -1,4 +1,4 @@
-import { formatPost } from "@/plugins/format.js";
+import { formatPost } from "@/plugins/utils/format.js";
 
 export const state = () => ({
   user: null,

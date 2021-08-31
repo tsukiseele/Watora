@@ -1,23 +1,23 @@
 <template lang="pug">
 client-only
   .markdown-preview
-    .markdown-content.card(v-html="markdown")
+    .markdown-content(v-html="markdown")
 </template>
 
 <script>
 import marked from "marked";
 import DOMPurify from "dompurify";
-// import "highlight.js/styles/atom-one-dark.css";
 /*
 import "highlight.js/styles/atom-one-dark-reasonable.css";
 import "highlight.js/styles/vs2015.css";
 import "highlight.js/styles/stackoverflow-dark.css";
-import "highlight.js/styles/night-owl.css";*/
+import "highlight.js/styles/night-owl.css";
+*/
 let CODE_ID = 0;
 const CODE_COPY_LIST = [];
 
 if (process.client) {
-  const hljs = require("@/plugins/highlight.js");
+  const hljs = require("@/plugins/utils/highlight.js");
   const renderer = new marked.Renderer();
 
   renderer.code = function code(_code, infostring, escaped) {
@@ -74,26 +74,33 @@ export default {
     },
   },
   methods: {},
+
+  created() {
+    /*
+    if (this.$isNight()) {
+      console.log(this.$isNight());
+      console.log("===================================");
+      require("highlight.js/styles/atom-one-dark.css");
+    } else {
+      require("highlight.js/styles/stackoverflow-light.css");
+    }*/
+  },
   mounted() {},
 };
 </script>
 
 <style lang="scss">
+// @import "highlight.js/styles/atom-one-dark.css";
 @import "./theme/index.scss";
-
-  @import "highlight.js/styles/atom-one-dark.css";
 :root[theme="dark"] {
   @import "./theme/dark.scss";
-  // @import "highlight.js/styles/stackoverflow-dark.css";
-  
+  // @import "highlight.js/styles/stackoverflow-light.css";
 }
-
 </style>
 
 <style lang="scss" scoped>
 /*
 @import "./theme/index.scss";
-@import "highlight.js/styles/stackoverflow-light.css";
 :root[theme="dark"] {
   @import "./theme/dark.scss";
   @import "highlight.js/styles/stackoverflow-dark.css";
@@ -103,8 +110,7 @@ export default {
   object-fit: cover;
 }
 .markdown-preview {
-  
-  margin: 0;
+  background-color: var(--card);
 }
 .markdown-content {
   overflow: hidden;
@@ -114,13 +120,9 @@ export default {
   overflow: auto;
   width: 100%;
 }
-.card {
-  margin-top: 0!important;
-  padding-top: 0!important;
-}
+
 pre,
 code {
   border-radius: var(--radius);
 }
-
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-.comment.card
+.comment
   Vssue(:title="title")
 </template>
 
@@ -33,6 +33,5 @@ export default {
 }
 .comment {
   background-color: var(--card);
-  margin: 0;
 }
 </style>
