@@ -114,5 +114,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./_post.scss";
+@import "_post.scss";
 </style>
