@@ -4,7 +4,7 @@ import Vue from 'vue'
  * 格式化日期，过去式
  */
 Vue.filter("formatTimeAgo", function(time) {
-  return time.formatTimeAgo();
+  return new Date(time).formatTimeAgo();
 });
 
 /**

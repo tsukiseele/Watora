@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
   //- (:style="{ 'background-image': background }")
-  #background(:style="{ 'background-image': background }")
+  //- #background(:style="{ 'background-image': background }")
   TheNav
   TheHeader(
     :title="header.title",
@@ -16,9 +16,9 @@
   //- 页脚
   TheFooter
   //- 播放器
-  TheAPlayer(:musics="musics")
+  //- TheAPlayer(:musics="musics")
   //- Live2d，仅PC端
-  TheLive2d(v-if="!isMobile", ref="live2d")
+  //- TheLive2d(v-if="!isMobile", ref="live2d")
   //- 返回顶部
   TheBackTop
 </template>

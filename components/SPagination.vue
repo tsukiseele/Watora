@@ -1,9 +1,9 @@
 <template lang="pug">
 .pagination-wrap
   .pagination
-    .pagination-first(v-show="current != 1", @click="onClick(1)")
+    .pagination-first(:class="{ disable: current === 1 }", @click="onClick(1)")
       SvgIcon(type="mdi", :path="icons.mdiPageFirst")
-    .pagination-pre(v-show="current > 1", @click="onClick(current - 1)")
+    .pagination-pre(:class="{ disable: current === 1 }", @click="onClick(current - 1)")
       SvgIcon(type="mdi", :path="icons.mdiChevronLeft")
     .pagination-page(
       v-for="n in range",
@@ -11,9 +11,9 @@
       :class="{ active: n === current }",
       @click="onClick(n)"
     ) {{ n }}
-    .pagination-next(v-show="current < size", @click="onClick(current + 1)")
+    .pagination-next(:class="{ disable: current === size }" @click="onClick(current + 1)")
       SvgIcon(type="mdi", :path="icons.mdiChevronRight")
-    .pagination-last(v-show="current !== size", @click="onClick(size)")
+    .pagination-last(:class="{ disable: current === size }" @click="onClick(size)")
       SvgIcon(type="mdi", :path="icons.mdiPageLast")
   .pagination-loading(v-show="loading")
 </template>
@@ -71,7 +71,6 @@ export default {
   },
   methods: {
     onClick(n) {
-      console.log(n);
       this.$emit("change", n);
     },
     getRange(start, end) {
@@ -168,6 +167,11 @@ export default {
   }
   .active {
     outline: 3px inset hotpink;
+  }
+  .disable {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.6;
   }
 }
 </style>

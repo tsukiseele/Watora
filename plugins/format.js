@@ -4,7 +4,7 @@
 const regex = /^(.+)?\r\n\s*(.+)?\r\n/;
 const coverRegex = /^\[(.+)\].*(http.*(?:jpg|jpeg|png|gif))/;
 export const formatPost = post => {
-  const { body, created_at } = post;
+  const { body, updated_at } = post;
   const result = regex.exec(body);
   const cover = coverRegex.exec(result[1]);
   if (cover && cover.length === 3) {
@@ -16,11 +16,11 @@ export const formatPost = post => {
   } else {
     post.cover = {
       title: "",
-      src: config.defaultCover
+      src: "x" || config.defaultCover
     };
     post.description = result[1];
   }
-  post.created_at = new Date(created_at).formatTimeAgo() //format(created_at, "zh_CN").replace(/\s/, "");
+  post.created_at = new Date(updated_at).formatTimeAgo(); //format(created_at, "zh_CN").replace(/\s/, "");
   return post;
 };
 

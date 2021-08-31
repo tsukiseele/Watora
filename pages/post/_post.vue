@@ -108,7 +108,8 @@ export default {
 
     await this.$store.dispatch("archives", { page: 1, count: 10 });
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 

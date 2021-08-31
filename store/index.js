@@ -1,3 +1,5 @@
+import { formatPost } from "@/plugins/format.js";
+
 export const state = () => ({
   user: null,
   clientWidth: 0,
@@ -6,7 +8,8 @@ export const state = () => ({
     pos: 0,
     change: 0
   },
-  archives: null,
+  archives: [],
+  archive: {},
   header: {
     title: "",
     subtitle: "",
@@ -58,11 +61,22 @@ export const mutations = {
   },
   archives(state, archives) {
     state.archives = archives;
+  },
+  archive(state, archive) {
+    state.archive = archive;
   }
 };
 
 export const actions = {
   async archives({ commit }, { page, count }) {
-    commit("archives", await this.$service.getArchives(page, count));
+    const archives = [];
+    const resp = await this.$service.getArchives(page, count);
+    resp.forEach(item => {
+      archives.push(formatPost(item));
+    });
+    commit("archives", archives);
+  },
+  async archive({ commit }, { id }) {
+    commit("archive", formatPost(await this.$service.getArchiveById(id)));
   }
 };

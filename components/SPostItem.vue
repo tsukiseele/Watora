@@ -1,14 +1,14 @@
 <template lang="pug">
 .post-item(@click="$router.push(to)")
   .item-cover-box
-    img.item-cover(v-lazy="item.articleCover || placeholder")
+    img.item-cover(v-lazy="item.cover || placeholder")
   .item-info 
     .item-title {{ item.title }}
     span.item-preview {{ preview }}
     ul.item-tags
       li.item-tag.item-date
         i.fa.fa-calendar.item-icon 
-        span {{ item.articleDate | formatDateAgo }}
+        span {{ item.articleDate | formatTimeAgo }}
       li.item-tag(v-for="(tag, i) in tags", :key="i")
         i.fa.fa-tag.item-icon 
         span {{ tag }}

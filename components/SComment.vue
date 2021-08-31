@@ -1,5 +1,5 @@
 <template lang="pug">
-.comment
+.comment.card
   Vssue(:title="title")
 </template>
 

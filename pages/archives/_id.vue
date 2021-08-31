@@ -3,7 +3,8 @@
   main#main
     .archive
       .banner
-        //- img.bg(:src="archive.archiveCover || $statics.images.backgrounds[0]") 
+        //-  || $statics.images.backgrounds[0]
+        img.bg(v-if="archive && archive.cover", :src="archive.cover.src") 
         .post-header
           .post-title {{ archive.title || '' }}
           //- ul.post-tags
@@ -14,7 +15,7 @@
       .markdown
         client-only
           //- SMdPreview(:content="archive.body")
-          SMarked(:value="archive.body")
+          SMarkdown(:value="archive.body")
       SComment(:title="this.$route.path")
 </template>
 
@@ -27,37 +28,42 @@ export default {
       toolbars: {
         fullscreen: false,
       },
-    },
+    } /*
     archive: {
       title: "",
       body: "",
-    },
+    },*/,
     comments: {},
   }),
   created() {
-    this.$store.commit("header", {
-      title: this.archive.title || "无题",
-      isHideSubtitle: true,
-      isHide: true,
-    });
-  },
-  methods: {},
-  async asyncData({ app, params, store }) {
-    const id = parseInt(params.id || 0);
-    if (store.state.archives) {
-      return {
-        archive:
-          store.state.archives.find((item) => Number(item.number) === id) || {},
-      };
-    }
-    return {
-      archive: (await app.$service.getArchiveById(id)) || {},
-    };
+    /*
+     */
   },
   computed: {
+    archive() {
+      console.log(this.$store.state.archive);
+      return this.$store.state.archive || {};
+    },
     tags() {
       if (this.archive.archiveTags) return this.archive.archiveTags.split(" ");
     },
+  },
+  methods: {},
+  async fetch({ store, params }) {
+    const id = Number(params.id || 0);
+    // 先从缓存里面找
+    if (store.state.archives) {
+      store.commit("archive", store.state.archives.find((item) => Number(item.number) === id))
+    } 
+    // 如果没有找到就请求
+    if (!store.state.archive) {
+      await store.dispatch("archive", { id });
+    }
+    store.commit("header", {
+      title: this.archive ? this.archive.title : "无题",
+      // isHideSubtitle: true,
+      isHide: true,
+    });
   },
 };
 </script>
