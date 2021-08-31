@@ -8,8 +8,6 @@ client-only
 import marked from "marked";
 import DOMPurify from "dompurify";
 // import "highlight.js/styles/atom-one-dark.css";
-
-import "highlight.js/styles/stackoverflow-light.css";
 /*
 import "highlight.js/styles/atom-one-dark-reasonable.css";
 import "highlight.js/styles/vs2015.css";
@@ -21,7 +19,7 @@ const CODE_COPY_LIST = [];
 if (process.client) {
   const hljs = require("@/plugins/highlight.js");
   const renderer = new marked.Renderer();
-  
+
   renderer.code = function code(_code, infostring, escaped) {
     CODE_ID++;
     const id = `code-${CODE_ID}`;
@@ -41,7 +39,7 @@ if (process.client) {
       this.options.langPrefix + lang
     }">${_code}</code><i id="${id}" class="icon icon-clipboard code-copy"></i></pre>\n`;
   };
-  
+
   renderer.table = function (header, body) {
     if (body) body = `<tbody>${body}</tbody>`;
     return `<div class="table-wrap">\n<table>\n<thead>\n${header}</thead>\n${body}</table>\n</div>\n`;
@@ -80,18 +78,49 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
 @import "./theme/index.scss";
+
+  @import "highlight.js/styles/atom-one-dark.css";
 :root[theme="dark"] {
   @import "./theme/dark.scss";
+  // @import "highlight.js/styles/stackoverflow-dark.css";
+  
 }
 
+</style>
+
+<style lang="scss" scoped>
+/*
+@import "./theme/index.scss";
+@import "highlight.js/styles/stackoverflow-light.css";
+:root[theme="dark"] {
+  @import "./theme/dark.scss";
+  @import "highlight.js/styles/stackoverflow-dark.css";
+}*/
+::v-deep img {
+  width: 100%;
+  object-fit: cover;
+}
+.markdown-preview {
+  
+  margin: 0;
+}
+.markdown-content {
+  overflow: hidden;
+  padding-top: 1rem;
+}
 .table-wrap {
   overflow: auto;
   width: 100%;
 }
-
-pre, code {
+.card {
+  margin-top: 0!important;
+  padding-top: 0!important;
+}
+pre,
+code {
   border-radius: var(--radius);
 }
+
 </style>

@@ -33,5 +33,6 @@ export default {
 }
 .comment {
   background-color: var(--card);
+  margin: 0;
 }
 </style>

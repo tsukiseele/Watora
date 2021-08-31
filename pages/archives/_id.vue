@@ -3,9 +3,9 @@
   main#main
     .archive
       .banner
-        //-  || $statics.images.backgrounds[0]
         img.bg(v-if="archive && archive.cover", :src="archive.cover.src") 
         .post-header
+          
           .post-title {{ archive.title || '' }}
           //- ul.post-tags
             li.post-tag(v-for="(tag, i) in tags", :key="i") 
@@ -77,7 +77,7 @@ export default {
 }
 
 .markdown {
-  overflow: hidden;
+
 }
 
 .comments {
@@ -95,8 +95,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 50vh;
+  padding: 0;
+  margin: .5rem;
   @media screen and (max-width: $mobile) {
     height: 33vh;
   }
@@ -151,10 +152,12 @@ export default {
   }
 }
 @media screen and(max-width: $mobile) {
+  .banner,
   .markdown,
   .comments {
     border-radius: 0;
     margin: 0 !important;
+    padding: 0 !important;
   }
   #main {
     margin-top: -3rem;
