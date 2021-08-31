@@ -2,6 +2,7 @@
   "name": "watora",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://tsukiseele.github.io/Watora",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev BASE_URL=http://localhost/ nuxt",
     "build": "nuxt build",
