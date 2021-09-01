@@ -29,7 +29,9 @@ timeago.register('pt_BR', locale);
  */
 Vue.filter("formatTimeAgo", function (time) {
   console.log(Number(5454445).toChineseNumber());
-  return timeago.format(new Date(time), "pt_BR");
+  const ago = timeago.format(new Date(time), "zh_CN");
+  const match = /\s+/.exec(ago).
+  ago.replaceAll(/\s+/,)
 });
 
 /**
