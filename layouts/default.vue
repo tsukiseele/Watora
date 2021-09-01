@@ -1,15 +1,15 @@
 <template lang="pug">
 #app
   //- (:style="{ 'background-image': background }")
-  #background(:style="{ 'background-image': background }")
+  //- #background(:style="{ 'background-image': background }")
   TheNav
-  TheHeader(
-    :title="header.title",
-    :subtitle="header.subtitle",
-    :isFull="header.isFull",
-    :isHide="header.isHide",
-    :isHideSubtitle="header.isHideSubtitle"
-  )
+  //- TheHeader(
+  //-   :title="header.title",
+  //-   :subtitle="header.subtitle",
+  //-   :isFull="header.isFull",
+  //-   :isHide="header.isHide",
+  //-   :isHideSubtitle="header.isHideSubtitle"
+  //- )
   main
     Nuxt
 
@@ -146,7 +146,7 @@ export default {
   background: var(--background);
 }
 #background {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -161,6 +161,7 @@ export default {
 }
 
 main {
+  // position: absolute;
   // background: #445;
 }
 @keyframes identifier {

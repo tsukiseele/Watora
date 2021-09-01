@@ -1,5 +1,12 @@
 <template lang="pug">
   #main.card
+    TheBanner(
+      :title="header.title",
+      :subtitle="header.subtitle",
+      :isFull="header.isFull",
+      :isHide="header.isHide",
+      :isHideSubtitle="header.isHideSubtitle"
+    )
     .about
       .blockquote
         i.fa.fa-quote-left
@@ -8,9 +15,13 @@
 </template>
 <script>
 export default {
-  fetch() {
-    this.$store.commit("header", { title: "『关于我』" });
-  },
+  data: () => ({
+    header: {
+      title: "ABOUT",
+      subtitle: "",
+      
+    }
+  })
 };
 </script>
 <style lang="scss" scoped>

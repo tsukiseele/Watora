@@ -70,7 +70,6 @@ export default {
       } else if (this.current + r > this.size) {
         return this.getRange(this.size - this.maxCount + 1, this.size);
       } else {
-        console.log(this.current - r, this.current + r);
         return this.getRange(
           this.current - r + (this.maxCount % 2 ? 0 : 1),
           this.current + r

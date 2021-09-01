@@ -31,10 +31,15 @@ export default {
         href: "/favicon.ico"
       },
       // FontAwesome图标库
+      /*
       {
         rel: "stylesheet",
         href:
           "//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      },*/
+      {
+        rel: "stylesheet",
+        href: "//fonts.googleapis.com/icon?family=Material+Icons"
       }
     ]
   },
@@ -51,13 +56,7 @@ export default {
     credentials: true
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    "ress",
-    "~/styles/main.scss",
-    "~/styles/transitions.scss",
-    "~/styles/theme/light.scss",
-    "~/styles/theme/dark.scss"
-  ],
+  css: ["ress", "~/styles/main.scss"],
 
   // Global variables, mixins and function
   styleResources: {
@@ -67,11 +66,10 @@ export default {
   // Plugins to run before rendering pasge: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "~/plugins/api.js",
-
+    "~/plugins/inject.js",
     "~/plugins/services.js",
     "~/plugins/utils/utils.js",
     "~/plugins/utils/filter.js",
-    "~/plugins/inject.js",
     "~/plugins/utils/ascii.client.js",
     "~/plugins/libs/lib-vue-lazyload.client.js",
     "~/plugins/libs/lib-vuex-persistedstate.client.js",

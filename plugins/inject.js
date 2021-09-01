@@ -25,11 +25,9 @@ export default ({ app }, inject) => {
     "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
   );
   // 判断客户端类型
-  inject("mobile", function() {
+  inject("mobile", function () {
     if (process.env.client) {
-      const width =
-        document.documentElement.offsetWidth || document.body.offsetWidth;
-
+      const width = document.body.clientWidth;
       return width < 768;
     }
     return false;

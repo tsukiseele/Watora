@@ -81,19 +81,21 @@ export default {
   transition: all 0.3s ease-in-out;
   user-select: none;
   z-index: 9;
+  
   // backdrop-filter: blur(10px);
+  
   &:hover {
-    // background: var(--background);
+    background: var(--background);
   }
-
+  /*
   &.nav-hide {
     transform: translateY(-100%);
     opacity: 0;
-  }
+  }*/
 
   &.nav-bg {
     color: var(--text);
-    background: var(--card);
+    background-color: var(--white);
     box-shadow: var(--shadow);
   }
 }

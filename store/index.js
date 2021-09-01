@@ -36,7 +36,7 @@ export const getters = {
     return state.clientWidth;
   },
   isMobile(state) {
-    return state.clientWidth < 768;
+    return state.clientWidth < 960;
   },
   archives(state) {
     return state.archives;

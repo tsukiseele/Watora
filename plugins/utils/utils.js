@@ -20,15 +20,71 @@ Date.prototype.format = function(fmt = "yyyy-MM-dd hh:mm:ss") {
   if (/(y+)/.test(fmt))
     fmt = fmt.replace(
       RegExp.$1,
-      (this.getFullYear() + "").substr(4 - RegExp.$1.length)
+      (this.getFullYear() + "").substring(4 - RegExp.$1.length)
     );
   for (var k in o)
     if (new RegExp("(" + k + ")").test(fmt))
       fmt = fmt.replace(
         RegExp.$1,
-        RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+        RegExp.$1.length == 1
+          ? o[k]
+          : ("00" + o[k]).substring(("" + o[k]).length)
       );
   return fmt;
+};
+
+Number.prototype.toChineseNumber = function(num = this) {
+  if (isNaN(parseInt(num))) {
+    return num;
+  }
+  var chnNumChar = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  var chnUnitChar = [
+    "",
+    "十",
+    "百",
+    "千",
+    "万",
+    "十",
+    "百",
+    "千",
+    "亿",
+    "十",
+    "百",
+    "千",
+    "兆",
+    "十",
+    "百",
+    "千"
+  ];
+  var mustUnits = ["万", "亿", "兆"];
+  var zero = "零";
+  var chnStr = "";
+  var str = parseInt(num).toString();
+  while (str.length > 0) {
+    var tmpNum = chnNumChar[parseInt(str.substring(0, 1))];
+    var tmpUnit = chnUnitChar[str.length - 1];
+    chnStr += chnStr.substring(-1) == zero && tmpNum == zero ? "" : tmpNum;
+    chnStr += tmpNum == zero ? "" : tmpUnit;
+    if (tmpNum == zero && mustUnits.indexOf(tmpUnit) !== -1) {
+      if (chnStr.substring(-1) == zero) {
+        chnStr = chnStr.substring(0, chnStr.length - 1);
+      }
+      chnStr += tmpUnit;
+    }
+    str = str.substring(1);
+  }
+  if (chnStr.length > 1) {
+    chnStr =
+      chnStr.substring(-1) == zero
+        ? (chnStr = chnStr.substring(0, chnStr.length - 1))
+        : chnStr;
+    chnStr =
+      chnStr.substring(0, 1) == zero ? (chnStr = chnStr.substring(1)) : chnStr;
+    if (chnStr.substring(0, 2) == "一十") {
+      chnStr = chnStr.substring(1);
+    }
+  }
+  return chnStr;
 };
 
 /**
@@ -36,7 +92,8 @@ Date.prototype.format = function(fmt = "yyyy-MM-dd hh:mm:ss") {
  * @param {Date} time
  * @returns
  */
-Date.prototype.formatTimeAgo = function(time) {
+/*
+Date.prototype.formatTimeAgo = function (time = this) {
   if (time) {
     var date = new Date(time);
     var difftime = Math.abs(new Date() - date);
@@ -91,7 +148,7 @@ Date.prototype.formatTimeAgo = function(time) {
       return "刚刚";
     }
   }
-};
+};*/
 /**
  * js截取字符串，对中英文做相应的处理，
  * 如果给定的字符串大于指定长度，截取指定长度返回，否者返回源字符串。

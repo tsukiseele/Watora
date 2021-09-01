@@ -1,5 +1,12 @@
 <template lang="pug">
 #container
+  TheBanner(
+    :title="header.title",
+    :subtitle="header.subtitle",
+    :isFull="header.isFull",
+    :isHide="header.isHide",
+    :isHideSubtitle="header.isHideSubtitle"
+  )
   main#main
     .aside-wrap(
       :class="{ down: !isMobile && scroll.change < 0 && scroll.pos > clientHeight }"
@@ -15,8 +22,11 @@
       .post-item-wrap(v-for="(item, index) in archives")
         SPostItem(
           :key="index",
-          :item="item",
-          :to="`/archives/${item.number || ''}`",
+          :title="item.title",
+          :cover="item.cover"
+          :date="item.createAt"
+          :description="item.description"
+          :to="`/archives/${item.id || ''}`",
           :placeholder="res.placeholder",
           :data-aos="index % 2 == 0 ? 'fade-left' : 'fade-right'",
           :data-aos-once="isAosOnce"
@@ -30,6 +40,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   scrollToTop: true,
   data: () => ({
@@ -68,14 +80,13 @@ export default {
     },*/,
   },
   computed: {
-    scroll() {
-      return this.$store.state.scroll;
-    },
+    ...mapState([
+      'header',
+      'scroll',
+      'archives'
+    ]),
     isMobile() {
       return this.$store.getters.isMobile;
-    },
-    archives() {
-      return this.$store.state.archives;
     },
     res() {
       const icon = `${this.$static}/icon/icon.png`;

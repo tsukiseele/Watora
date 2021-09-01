@@ -1,5 +1,9 @@
+@import "./loading.scss";
+@import "./transitions.scss";
+@import "./theme/light.scss";
+@import "./theme/dark.scss";
 
-
+@import "./icons.scss";
 /** 全局变量 **/
 :root {
   --redius: 5px;
@@ -30,11 +34,6 @@
 @font-face {
   font-family: "InfoDisplay";
   src: url("https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/fonts/InfoDisplay.woff");
-}
-
-@font-face {
-  font-family: "chinese";
-  src: url("https://cdn.jsdelivr.net/gh/tsukiseele/statics/watora/fonts/chinese.font.woff");
 }
 
 *::-webkit-scrollbar {

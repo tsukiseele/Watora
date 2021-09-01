@@ -1,52 +1,70 @@
 <template lang="pug">
 .post-item(@click="$router.push(to)")
   .item-cover-box
-    img.item-cover(v-lazy="item.cover || placeholder")
+    img.item-cover(v-lazy="cover.src || placeholder")
   .item-info 
-    .item-title {{ item.title }}
-    span.item-preview {{ preview }}
+    .item-title {{ title }}
+    span.item-preview {{ description }}
     ul.item-tags
       li.item-tag.item-date
-        i.fa.fa-calendar.item-icon 
-        span {{ item.articleDate | formatTimeAgo }}
+        SChip(:text="date | formatTimeAgo" icon="event_note")
+        //- i.material-icons.item-icon event_note
+        //- span {{ date | formatTimeAgo }}
       li.item-tag(v-for="(tag, i) in tags", :key="i")
-        i.fa.fa-tag.item-icon 
+        i.material-icons.item-icon sell 
         span {{ tag }}
   .item-type 
     i.tag-icon.fa.fa-archive 
-    span.tag-text {{ item.articleType || '未分类' }}
+    span.tag-text {{ category || '未分类' }}
 </template>
 
 <script>
 export default {
   props: {
-    to: String,
-    item: Object,
+    to: {
+      type: String,
+      default: null,
+    },
+    title: {
+      type: String,
+      default: null,
+    },
+    cover: {
+      type: Object,
+      default: () => ({}),
+    },
+    date: {
+      type: String,
+      default: null,
+    },
+    labels: {
+      type: Array,
+      default: () => []
+    },
+    type: {
+      type: String,
+      default: null,
+    },
+    category: {
+      type: Object,
+      default: null,
+    },
     placeholder: {
       type: String,
-      default: "",
+      default: null,
     },
+    description: {
+      type: String,
+      default: null,
+    }
+  },
+  mounted() {
+    console.log(this.date);
   },
   computed: {
     tags() {
-      if (this.item.articleTags) return this.item.articleTags.split(" ");
-    },
-    preview() {
-      let content = this.item.articleContent;
-      if (content) {
-        /*
-        var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？↵\r\n]");
-        var rs = "";
-        for (var i = 0; i < content.length; i++) {
-            rs = rs + content.substr(i, 1).replace(pattern, '');
-         
-        content = rs;
-        */
-        if (content.length > 96) {
-          return content.substring(0, 64) + "...";
-        }
-        return content;
-      }
+      return []
+      // if (this.item.articleTags) return this.item.articleTags.split(" ");
     },
   },
 };
@@ -114,22 +132,7 @@ export default {
     }
     .item-tags {
       list-style: none;
-      .item-tag {
-        display: inline-block;
-        color: var(--text);
-        font-size: 0.7rem;
-        line-height: 1.5rem;
-        padding: 0 0.5rem;
-        margin: 0.5rem 0.1rem;
-        border: thin solid var(--border);
-        border-radius: 1rem;
-        transition: border 0.3s ease;
-        cursor: pointer;
-        &:hover {
-          border: thin solid var(--text-primary);
-          color: var(--text-primary);
-        }
-      }
+
     }
   }
   .item-type {

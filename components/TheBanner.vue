@@ -37,6 +37,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    
   },
   data: () => ({
     input: {
@@ -123,28 +124,6 @@ export default {
     },
   },
   computed: {
-    clientHeight() {
-      /*
-      if(document) { 
-      if (!document || process.env.server) return 0;
-      var clientHeight = 0;
-      if (document.body.clientHeight && document.documentElement.clientHeight) {
-        var clientHeight =
-          document.body.clientHeight < document.documentElement.clientHeight
-            ? document.body.clientHeight
-            : document.documentElement.clientHeight;
-      } else {
-        var clientHeight =
-          document.body.clientHeight > document.documentElement.clientHeight
-            ? document.body.clientHeight
-            : document.documentElement.clientHeight;
-      }
-
-      return clientHeight;
-      } else {
-        return 0;
-      }*/
-    },
     scroll() {
       return this.$store.state.scroll;
     },
@@ -177,6 +156,7 @@ export default {
   overflow: hidden;
   transition: all 0.3s ease;
 
+  background-image: repeating-linear-gradient(45deg, #ddd 3rem, #fff 3rem 6rem, #ddd 6rem 9rem);
   &.full {
     // height: 100vh;
     // background-color: transparent;

@@ -1,27 +1,33 @@
 /**
  * 格式化文章
  */
-const regex = /^(.+)?\r\n\s*(.+)?\r\n/;
-const coverRegex = /^\[(.+)\].*(http.*(?:jpg|jpeg|png|gif))/;
+const regex = /^(.+)?\r\n\s*(.+)?\r\n/; // 匹配第一个段落的内容
+const coverRegex = /^\[(.+)\].*(http.*(?:jpg|jpeg|png|gif))/; // 匹配文章封面
 export const formatPost = post => {
-  const { body, updated_at } = post;
-  const result = regex.exec(body);
-  const cover = coverRegex.exec(result[1]);
+  const result = { };
+  const desc = regex.exec(post.body);
+  const cover = coverRegex.exec(desc[1]);
   if (cover && cover.length === 3) {
-    post.cover = {
+    result.cover = {
       title: cover[1],
       src: cover[2]
     };
-    post.description = result[2];
+    result.description = desc[2];
   } else {
-    post.cover = {
+    result.cover = {
       title: "",
-      src: "x" || config.defaultCover
+      src: "" //resource.images.placeholder
     };
-    post.description = result[1];
+    result.description = desc[1];
   }
-  post.created_at = new Date(updated_at).formatTimeAgo(); //format(created_at, "zh_CN").replace(/\s/, "");
-  return post;
+  // console.log(resource.images.placeholder);
+  result.title = post.title;
+  result.content = post.body;
+  result.createAt = post.created_at;
+  result.labels = post.labels;
+  result.category = post.milestone;
+  result.id = post.number;
+  return result;
 };
 
 /**

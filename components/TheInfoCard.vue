@@ -1,6 +1,6 @@
 <template lang="pug">
 .info-card.card
-  img.card-icon(:src="icon")
+  //- img.card-icon(:src="icon")
   .card-title TsukiSeele
   .card-info Tsutsukakushi Tsukiko
   hr
