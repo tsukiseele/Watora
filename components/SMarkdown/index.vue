@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss">
-// @import "highlight.js/styles/atom-one-dark.css";
+@import "highlight.js/styles/atom-one-dark.css";
 @import "./theme/index.scss";
 :root[theme="dark"] {
   @import "./theme/dark.scss";
