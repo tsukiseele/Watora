@@ -120,10 +120,6 @@ export default {
   overflow: auto;
   width: 100%;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 8de06d38a791d284e3fb05217e384c15cfca7930
 pre,
 code {
   border-radius: var(--radius);
