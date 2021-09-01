@@ -3,17 +3,26 @@
   .pagination
     .pagination-first(:class="{ disable: current === 1 }", @click="onClick(1)")
       SvgIcon(type="mdi", :path="icons.mdiPageFirst")
-    .pagination-pre(:class="{ disable: current === 1 }", @click="onClick(current - 1)")
+    .pagination-pre(
+      :class="{ disable: current === 1 }",
+      @click="onClick(current - 1)"
+    )
       SvgIcon(type="mdi", :path="icons.mdiChevronLeft")
     .pagination-page(
       v-for="n in range",
       :key="n",
       :class="{ active: n === current }",
-      @click="onClick(n)"
+      @click="n === current ? null : onClick(n)"
     ) {{ n }}
-    .pagination-next(:class="{ disable: current === size }" @click="onClick(current + 1)")
+    .pagination-next(
+      :class="{ disable: current === size }",
+      @click="onClick(current + 1)"
+    )
       SvgIcon(type="mdi", :path="icons.mdiChevronRight")
-    .pagination-last(:class="{ disable: current === size }" @click="onClick(size)")
+    .pagination-last(
+      :class="{ disable: current === size }",
+      @click="onClick(size)"
+    )
       SvgIcon(type="mdi", :path="icons.mdiPageLast")
   .pagination-loading(v-show="loading")
 </template>
@@ -101,7 +110,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0,.33);
+  background-color: rgba(0, 0, 0, 0.33);
   &::before,
   &::after {
     content: "";
@@ -166,7 +175,7 @@ export default {
     }
   }
   .active {
-    outline: 3px inset hotpink;
+    outline: 3px inset pink;
   }
   .disable {
     pointer-events: none;

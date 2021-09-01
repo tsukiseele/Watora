@@ -85,7 +85,7 @@ export default {
     width: 100%;
     object-fit: cover;
     transform: scale(1.2);
-    transition: filter 0.6s, transform 0.6s;
+    transition: all 0.6s;
   }
   .item-info {
     display: flex;

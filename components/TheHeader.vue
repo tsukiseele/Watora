@@ -1,5 +1,9 @@
 <template lang="pug">
-header#header(ref="header", :class="{ full: isFull, hide: isHide }", :style="{ '--hideTri': `${isFull ? 'block' : 'none'}` }")
+header#header(
+  ref="header",
+  :class="{ full: isFull, hide: isHide }",
+  :style="{ '--hideTri': `${isFull ? 'block' : 'none'}` }"
+)
   .header--card(v-show="!isHide")
     .header--title(@click="scrollToContent()")
       span {{ title }}
@@ -15,24 +19,24 @@ export default {
   props: {
     title: {
       type: String,
-      default: ""
+      default: "",
     },
     subtitle: {
       type: String,
-      default: ""
+      default: "",
     },
     isHideSubtitle: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isFull: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isHide: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: () => ({
     input: {
@@ -56,8 +60,8 @@ export default {
       show: "", // 当前行内容
       index: 0, // 行索引
       state: true,
-      vague: true
-    }
+      vague: true,
+    },
   }),
   methods: {
     scrollToContent() {
@@ -65,7 +69,7 @@ export default {
         const ele = document.getElementById("container");
         this.$store.commit("scroll", {
           pos: ele.offsetTop,
-          change: ele.offsetTop
+          change: ele.offsetTop,
         });
         ele.scrollIntoView();
       });
@@ -112,11 +116,11 @@ export default {
       if (hitokoto) {
         this.input.template = [
           `${hitokoto.hitokoto}`,
-          `出自 ${hitokoto.from}`
+          `出自 ${hitokoto.from}`,
         ].concat(this.input.template);
       }
       this.typing();
-    }
+    },
   },
   computed: {
     clientHeight() {
@@ -143,10 +147,10 @@ export default {
     },
     scroll() {
       return this.$store.state.scroll;
-    }
+    },
   },
   watch: {
-    scroll() {}
+    scroll() {},
   },
   mounted() {
     if (!this.hideSubtitle) {
@@ -157,7 +161,7 @@ export default {
         this.getHitokoto();
       }
     }
-  }
+  },
 };
 </script>
 
@@ -167,15 +171,15 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 33vh;
+  height: 50vh;
   width: 100%;
   background-color: var(--header);
   overflow: hidden;
   transition: all 0.3s ease;
 
   &.full {
-    height: 100vh;
-    background-color: transparent;
+    // height: 100vh;
+    // background-color: transparent;
   }
 
   &.hide {

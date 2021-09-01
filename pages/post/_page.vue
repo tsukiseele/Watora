@@ -31,25 +31,41 @@
 
 <script>
 export default {
+  scrollToTop: true,
   data: () => ({
     page: 1,
-    // archives: null,
     arch: null,
     error: null,
     isLoading: false,
     itemActive: null,
-    isAosOnce: false,
+    isAosOnce: true,
     // 侧栏
     asideStyles: {},
     asideClasses: {},
     asidePos: null,
   }),
+
   watch: {
     itemActive(newVal, oldVal) {
       if (newVal) {
         this.$store.commit("live2dText", `要阅读『${newVal} 』吗?`);
       }
-    },
+    } /*
+    $route: {
+      handler(to, from) {
+        if (process.client) {
+          this.$nextTick(() => {
+            setTimeout(() => {
+              document
+                .getElementById("container")
+                .scrollIntoView({ behavior: "smooth" });
+            }, 0);
+          });
+        }
+      },
+      deep: true,
+      immediate: true,
+    },*/,
   },
   computed: {
     scroll() {
@@ -70,50 +86,27 @@ export default {
       };
     },
     clientHeight() {
-      var clientHeight = 0;
-      if (document.body.clientHeight && document.documentElement.clientHeight) {
-        var clientHeight =
-          document.body.clientHeight < document.documentElement.clientHeight
-            ? document.body.clientHeight
-            : document.documentElement.clientHeight;
-      } else {
-        var clientHeight =
-          document.body.clientHeight > document.documentElement.clientHeight
-            ? document.body.clientHeight
-            : document.documentElement.clientHeight;
-      }
-      return clientHeight;
+      return document.body.clientHeight;
     },
   },
-
   methods: {
     async onChange(page) {
-      try {
-        this.isLoading = true;
-        await this.$store.dispatch("archives", { page, count: 10 });
-        if (this.archives && this.archives.length) {
-          document
-            .getElementById("container")
-            .scrollIntoView({ behavior: "smooth" });
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        this.isLoading = false;
-      }
+      this.$router.push({ params: { page } });
     },
   },
-  async fetch() {
-    this.$store.commit("header", { title: "雫『Shizuku』", isFull: true });
-
-    await this.$store.dispatch("archives", { page: 1, count: 10 });
+  asyncData({ params }) {
+    return { page: Number(params.page || 1) };
   },
-  mounted() {
+  async fetch({ store, params }) {
+    store.commit("header", { title: "雫『Shizuku』", isFull: true });
+    await store.dispatch("archives", {
+      page: Number(params.page || 1),
+      count: 10,
+    });
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "_post.scss";
-
+@import "_page.scss";
 </style>

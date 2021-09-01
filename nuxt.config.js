@@ -69,10 +69,10 @@ export default {
     "~/plugins/api.js",
 
     "~/plugins/services.js",
-    "~/plugins/utils.js",
-    "~/plugins/filter.js",
+    "~/plugins/utils/utils.js",
+    "~/plugins/utils/filter.js",
     "~/plugins/inject.js",
-    "~/plugins/ascii.client.js",
+    "~/plugins/utils/ascii.client.js",
     "~/plugins/libs/lib-vue-lazyload.client.js",
     "~/plugins/libs/lib-vuex-persistedstate.client.js",
     "~/plugins/libs/lib-meditor.client.js",

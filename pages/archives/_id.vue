@@ -5,7 +5,6 @@
       .banner
         img.bg(v-if="archive && archive.cover", :src="archive.cover.src") 
         .post-header
-          
           .post-title {{ archive.title || '' }}
           //- ul.post-tags
             li.post-tag(v-for="(tag, i) in tags", :key="i") 
@@ -53,8 +52,11 @@ export default {
     const id = Number(params.id || 0);
     // 先从缓存里面找
     if (store.state.archives) {
-      store.commit("archive", store.state.archives.find((item) => Number(item.number) === id))
-    } 
+      store.commit(
+        "archive",
+        store.state.archives.find((item) => Number(item.number) === id)
+      );
+    }
     // 如果没有找到就请求
     if (!store.state.archive) {
       await store.dispatch("archive", { id });
@@ -78,13 +80,19 @@ export default {
   // box-shadow: var(--shadow);
 }
 
-.markdown {
-
+.markdown,
+.comments,
+.banner {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .comments {
   overflow: hidden;
   padding: 1rem;
+  margin-bottom: 1rem;
   background-color: var(--card);
   .comment-header {
     color: var(--text);
@@ -99,7 +107,6 @@ export default {
   justify-content: center;
   height: 50vh;
   padding: 0;
-  margin: .5rem;
   @media screen and (max-width: $mobile) {
     height: 33vh;
   }

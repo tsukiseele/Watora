@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
   //- (:style="{ 'background-image': background }")
-  //- #background(:style="{ 'background-image': background }")
+  #background(:style="{ 'background-image': background }")
   TheNav
   TheHeader(
     :title="header.title",
@@ -28,11 +28,10 @@ export default {
   data: () => ({
     playlistId: 6760099512,
     musics: [],
-    windowWidth: 0
+    windowWidth: 0,
   }),
   computed: {
     background() {
-      
       // 判断客户端，防止重复渲染；
       if (process.client) {
         // return "linear-gradient(45deg, pink 20%, hotpink 20% 40%, pink 40% 60%, hotpink 60% 80%, pink 80%);"
@@ -47,7 +46,7 @@ export default {
     },
     live2dText() {
       return this.$store.state.live2dText;
-    }
+    },
   },
   watch: {
     live2dText(newVal) {
@@ -55,7 +54,7 @@ export default {
     },
     windowWidth(newVal) {
       this.$store.commit("clientWidth", newVal);
-    }
+    },
   },
   methods: {
     /**
@@ -71,7 +70,7 @@ export default {
               name: music.name,
               artist: music.ar[0].name,
               cover: music.al.picUrl,
-              url: `https://music.163.com/song/media/outer/url?id=${music.id}.mp3`
+              url: `https://music.163.com/song/media/outer/url?id=${music.id}.mp3`,
             });
           }
           return musics;
@@ -84,7 +83,7 @@ export default {
       // 文档参见：https://api.imjad.cn/cloudmusic.md
       const apis = [
         // `http://www.hjmin.com/playlist/detail?id=${this.playlistId}`,
-        `https://api.imjad.cn/cloudmusic/?type=playlist&id=${this.playlistId}`
+        `https://api.imjad.cn/cloudmusic/?type=playlist&id=${this.playlistId}`,
       ];
       for (const api of apis) {
         const result = await this.getMusicList(api);
@@ -104,7 +103,7 @@ export default {
       const scroll = this.$store.getters.scroll;
       this.$store.commit("scroll", {
         pos: newPos,
-        change: scroll && scroll.pos ? newPos - scroll.pos : 0
+        change: scroll && scroll.pos ? newPos - scroll.pos : 0,
       });
     },
     handleResize() {
@@ -117,7 +116,7 @@ export default {
       if (this.$isNight()) {
         document.getElementsByTagName("html")[0].setAttribute("theme", "dark");
       }
-    }
+    },
   },
   beforeMount() {
     this.changeTheme();
@@ -132,7 +131,7 @@ export default {
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
     window.removeEventListener("resize", this.handleResize);
-  }
+  },
 };
 </script>
 
@@ -160,9 +159,13 @@ export default {
   transition: background 1s;
   overflow: hidden;
 }
+
+main {
+  // background: #445;
+}
 @keyframes identifier {
   100% {
     transform: translate(100%, 100%);
-  }  
+  }
 }
 </style>
