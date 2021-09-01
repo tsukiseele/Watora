@@ -1,7 +1,7 @@
 <template lang="pug">
 client-only
   .markdown-preview
-    .markdown-content.card(v-html="markdown")
+    .markdown-content(v-html="markdown")
 </template>
 
 <script>
@@ -108,15 +108,11 @@ export default {
 }
 .markdown-content {
   overflow: hidden;
-  padding-top: 1rem;
+  padding: 0 .5rem;
 }
 .table-wrap {
   overflow: auto;
   width: 100%;
-}
-.card {
-  margin-top: 0!important;
-  padding-top: 0!important;
 }
 pre,
 code {
