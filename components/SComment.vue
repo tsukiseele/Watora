@@ -4,21 +4,13 @@
 </template>
 
 <script>
-import { mdiReply } from "@mdi/js";
 export default {
-  name: "SComment",
   props: {
     title: {
       type: String,
       default: "",
     },
-  },
-  data: () => ({}),
-  computed: {},
-  methods: {},
-  mounted() {
-    console.log(this.title);
-  },
+  }
 };
 </script>
 
@@ -30,8 +22,5 @@ export default {
       display: none;
     }
   }
-}
-.comment {
-  background-color: var(--card);
 }
 </style>

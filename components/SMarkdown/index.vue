@@ -97,10 +97,11 @@ export default {
 <style lang="scss">
 // @import "highlight.js/styles/atom-one-dark.css";
 @import "highlight.js/styles/stackoverflow-light.css";
-@import "./theme/index.scss";
+@import "./index.scss";
+/*
 :root[theme="dark"] {
   @import "./theme/dark.scss";
-}
+}*/
 </style>
 
 <style lang="scss" scoped>

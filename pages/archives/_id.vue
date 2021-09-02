@@ -9,15 +9,6 @@
   )
   main#main
     .archive
-      //- .banner
-        img.bg(v-if="archive && archive.cover", :src="archive.cover.src") 
-        .post-header
-          .post-title {{ archive.title || '' }}
-          //- ul.post-tags
-            li.post-tag(v-for="(tag, i) in tags", :key="i") 
-              //- i.tag-icon.fa.fa-tags
-              SvgIcon(type="mdi", :path="mdiTag")
-              span.tag-text {{ tag }}
       .markdown
         client-only
           SMarkdown(:content="archive.content")

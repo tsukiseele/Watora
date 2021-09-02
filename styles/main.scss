@@ -2,15 +2,15 @@
 @import "./transitions.scss";
 @import "./theme/light.scss";
 @import "./theme/dark.scss";
-
-@import "./icons.scss";
+@import "./fonts.scss";
 /** 全局变量 **/
 :root {
   --redius: 5px;
 }
+
 /** 根样式 **/
 :root {
-  font-family: InfoDisplay, Titillium Web, "Sarasa Gothic SC",
+  font-family: "Noto Sans TC", InfoDisplay, Titillium Web, "Sarasa Gothic SC",
     "Source Han Sans CN", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
     sans-serif;
   font-weight: 300;

@@ -19,7 +19,6 @@ client-only
         :hidden="!isLive2d",
         :btns="tools.btns",
         :options="tools.options",
-        iconType="mdi"
         @home="home()",
         @change="change()",
         @save="save()",
@@ -31,15 +30,6 @@ client-only
 <script>
 import custom from "~/assets/data/custom.json";
 import Live2dTools from "~/components/TheLive2dTools";
-
-import {
-  mdiEye,
-  mdiEyeOff,
-  mdiHome,
-  mdiOrbitVariant,
-  mdiCamera,
-  mdiInformation,
-} from "@mdi/js";
 
 export default {
   components: {
@@ -66,29 +56,28 @@ export default {
     width: 200,
     height: 200,
     tools: {
-      iconType: "mdi",
       btns: [
         {
-          icon: mdiHome,
+          icon: "home",
           on: "home",
         },
         {
-          icon: mdiOrbitVariant,
+          icon: "change_circle",
           on: "change",
         },
         {
-          icon: mdiCamera,
+          icon: "photo_camera",
           on: "save",
         },
         {
-          icon: mdiInformation,
+          icon: "info",
           on: "about",
         },
       ],
       options: {
         icon: {
-          hidden: mdiEyeOff,
-          show: mdiEye,
+          hidden: "visibility_off",
+          show: "visibility",
         },
         on: "hide",
       },

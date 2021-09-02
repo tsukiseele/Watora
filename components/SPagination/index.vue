@@ -2,12 +2,12 @@
 .pagination-wrap
   .pagination
     .pagination-first(:class="{ disable: current === 1 }", @click="onClick(1)")
-      SvgIcon(type="mdi", :path="icons.mdiPageFirst")
+      i.material-icons first_page
     .pagination-pre(
       :class="{ disable: current === 1 }",
       @click="onClick(current - 1)"
     )
-      SvgIcon(type="mdi", :path="icons.mdiChevronLeft")
+      i.material-icons navigate_before
     .pagination-page(
       v-for="n in range",
       :key="n",
@@ -18,22 +18,16 @@
       :class="{ disable: current === size }",
       @click="onClick(current + 1)"
     )
-      SvgIcon(type="mdi", :path="icons.mdiChevronRight")
+      i.material-icons navigate_next
     .pagination-last(
       :class="{ disable: current === size }",
       @click="onClick(size)"
     )
-      SvgIcon(type="mdi", :path="icons.mdiPageLast")
+      i.material-icons last_page
   .pagination-loading(v-show="loading")
 </template>
 
 <script>
-import {
-  mdiPageFirst,
-  mdiPageLast,
-  mdiChevronLeft,
-  mdiChevronRight,
-} from "@mdi/js";
 export default {
   model: {
     prop: "current",
@@ -55,12 +49,6 @@ export default {
   },
   data: () => ({
     maxCount: 5,
-    icons: {
-      mdiPageFirst,
-      mdiPageLast,
-      mdiChevronLeft,
-      mdiChevronRight,
-    },
   }),
   computed: {
     range() {

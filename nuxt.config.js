@@ -37,10 +37,10 @@ export default {
         href:
           "//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       },*/
-      {
+      /*{
         rel: "stylesheet",
         href: "//fonts.googleapis.com/icon?family=Material+Icons"
-      }
+      }*/
     ]
   },
   env: {
@@ -74,7 +74,6 @@ export default {
     "~/plugins/libs/lib-vue-lazyload.client.js",
     "~/plugins/libs/lib-vuex-persistedstate.client.js",
     "~/plugins/libs/lib-aos.client.js",
-    "~/plugins/libs/lib-svgicon.client.js",
     "~/plugins/libs/lib-live2d.client.js",
     "~/plugins/libs/lib-aplayer.client.js",
     "~/plugins/libs/lib-vssue.client.js"

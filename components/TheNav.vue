@@ -7,53 +7,49 @@
     .nav-title(@click="$router.push('/')") {{ title }}
     .nav-spacer
     ul.nav-menu(v-if="!isMobile", :class="{ 'menu-dark': scroll.pos > 100 }")
-      li(@click="$router.push('/')")
-        SvgIcon(type="mdi", :path="icons.mdiHome") 
-        .menu-title 主页
-      li(@click="$router.push('/timeline')")
-        SvgIcon(type="mdi", :path="icons.mdiViewList") 
-        .menu-title 归档
-      li(@click="$router.push('/friends')") 
-        SvgIcon(type="mdi", :path="icons.mdiAt") 
-        .menu-title 友链
-      li(@click="$router.push('/about')")
-        SvgIcon(type="mdi", :path="icons.mdiInformation") 
-        .menu-title 关于
+      li(v-for="(link, i) in links", @click="$router.push(link.to)")
+        i.material-icons {{ link.icon }}
+        .menu-title {{ link.name }}
     .nav-spacer
     .nav-bars(v-if="isMobile", @click="drawer = !drawer")
-      SvgIcon(type="mdi", :path="icons.mdiMenu") 
+      i.material-icons menu
   .nav-drawer(v-if="isMobile", :class="{ open: drawer }")
     .drawer-blank(@click="drawer = !drawer")
     .drawer-main
       .drawer-banner 
       ul.drawer-menu(@click="drawer = !drawer")
-        li(@click="$router.push('/')")
-          SvgIcon(type="mdi", :path="icons.mdiHome") 
-          .menu-title 主页
-        li(@click="$router.push('/timeline')")
-          SvgIcon(type="mdi", :path="icons.mdiViewList") 
-          .menu-title 归档
-        li(@click="$router.push('/friends')") 
-          SvgIcon(type="mdi", :path="icons.mdiAt") 
-          .menu-title 友链
-        li(@click="$router.push('/about')")
-          SvgIcon(type="mdi", :path="icons.mdiInformation") 
-          .menu-title 关于
+        li(v-for="(link, i) in links", @click="$router.push(link.to)")
+          i.material-icons {{ link.icon }}
+          .menu-title {{ link.name }}
 </template>
 
 <script>
-import { mdiHome, mdiViewList, mdiAt, mdiInformation, mdiMenu } from "@mdi/js";
 export default {
   data: () => ({
     title: "雫『Watora』",
     drawer: false,
-    icons: {
-      mdiHome,
-      mdiViewList,
-      mdiAt,
-      mdiInformation,
-      mdiMenu,
-    },
+    links: [
+      {
+        name: "主页",
+        to: "/",
+        icon: "home",
+      },
+      {
+        name: "归档",
+        to: "/timeline",
+        icon: "bookmark",
+      },
+      {
+        name: "友链",
+        to: "/friends",
+        icon: "link",
+      },
+      {
+        name: "关于",
+        to: "/about",
+        icon: "info",
+      },
+    ],
   }),
   computed: {
     scroll() {
@@ -81,9 +77,9 @@ export default {
   transition: all 0.3s ease-in-out;
   user-select: none;
   z-index: 9;
-  
+
   // backdrop-filter: blur(10px);
-  
+
   &:hover {
     background: var(--background);
   }
@@ -143,7 +139,7 @@ export default {
       display: flex;
       transition: all 0.2s ease;
       cursor: pointer;
-      padding: .67rem 0;
+      padding: 0.67rem 0;
       align-items: center;
 
       &:hover {
@@ -225,7 +221,7 @@ export default {
     }
     .menu-title {
       margin-top: 3px;
-      margin-left: .5rem;
+      margin-left: 0.5rem;
     }
   }
   &.menu-dark li {

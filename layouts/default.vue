@@ -114,7 +114,7 @@ export default {
     // 夜晚改变主题
     changeTheme() {
       if (this.$isNight()) {
-        document.getElementsByTagName("html")[0].setAttribute("theme", "dark");
+        // document.getElementsByTagName("html")[0].setAttribute("theme", "dark");
       }
     },
   },
