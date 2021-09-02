@@ -195,12 +195,12 @@ export default {
   flex-flow: column;
   text-align: center;
   color: var(--text);
-  font-family: chinese, InfoDisplay;
+  font-family: InfoDisplay;
 
   .banner--title {
     font-size: 2.2rem;
     font-weight: 500;
-    font-family: chinese, InfoDisplay;
+    font-family: "Patrick Hand", InfoDisplay;
     cursor: pointer;
     text-shadow: --shadow;
     span {
