@@ -15,6 +15,10 @@ export default {
       type: String,
       default: null,
     },
+    height: {
+      type: String,
+      default: null,
+    }
   },
   data: () => ({}),
   methods: {},

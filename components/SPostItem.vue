@@ -5,17 +5,14 @@
   .item-info 
     .item-title {{ title }}
     span.item-preview {{ description }}
-    ul.item-tags
-      li.item-tag.item-date
-        SChip(:text="date | formatTimeAgo" icon="event_note")
-        //- i.material-icons.item-icon event_note
-        //- span {{ date | formatTimeAgo }}
-      li.item-tag(v-for="(tag, i) in tags", :key="i")
-        i.material-icons.item-icon sell 
-        span {{ tag }}
-  .item-type 
-    i.tag-icon.fa.fa-archive 
-    span.tag-text {{ category || '未分类' }}
+    ul.item-labels
+      li.item-label
+        SChip(:text="date | formatTimeAgo", icon="event_note")
+      li.item-label(v-for="(label, i) in labels", :key="i")
+        SChip(:text="label.name", icon="sell")
+  .item-category 
+    i.category-icon.material-icons archives
+    span.category-text {{ category || '未分类' }}
 </template>
 
 <script>
@@ -39,7 +36,7 @@ export default {
     },
     labels: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     type: {
       type: String,
@@ -56,15 +53,6 @@ export default {
     description: {
       type: String,
       default: null,
-    }
-  },
-  mounted() {
-    console.log(this.date);
-  },
-  computed: {
-    tags() {
-      return []
-      // if (this.item.articleTags) return this.item.articleTags.split(" ");
     },
   },
 };
@@ -130,28 +118,33 @@ export default {
     .item-icon {
       padding-right: 0.33rem;
     }
-    .item-tags {
+    .item-labels {
       list-style: none;
-
+      .item-label {
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
     }
   }
-  .item-type {
+  .item-category {
+    $triangle: 0.8rem;
+    $height: 2rem;
     position: absolute;
     text-align: center;
     color: var(--theme-primary);
     background: currentColor;
     width: 6.6rem;
     font-size: 0.8rem;
-    line-height: 1.8rem;
+    line-height: $height;
     padding: 0 0.5rem 0 0.5rem;
     border-radius: 0 3px 3px 0;
     top: 1rem;
-    left: -0.6rem;
+    left: -$triangle;
     box-shadow: var(--shadow);
     &::before {
       content: "";
       position: absolute;
-      border: 0.6rem solid;
+      border: $triangle solid;
       border-right-width: 0;
       border-color: currentColor transparent transparent;
       rotate: 45deg;
@@ -161,13 +154,19 @@ export default {
       left: 0;
       filter: brightness(120%);
     }
-    .tag-icon {
+    .category-icon {
+      display: inline-block;
       color: var(--text);
+      font-size: 1.2rem;
+      vertical-align: middle;
+      // width: 1.5rem;
+      margin-left: -.5rem;
     }
-    .tag-text {
+    .category-text {
       color: var(--text);
-      margin-left: 0.5rem;
+      margin: 0rem;
       font-size: 0.8rem;
+      vertical-align: middle;
     }
   }
   /** Mobile兼容 */
@@ -186,7 +185,7 @@ export default {
       padding: 0.5rem 1rem 0.5rem 1rem;
     }
 
-    .item-type {
+    .item-category {
       line-height: 2.2rem;
     }
     /* B方案-遮罩层显示*/

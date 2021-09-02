@@ -1,6 +1,7 @@
 <template lang="pug">
 #container
   TheBanner(
+    ref="banner",
     :title="header.title",
     :subtitle="header.subtitle",
     :isFull="header.isFull",
@@ -9,30 +10,33 @@
   )
   main#main
     .aside-wrap(
-      :class="{ down: !isMobile && scroll.change < 0 && scroll.pos > clientHeight }"
+      :class="{ down: !isMobile && /*scroll.change < 0 && */ scroll.pos > bannerHeight() }"
     )
       TheInfoCard(
         :icon="res.icon",
         :class="asideClasses",
         :style="asideStyles"
       )
-      TheArchives(:archives="arch")
+      .sticky
+        SLabelClouds.card(:labels="labels")
+        TheArchives(:archives="arch")
     .post
       .error(v-if="error") {{ error }}
       .post-item-wrap(v-for="(item, index) in archives")
         SPostItem(
           :key="index",
           :title="item.title",
-          :cover="item.cover"
-          :date="item.createAt"
-          :description="item.description"
+          :cover="item.cover",
+          :date="item.createAt",
+          :labels="item.labels",
+          :description="item.description",
           :to="`/archives/${item.id || ''}`",
           :placeholder="res.placeholder",
           :data-aos="index % 2 == 0 ? 'fade-left' : 'fade-right'",
           :data-aos-once="isAosOnce"
         )
       SPagination(
-        v-model="page",
+        :current="page",
         @change="onChange",
         :size="10",
         :loading="isLoading"
@@ -40,12 +44,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   scrollToTop: true,
   data: () => ({
-    page: 1,
+    header: {
+      title: "雫『Shizuku』",
+    },
     arch: null,
     error: null,
     isLoading: false,
@@ -62,7 +68,7 @@ export default {
       if (newVal) {
         this.$store.commit("live2dText", `要阅读『${newVal} 』吗?`);
       }
-    } /*
+    }, /*
     $route: {
       handler(to, from) {
         if (process.client) {
@@ -77,14 +83,10 @@ export default {
       },
       deep: true,
       immediate: true,
-    },*/,
+    },*/
   },
   computed: {
-    ...mapState([
-      'header',
-      'scroll',
-      'archives'
-    ]),
+    ...mapState(["page", "scroll", "archives", "labels"]),
     isMobile() {
       return this.$store.getters.isMobile;
     },
@@ -96,24 +98,29 @@ export default {
         placeholder,
       };
     },
-    clientHeight() {
-      return document.body.clientHeight;
-    },
   },
   methods: {
     async onChange(page) {
       this.$router.push({ params: { page } });
     },
-  },
-  asyncData({ params }) {
-    return { page: Number(params.page || 1) };
+    bannerHeight() {
+      if (process.client) {
+        const banner = document.getElementById("banner");
+        if (banner) {
+          return banner.offsetHeight;
+        }
+        return NaN;
+      }
+    },
   },
   async fetch({ store, params }) {
-    store.commit("header", { title: "雫『Shizuku』", isFull: true });
-    await store.dispatch("archives", {
-      page: Number(params.page || 1),
-      count: 10,
-    });
+    await Promise.all([
+      store.dispatch("archives", {
+        page: Number(params.page || 1),
+        count: 10,
+      }),
+      store.dispatch("labels"),
+    ]);
   },
 };
 </script>

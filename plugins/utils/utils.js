@@ -8,7 +8,7 @@
  * @returns
  */
 Date.prototype.format = function(fmt = "yyyy-MM-dd hh:mm:ss") {
-  var o = {
+  const o = {
     "M+": this.getMonth() + 1, //月份
     "d+": this.getDate(), //日
     "h+": this.getHours(), //小时
@@ -22,7 +22,7 @@ Date.prototype.format = function(fmt = "yyyy-MM-dd hh:mm:ss") {
       RegExp.$1,
       (this.getFullYear() + "").substring(4 - RegExp.$1.length)
     );
-  for (var k in o)
+  for (const k in o)
     if (new RegExp("(" + k + ")").test(fmt))
       fmt = fmt.replace(
         RegExp.$1,
@@ -32,13 +32,17 @@ Date.prototype.format = function(fmt = "yyyy-MM-dd hh:mm:ss") {
       );
   return fmt;
 };
-
+/**
+ * 获取数字的中文表示形式
+ * @param {Number} num  
+ * @returns 
+ */
 Number.prototype.toChineseNumber = function(num = this) {
   if (isNaN(parseInt(num))) {
     return num;
   }
-  var chnNumChar = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
-  var chnUnitChar = [
+  const chnNumChar = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  const chnUnitChar = [
     "",
     "十",
     "百",
@@ -56,13 +60,13 @@ Number.prototype.toChineseNumber = function(num = this) {
     "百",
     "千"
   ];
-  var mustUnits = ["万", "亿", "兆"];
-  var zero = "零";
-  var chnStr = "";
-  var str = parseInt(num).toString();
+  const mustUnits = ["万", "亿", "兆"];
+  const zero = "零";
+  let chnStr = "";
+  let str = parseInt(num).toString();
   while (str.length > 0) {
-    var tmpNum = chnNumChar[parseInt(str.substring(0, 1))];
-    var tmpUnit = chnUnitChar[str.length - 1];
+    const tmpNum = chnNumChar[parseInt(str.substring(0, 1))];
+    const tmpUnit = chnUnitChar[str.length - 1];
     chnStr += chnStr.substring(-1) == zero && tmpNum == zero ? "" : tmpNum;
     chnStr += tmpNum == zero ? "" : tmpUnit;
     if (tmpNum == zero && mustUnits.indexOf(tmpUnit) !== -1) {
@@ -88,104 +92,40 @@ Number.prototype.toChineseNumber = function(num = this) {
 };
 
 /**
- * 获取指定日期过去式的中文表示形式
- * @param {Date} time
- * @returns
- */
-/*
-Date.prototype.formatTimeAgo = function (time = this) {
-  if (time) {
-    var date = new Date(time);
-    var difftime = Math.abs(new Date() - date);
-    // 获取当前时间的年月
-    var nowyear = date.getFullYear();
-    var nowmonth = date.getMonth + 1;
-    var yearAllday = 0;
-    var monthAllday = 0;
-    // 判断是否为闰年
-    if ((nowyear % 4 === 0 && nowyear % 100 !== 0) || nowyear % 400 === 0) {
-      yearAllday = 366;
-    } else {
-      yearAllday = 365;
-    }
-    // 每个月的天数
-    if (yearAllday === 366 && nowmonth === 2) {
-      monthAllday = 29;
-    } else if (yearAllday === 365 && nowmonth === 2) {
-      monthAllday = 28;
-    }
-    if (nowmonth === 4 || nowmonth === 6 || nowmonth === 9 || nowmonth === 11) {
-      monthAllday = 30;
-    } else {
-      monthAllday = 31;
-    }
-    if (difftime > yearAllday * 24 * 3600 * 1000) {
-      var yearNum = Math.floor(difftime / (yearAllday * 24 * 3600 * 1000));
-      return yearNum + " 年前";
-    } else if (
-      difftime > monthAllday * 24 * 3600 * 1000 &&
-      difftime < yearAllday * 24 * 3600 * 1000
-    ) {
-      var monthNum = Math.floor(difftime / (monthAllday * 24 * 60 * 60 * 1000));
-      return monthNum + " 个月前";
-    } else if (
-      difftime > 7 * 24 * 60 * 60 * 1000 &&
-      difftime &&
-      difftime < monthAllday * 24 * 60 * 60 * 1000
-    ) {
-      var weekNum = Math.floor(difftime / (7 * 24 * 3600 * 1000));
-      return weekNum + " 周前";
-    } else if (difftime < 7 * 24 * 3600 * 1000 && difftime > 24 * 3600 * 1000) {
-      var dayNum = Math.floor(difftime / (24 * 60 * 60 * 1000));
-      return dayNum + " 天前";
-    } else if (difftime < 24 * 3600 * 1000 && difftime > 3600 * 1000) {
-      var dayNum = Math.floor(difftime / (60 * 60 * 1000));
-      return dayNum + " 小时前";
-    } else if (difftime < 3600 * 1000 && difftime > 0) {
-      var dayNum = Math.floor(difftime / (60 * 1000));
-      return dayNum + " 分钟前";
-    } else if (difftime < 60 * 1000 && difftime > 0) {
-      return "刚刚";
-    }
-  }
-};*/
-/**
  * js截取字符串，对中英文做相应的处理，
  * 如果给定的字符串大于指定长度，截取指定长度返回，否者返回源字符串。
  * @param {Number} len: 需要截取的长度
  */
 String.prototype.cut = function(length) {
-  let getLocalLength = function(str) {
-    var realLength = 0,
+  const getLocalLength = function(str) {
+    let realLength = 0,
       len = str.length,
       charCode = -1;
-    for (var i = 0; i < len; i++) {
+    for (let i = 0; i < len; i++) {
       charCode = str.charCodeAt(i);
       if (charCode >= 0 && charCode <= 128) realLength += 1;
       else realLength += 2;
     }
     return realLength;
   };
-  let cutString = function(str, len) {
-    var str_length = 0;
-    var str_len = 0;
-    str_cut = new String();
-    str_len = str.length;
-    for (var i = 0; i < str_len; i++) {
+  const cutString = function(str, len) {
+    let strLength = 0;
+    let strCut = new String();
+    for (let i = 0; i < str.length; i++) {
       a = str.charAt(i);
-      str_length++;
-      if (escape(a).length > 4) {
+      strLength++;
+      if (decodeURI(a).length > 4) {
         //中文字符的长度经编码之后大于4
-        str_length++;
+        strLength++;
       }
-      str_cut = str_cut.concat(a);
-      if (str_length >= len) {
-        str_cut = str_cut.concat("...");
-        return str_cut;
+      strCut = strCut.concat(a);
+      if (strLength >= len) {
+        strCut = strCut.concat("...");
+        return strCut;
       }
     }
     //如果给定字符串小于指定长度，则返回源字符串；
-    if (str_length < len) {
+    if (strLength < len) {
       return str;
     }
   };

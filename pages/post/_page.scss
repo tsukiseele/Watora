@@ -1,4 +1,3 @@
-
 /**
  * position: sticly 粘性布局在 flex box 内应用需要给
  * 父元素设置 overflow: visible; 保证内容可滚动。
@@ -11,18 +10,29 @@
   display: flex;
   overflow: visible;
 }
+
 .aside-wrap {
-  position: sticky;
-  top: 0;
+  // position: sticky;
+  // top: 0;
+  // height: 1000vh;
+  
+  overflow: visible;
   flex: 1;
-  align-self: flex-start;
-  padding: 1rem;
-  transition: padding 0.8s;
+  // align-self: flex-start;
+  margin-right: .5rem;
+  padding-top: 1rem;
+  // transition: padding 0.3s;
+  
   & > *:nth-child(2) {
-    margin-top: 1rem;
+    padding-top: 1rem;
   }
   &.down {
-    // padding-top: 4.5rem;
+    // padding-top: 4rem;
+  }
+
+  .sticky {
+    top: var(--nav-height);
+    position: sticky;
   }
 }
 @media screen and (max-width: $mobile) {

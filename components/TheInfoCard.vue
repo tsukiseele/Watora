@@ -1,6 +1,6 @@
 <template lang="pug">
 .info-card.card
-  //- img.card-icon(:src="icon")
+  img.card-icon(:src="icon")
   .card-title TsukiSeele
   .card-info Tsutsukakushi Tsukiko
   hr
@@ -27,8 +27,8 @@ export default {
 <style lang="scss" scoped>
 @media screen and (max-width: $mobile) {
   .card-icon {
-    height: 8rem;
-    width: 8rem;
+    height: 6rem;
+    width: 6rem;
   }
 }
 .info-card {

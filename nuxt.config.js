@@ -73,7 +73,6 @@ export default {
     "~/plugins/utils/ascii.client.js",
     "~/plugins/libs/lib-vue-lazyload.client.js",
     "~/plugins/libs/lib-vuex-persistedstate.client.js",
-    "~/plugins/libs/lib-meditor.client.js",
     "~/plugins/libs/lib-aos.client.js",
     "~/plugins/libs/lib-svgicon.client.js",
     "~/plugins/libs/lib-live2d.client.js",
@@ -100,13 +99,7 @@ export default {
     extractCSS: {
       ignoreOrder: true
     },
-    // 开启打包分析
-    /*
-    analyze: true,
-    assetFilter: function (assetFilename) {
-      return assetFilename.endsWith('.js');
-    },
-    */
+    // analyze: true,
     /*
      ** You can extend webpack config here
      */

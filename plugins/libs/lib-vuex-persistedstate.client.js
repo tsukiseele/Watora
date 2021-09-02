@@ -3,8 +3,14 @@ import createPersistedState from 'vuex-persistedstate'
 
 export default ({store}) => {
   createPersistedState(store)
-}
-*/
+}*/
+import Vuex from "vuex";
+import persistedState from "vuex-persistedstate";
+export default new Vuex.Store({
+  // ...
+  plugins: [persistedState()]
+});
+/*
 // 本地状态缓存，只能在客户端执行，用于保存页面状态
 export default function (ctx) {
     // 离开页面 刷新前 将store中的数据存到session
@@ -19,4 +25,4 @@ export default function (ctx) {
             ctx.store.replaceState(JSON.parse(storeCache));
         }
     });
-}
+}*/

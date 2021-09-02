@@ -1,8 +1,15 @@
 <template lang="pug">
 #container
+  TheBanner(
+    v-if="archive",
+    :title="archive.title",
+    :cover="archive.cover.src",
+    :subtitle="header.subtitle",
+    :disableTyping="false"
+  )
   main#main
     .archive
-      .banner
+      //- .banner
         img.bg(v-if="archive && archive.cover", :src="archive.cover.src") 
         .post-header
           .post-title {{ archive.title || '' }}
@@ -13,13 +20,12 @@
               span.tag-text {{ tag }}
       .markdown
         client-only
-          //- SMdPreview(:content="archive.body")
-          SMarkdown(:value="archive.body")
+          SMarkdown(:content="archive.content")
       SComment(:title="this.$route.path")
 </template>
 
 <script>
-import { mdiTag } from "@mdi/js";
+import { mapState } from "vuex";
 
 export default {
   data: () => ({
@@ -27,45 +33,30 @@ export default {
       toolbars: {
         fullscreen: false,
       },
-    } /*
-    archive: {
-      title: "",
-      body: "",
-    },*/,
+    },
     comments: {},
   }),
-  created() {
-    /*
-     */
-  },
   computed: {
+    ...mapState(["archive"]),
+    header() {
+      return {
+        title: this.archive ? this.archive.title : "无题",
+
+        subtitle: this.archive ? this.archive.description : "无题",
+        isHideSubtitle: true,
+        isHide: true,
+      };
+    },
+
+    /*
     archive() {
-      console.log(this.$store.state.archive);
       return this.$store.state.archive || {};
-    },
-    tags() {
-      if (this.archive.archiveTags) return this.archive.archiveTags.split(" ");
-    },
+    }*/
   },
   methods: {},
   async fetch({ store, params }) {
-    const id = Number(params.id || 0);
-    // 先从缓存里面找
-    if (store.state.archives) {
-      store.commit(
-        "archive",
-        store.state.archives.find((item) => Number(item.number) === id)
-      );
-    }
-    // 如果没有找到就请求
-    if (!store.state.archive) {
-      await store.dispatch("archive", { id });
-    }
-    store.commit("header", {
-      title: this.archive ? this.archive.title : "无题",
-      // isHideSubtitle: true,
-      isHide: true,
-    });
+    const id = parseInt(params.id);
+    await store.dispatch("archive", { id });
   },
 };
 </script>
@@ -107,6 +98,7 @@ export default {
   justify-content: center;
   height: 50vh;
   padding: 0;
+  text-shadow: var(--shadow);
   @media screen and (max-width: $mobile) {
     height: 33vh;
   }
@@ -169,7 +161,7 @@ export default {
     padding: 0 !important;
   }
   #main {
-    margin-top: -3rem;
+    // margin-top: -3rem;
   }
 }
 </style>

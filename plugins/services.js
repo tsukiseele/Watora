@@ -17,6 +17,12 @@ export default ({ app, $axios }, inject) => {
         // `https://api.github.com/repos/tsukiseele/Watora/issues/${number}`
         `https://api.github.com/repos/chanshiyucx/blog/issues/${number}`
       );
+    },
+    async getLabels() {
+      return await $axios.$get(
+        // `https://api.github.com/repos/tsukiseele/Watora/issues/${number}`
+        `https://api.github.com/repos/chanshiyucx/blog/labels`
+      );
     }
   });
 };

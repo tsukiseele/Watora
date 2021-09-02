@@ -74,7 +74,7 @@ export default {
   display: flex;
   top: 0;
   width: 100%;
-  height: 3rem;
+  height: var(--nav-height);
   padding: 0 2rem;
   color: var(--text);
   background: transparent;

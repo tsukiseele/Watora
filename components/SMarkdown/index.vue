@@ -61,7 +61,7 @@ if (process.client) {
 
 export default {
   props: {
-    value: {
+    content: {
       type: String,
       default: null,
     },
@@ -70,7 +70,12 @@ export default {
   created() {},
   computed: {
     markdown() {
-      return this.$isServer || DOMPurify.sanitize(marked(this.value));
+      try {
+        return this.$isServer || DOMPurify.sanitize(marked(this.content));
+      } catch (error) {
+        console.log(error);
+      }
+      return null;
     },
   },
   methods: {},
@@ -90,38 +95,35 @@ export default {
 </script>
 
 <style lang="scss">
-@import "highlight.js/styles/atom-one-dark.css";
+// @import "highlight.js/styles/atom-one-dark.css";
+@import "highlight.js/styles/stackoverflow-light.css";
 @import "./theme/index.scss";
 :root[theme="dark"] {
   @import "./theme/dark.scss";
-  // @import "highlight.js/styles/stackoverflow-light.css";
 }
 </style>
 
 <style lang="scss" scoped>
-/*
-@import "./theme/index.scss";
-:root[theme="dark"] {
-  @import "./theme/dark.scss";
-  @import "highlight.js/styles/stackoverflow-dark.css";
-}*/
-::v-deep img {
-  width: 100%;
-  object-fit: cover;
+::v-deep {
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+  pre,
+  code {
+    padding: .5rem;
+    border-radius: 5px;
+  }
 }
 .markdown-preview {
   background-color: var(--card);
 }
 .markdown-content {
   overflow: hidden;
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
 }
 .table-wrap {
   overflow: auto;
   width: 100%;
-}
-pre,
-code {
-  border-radius: var(--radius);
 }
 </style>

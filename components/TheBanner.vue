@@ -1,13 +1,13 @@
 <template lang="pug">
-header#header(
-  ref="header",
+#banner(
+  ref="banner",
   :class="{ full: isFull, hide: isHide }",
-  :style="{ '--hideTri': `${isFull ? 'block' : 'none'}` }"
+  :style="{ '--hideTri': `${isFull ? 'block' : 'none'}`, 'background-image': cover ? `url(${cover})` : null }"
 )
-  .header--card(v-show="!isHide")
-    .header--title(@click="scrollToContent()")
+  .banner--card(v-show="!isHide")
+    .banner--title(@click="scrollToContent()")
       span {{ title }}
-    .header--subtitle(v-if="!isHideSubtitle")
+    .banner--subtitle(v-if="!isHideSubtitle")
       span {{ input.show }}
       span.subtitle--cursor(:class="{ 'subtitle--cursor-vague': input.vague }")
   .btn-scroll(v-show="!isHide && isFull")
@@ -19,11 +19,15 @@ export default {
   props: {
     title: {
       type: String,
-      default: "",
+      default: null,
     },
     subtitle: {
       type: String,
-      default: "",
+      default: null,
+    },
+    cover: {
+      type: String, 
+      default: null,
     },
     isHideSubtitle: {
       type: Boolean,
@@ -37,7 +41,10 @@ export default {
       type: Boolean,
       default: false,
     },
-    
+    disableTyping: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
     input: {
@@ -76,6 +83,7 @@ export default {
       });
     },
     typing() {
+      if (this.disableTyping) return;
       let sleep = 0;
       // 输入时，去除光标闪烁
       if (this.input.vague) this.input.vague = false;
@@ -133,8 +141,9 @@ export default {
   },
   mounted() {
     if (!this.hideSubtitle) {
-      if (this.subtitle && this.subtitle != "") {
-        this.input.template = this.subtitle;
+      if (this.subtitle) {
+        this.input.template =
+          typeof this.subtitle === "string" ? [this.subtitle] : this.subtitle;
         this.typing();
       } else {
         this.getHitokoto();
@@ -145,18 +154,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#header {
+#banner {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50vh;
   width: 100%;
-  background-color: var(--header);
+  background-color: var(--banner);
+  background-position: center;
+  background-size: cover;
   overflow: hidden;
   transition: all 0.3s ease;
 
-  background-image: repeating-linear-gradient(45deg, #ddd 3rem, #fff 3rem 6rem, #ddd 6rem 9rem);
+  background-image: repeating-linear-gradient(
+    45deg,
+    #ddd 3rem,
+    #fff 3rem 6rem,
+    #ddd 6rem 9rem
+  );
   &.full {
     // height: 100vh;
     // background-color: transparent;
@@ -172,7 +188,7 @@ export default {
   }
 }
 
-.header--card {
+.banner--card {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -181,7 +197,7 @@ export default {
   color: var(--text);
   font-family: chinese, InfoDisplay;
 
-  .header--title {
+  .banner--title {
     font-size: 2.2rem;
     font-weight: 500;
     font-family: chinese, InfoDisplay;
@@ -195,9 +211,12 @@ export default {
     }
   }
 
-  .header--subtitle {
+  .banner--subtitle {
     font-size: 1.4rem;
     cursor: pointer;
+    width: 80vw;
+    margin-top: 2rem;
+    white-space: pre-wrap;
     .subtitle--cursor {
       height: 100%;
       border-left: white solid 1px;
@@ -208,10 +227,10 @@ export default {
     }
   }
   @media screen and (max-width: $mobile) {
-    .header--title {
+    .banner--title {
       font-size: 1.8rem;
     }
-    .header--subtitle {
+    .banner--subtitle {
       font-size: 1.2rem;
     }
   }
