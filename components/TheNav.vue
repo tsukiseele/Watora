@@ -204,7 +204,6 @@ export default {
 
     &:hover {
       color: var(--theme);
-      background-color: var(--active-background);
       &::after {
         width: 100%;
         left: 0;
@@ -226,7 +225,6 @@ export default {
   }
   &.menu-dark li {
     &:hover {
-      background: var(--theme-primary);
     }
     &::after {
       border-bottom: var(--black) solid 2px;

@@ -25,7 +25,7 @@ export default ({ app }, inject) => {
     "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
   );
   // 判断客户端类型
-  inject("mobile", function () {
+  inject("mobile", function() {
     if (process.env.client) {
       const width = document.body.clientWidth;
       return width < 768;
@@ -33,7 +33,7 @@ export default ({ app }, inject) => {
     return false;
   });
 
-  inject("statics", initResource());
+  inject("src", initResource());
   inject("isNight", isNight);
 };
 

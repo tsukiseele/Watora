@@ -11,7 +11,7 @@
       li.item-label(v-for="(label, i) in labels", :key="i")
         SChip(:text="label.name", icon="sell")
   .item-category 
-    i.category-icon.material-icons archives
+    i.category-icon.material-icons bookmark
     span.category-text {{ category || '未分类' }}
 </template>
 
@@ -64,7 +64,7 @@ export default {
   display: flex;
   flex-direction: row;
   padding: 0.5rem;
-  margin: 1rem;
+  margin: 0.5rem;
   background: var(--card);
   transition: all 0.3s;
   box-shadow: var(--shadow);
@@ -159,8 +159,7 @@ export default {
       color: var(--text);
       font-size: 1.2rem;
       vertical-align: middle;
-      // width: 1.5rem;
-      margin-left: -.5rem;
+      margin: 0 0.5rem 0 -0.5rem;
     }
     .category-text {
       color: var(--text);

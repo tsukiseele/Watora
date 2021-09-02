@@ -6,7 +6,8 @@
     :subtitle="header.subtitle",
     :isFull="header.isFull",
     :isHide="header.isHide",
-    :isHideSubtitle="header.isHideSubtitle"
+    :isHideSubtitle="header.isHideSubtitle",
+    :cover="$src.images.backgrounds[7]"
   )
   main#main
     .aside-wrap(
@@ -50,7 +51,7 @@ export default {
   scrollToTop: true,
   data: () => ({
     header: {
-      title: "雫『Shizuku』",
+      title: "WATORA",
     },
     arch: null,
     error: null,
@@ -68,7 +69,7 @@ export default {
       if (newVal) {
         this.$store.commit("live2dText", `要阅读『${newVal} 』吗?`);
       }
-    }, /*
+    } /*
     $route: {
       handler(to, from) {
         if (process.client) {
@@ -83,7 +84,7 @@ export default {
       },
       deep: true,
       immediate: true,
-    },*/
+    },*/,
   },
   computed: {
     ...mapState(["page", "scroll", "archives", "labels"]),
@@ -92,7 +93,7 @@ export default {
     },
     res() {
       const icon = `${this.$static}/icon/icon.png`;
-      const placeholder = this.$statics.images.placeholder;
+      const placeholder = this.$src.images.placeholder;
       return {
         icon,
         placeholder,

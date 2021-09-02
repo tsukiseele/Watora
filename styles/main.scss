@@ -183,14 +183,17 @@ a {
   @media screen and (min-width: $mobile) {
     width: $mobile;
   }
+  @media screen and (min-width: 1080px) {
+    width: 1080px;
+  }
 }
 
 .card {
   background: var(--card);
   border-radius: var(--redius);
   transition: 0.3s ease;
-  margin: .5rem;
-  padding: .5rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
   box-shadow: var(--shadow);
   &hover:hover {
     background: var(--card-active);

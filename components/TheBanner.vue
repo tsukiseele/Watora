@@ -2,7 +2,7 @@
 #banner(
   ref="banner",
   :class="{ full: isFull, hide: isHide }",
-  :style="{ '--hideTri': `${isFull ? 'block' : 'none'}`, 'background-image': cover ? `url(${cover})` : null }"
+  :style="{ '--bg': cover ? `url(${cover})` : null }"
 )
   .banner--card(v-show="!isHide")
     .banner--title(@click="scrollToContent()")
@@ -26,7 +26,7 @@ export default {
       default: null,
     },
     cover: {
-      type: String, 
+      type: String,
       default: null,
     },
     isHideSubtitle: {
@@ -161,18 +161,28 @@ export default {
   align-items: center;
   height: 50vh;
   width: 100%;
-  background-color: var(--banner);
-  background-position: center;
-  background-size: cover;
   overflow: hidden;
   transition: all 0.3s ease;
+  // background-color: rgba(0, 0, 0, 0.1);
 
-  background-image: repeating-linear-gradient(
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--banner);
+    background-image: var(--bg);
+    z-index: -1; /*repeating-linear-gradient(
     45deg,
     #ddd 3rem,
     #fff 3rem 6rem,
     #ddd 6rem 9rem
-  );
+  );*/
+    filter: blur(10px);
+
+    background-position: center;
+    background-size: cover;
+  }
   &.full {
     // height: 100vh;
     // background-color: transparent;
@@ -215,7 +225,7 @@ export default {
     font-size: 1.4rem;
     cursor: pointer;
     width: 80vw;
-    margin-top: 2rem;
+    margin-top: 1rem;
     white-space: pre-wrap;
     .subtitle--cursor {
       height: 100%;

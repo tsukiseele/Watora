@@ -9,30 +9,17 @@
 #main {
   display: flex;
   overflow: visible;
+  padding: 0.5rem 0;
 }
 
 .aside-wrap {
-  // position: sticky;
-  // top: 0;
-  // height: 1000vh;
-  
   overflow: visible;
   flex: 1;
-  // align-self: flex-start;
-  margin-right: .5rem;
-  padding-top: 1rem;
-  // transition: padding 0.3s;
-  
-  & > *:nth-child(2) {
-    padding-top: 1rem;
-  }
-  &.down {
-    // padding-top: 4rem;
-  }
-
+  margin: 0 0.5rem 0 0;
   .sticky {
-    top: var(--nav-height);
+    top: calc(var(--nav-height) + 1rem);
     position: sticky;
+    padding-bottom: 0.5rem;
   }
 }
 @media screen and (max-width: $mobile) {
