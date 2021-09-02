@@ -1,54 +1,60 @@
 <template lang="pug">
 .post-item(@click="$router.push(to)")
   .item-cover-box
-    img.item-cover(v-lazy="item.articleCover || placeholder")
+    img.item-cover(v-lazy="cover.src || placeholder")
   .item-info 
-    .item-title {{ item.articleTitle }}
-    span.item-preview {{ preview }}
-    ul.item-tags
-      li.item-tag.item-date
-        i.fa.fa-calendar.item-icon 
-        span {{ item.articleDate | formatDateAgo }}
-      li.item-tag(v-for="(tag, i) in tags", :key="i")
-        i.fa.fa-tag.item-icon 
-        span {{ tag }}
-  .item-type 
-    i.tag-icon.fa.fa-archive 
-    span.tag-text {{ item.articleType || '未分类' }}
+    .item-title {{ title }}
+    span.item-preview {{ description }}
+    ul.item-labels
+      li.item-label
+        SChip(:text="date | formatTimeAgo", icon="event_note")
+      li.item-label(v-for="(label, i) in labels", :key="i")
+        SChip(:text="label.name", icon="sell")
+  .item-category 
+    i.category-icon.material-icons bookmark
+    span.category-text {{ category || '未分类' }}
 </template>
 
 <script>
 export default {
   props: {
-    to: String,
-    item: Object,
+    to: {
+      type: String,
+      default: null,
+    },
+    title: {
+      type: String,
+      default: null,
+    },
+    cover: {
+      type: Object,
+      default: () => ({}),
+    },
+    date: {
+      type: String,
+      default: null,
+    },
+    labels: {
+      type: Array,
+      default: () => [],
+    },
+    type: {
+      type: String,
+      default: null,
+    },
+    category: {
+      type: Object,
+      default: null,
+    },
     placeholder: {
       type: String,
-      default: ""
-    }
-  },
-  computed: {
-    tags() {
-      if (this.item.articleTags) return this.item.articleTags.split(" ");
+      default: null,
     },
-    preview() {
-      let content = this.item.articleContent;
-      if (content) {
-        /*
-        var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？↵\r\n]");
-        var rs = "";
-        for (var i = 0; i < content.length; i++) {
-            rs = rs + content.substr(i, 1).replace(pattern, '');
-         
-        content = rs;
-        */
-        if (content.length > 96) {
-          return content.substring(0, 64) + "...";
-        }
-        return content;
-      }
-    }
-  }
+    description: {
+      type: String,
+      default: null,
+    },
+  },
 };
 </script>
 
@@ -58,7 +64,7 @@ export default {
   display: flex;
   flex-direction: row;
   padding: 0.5rem;
-  margin: 1rem;
+  margin: 0.5rem;
   background: var(--card);
   transition: all 0.3s;
   box-shadow: var(--shadow);
@@ -85,7 +91,7 @@ export default {
     width: 100%;
     object-fit: cover;
     transform: scale(1.2);
-    transition: filter 0.6s, transform 0.6s;
+    transition: all 0.6s;
   }
   .item-info {
     display: flex;
@@ -112,43 +118,33 @@ export default {
     .item-icon {
       padding-right: 0.33rem;
     }
-    .item-tags {
+    .item-labels {
       list-style: none;
-      .item-tag {
+      .item-label {
         display: inline-block;
-        color: var(--text);
-        font-size: 0.7rem;
-        line-height: 1.5rem;
-        padding: 0 0.5rem;
-        margin: 0.5rem 0.1rem;
-        border: thin solid var(--border);
-        border-radius: 1rem;
-        transition: border 0.3s ease;
-        cursor: pointer;
-        &:hover {
-          border: thin solid var(--text-primary);
-          color: var(--text-primary);
-        }
+        margin-right: 0.5rem;
       }
     }
   }
-  .item-type {
+  .item-category {
+    $triangle: 0.8rem;
+    $height: 2rem;
     position: absolute;
     text-align: center;
     color: var(--theme-primary);
     background: currentColor;
     width: 6.6rem;
     font-size: 0.8rem;
-    line-height: 1.8rem;
+    line-height: $height;
     padding: 0 0.5rem 0 0.5rem;
     border-radius: 0 3px 3px 0;
     top: 1rem;
-    left: -0.6rem;
+    left: -$triangle;
     box-shadow: var(--shadow);
     &::before {
       content: "";
       position: absolute;
-      border: 0.6rem solid;
+      border: $triangle solid;
       border-right-width: 0;
       border-color: currentColor transparent transparent;
       rotate: 45deg;
@@ -158,13 +154,18 @@ export default {
       left: 0;
       filter: brightness(120%);
     }
-    .tag-icon {
+    .category-icon {
+      display: inline-block;
       color: var(--text);
+      font-size: 1.2rem;
+      vertical-align: middle;
+      margin: 0 0.5rem 0 -0.5rem;
     }
-    .tag-text {
+    .category-text {
       color: var(--text);
-      margin-left: 0.5rem;
+      margin: 0rem;
       font-size: 0.8rem;
+      vertical-align: middle;
     }
   }
   /** Mobile兼容 */
@@ -183,7 +184,7 @@ export default {
       padding: 0.5rem 1rem 0.5rem 1rem;
     }
 
-    .item-type {
+    .item-category {
       line-height: 2.2rem;
     }
     /* B方案-遮罩层显示*/

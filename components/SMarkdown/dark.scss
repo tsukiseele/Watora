@@ -1,4 +1,4 @@
-:root[theme="dark"] .markdown-preview {
+.markdown-content {
   $md-font: "Microsoft YaHei", "Lucida Grande", "Lucida Sans Unicode", Helvetica,
   Arial, Verdana, sans-serif;
   $md-code-font: Menlo, Consolas, "Courier New", Courier, FreeMono, monospace;
@@ -138,6 +138,8 @@
     }
   }
   table {
+    width: 100px !important;
+    overflow-x: scroll !important;
     th, td, tr:nth-of-type(even) td {
       color: $md-text;
       background-color: $md-bg;
@@ -172,7 +174,6 @@
       align-self: flex-start;
     }
   }
-
   @media screen and (max-width: $mobile){
     h1 {
       font-size: 1.5rem;

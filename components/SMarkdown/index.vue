@@ -1,0 +1,130 @@
+<template lang="pug">
+client-only
+  .markdown-preview
+    .markdown-content(v-html="markdown")
+</template>
+
+<script>
+import marked from "marked";
+import DOMPurify from "dompurify";
+/*
+import "highlight.js/styles/atom-one-dark-reasonable.css";
+import "highlight.js/styles/vs2015.css";
+import "highlight.js/styles/stackoverflow-dark.css";
+import "highlight.js/styles/night-owl.css";
+*/
+let CODE_ID = 0;
+const CODE_COPY_LIST = [];
+
+if (process.client) {
+  const hljs = require("@/plugins/utils/highlight.js");
+  const renderer = new marked.Renderer();
+
+  renderer.code = function code(_code, infostring, escaped) {
+    CODE_ID++;
+    const id = `code-${CODE_ID}`;
+    CODE_COPY_LIST.push({ id, code: _code });
+    const lang = (infostring || "").match(/\S*/)[0];
+    if (this.options.highlight) {
+      const out = this.options.highlight(_code, lang);
+      if (out != null && out !== _code) {
+        escaped = true;
+        _code = out;
+      }
+    }
+    if (!lang) {
+      return `<pre class="hljs"><code>${_code}</code><i id="${id}" class="icon icon-clipboard code-copy"></i></pre>`;
+    }
+    return `<pre class="hljs ${this.options.langPrefix + lang}"><code class="${
+      this.options.langPrefix + lang
+    }">${_code}</code><i id="${id}" class="icon icon-clipboard code-copy"></i></pre>\n`;
+  };
+
+  renderer.table = function (header, body) {
+    if (body) body = `<tbody>${body}</tbody>`;
+    return `<div class="table-wrap">\n<table>\n<thead>\n${header}</thead>\n${body}</table>\n</div>\n`;
+  };
+
+  marked.setOptions({
+    renderer,
+    highlight: (code) => hljs.default.highlightAuto(code).value,
+    pedantic: false,
+    gfm: true,
+    tables: true,
+    breaks: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false,
+    xhtml: false,
+  });
+}
+
+export default {
+  props: {
+    content: {
+      type: String,
+      default: null,
+    },
+  },
+  data: () => ({}),
+  created() {},
+  computed: {
+    markdown() {
+      try {
+        return this.$isServer || DOMPurify.sanitize(marked(this.content));
+      } catch (error) {
+        console.log(error);
+      }
+      return null;
+    },
+  },
+  methods: {},
+
+  created() {
+    /*
+    if (this.$isNight()) {
+      console.log(this.$isNight());
+      console.log("===================================");
+      require("highlight.js/styles/atom-one-dark.css");
+    } else {
+      require("highlight.js/styles/stackoverflow-light.css");
+    }*/
+  },
+  mounted() {},
+};
+</script>
+
+<style lang="scss">
+// @import "highlight.js/styles/atom-one-dark.css";
+@import "highlight.js/styles/stackoverflow-light.css";
+@import "./index.scss";
+/*
+:root[theme="dark"] {
+  @import "./theme/dark.scss";
+}*/
+</style>
+
+<style lang="scss" scoped>
+::v-deep {
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+  pre,
+  code {
+    padding: .5rem;
+    border-radius: 5px;
+  }
+}
+.markdown-preview {
+  background-color: var(--card);
+}
+.markdown-content {
+  overflow: hidden;
+  padding: 0 0.5rem;
+}
+.table-wrap {
+  overflow: auto;
+  width: 100%;
+}
+</style>

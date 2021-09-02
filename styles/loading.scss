@@ -1,0 +1,27 @@
+img[lazy=loading] {
+  object-fit: contain!important;
+}
+img[lazy=error] {
+  position: relative;
+  &::before {
+    content: "\f116" " " attr(alt);
+    font-size: 36px;
+    font-family: "Material Icons";
+    color: rgb(100, 100, 100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+  }
+}
+/*
+img[lazy=loaded] {
+  
+}
+*/

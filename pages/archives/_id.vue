@@ -1,32 +1,22 @@
 <template lang="pug">
 #container
+  TheBanner(
+    v-if="archive",
+    :title="archive.title",
+    :cover="archive.cover.src",
+    :subtitle="header.subtitle",
+    :disableTyping="false"
+  )
   main#main
-    .article
-      .banner
-        img.bg(:src="article.articleCover || $statics.images.backgrounds[0]") 
-        .post-header
-          .post-title(v-text="article.articleTitle")
-          ul.post-tags
-            li.post-tag(v-for="(tag, i) in tags", :key="i") 
-              //- i.tag-icon.fa.fa-tags
-              SvgIcon(type="mdi", :path="mdiTag")
-              span.tag-text {{ tag }}
+    .archive
       .markdown
         client-only
-          SMdPreview(:content="article.articleContent")
-      .comments
-        .comment-header {{ comments.length == 0 ? '暂无评论' : '评论' }}
-        .comment-edit
-          .comment-content
-          .comment-username
-          .comment-email
-          .comment-domain
-
-        SComment(:comments="comments", :reply="handleReply()")
+          SMarkdown(:content="archive.content")
+      SComment(:title="this.$route.path")
 </template>
 
 <script>
-import { mdiTag } from "@mdi/js";
+import { mapState } from "vuex";
 
 export default {
   data: () => ({
@@ -35,67 +25,56 @@ export default {
         fullscreen: false,
       },
     },
-    article: {},
     comments: {},
   }),
-  created() {
-    this.$store.commit("header", {
-      title: this.article.articleTitle || "无题",
-      isHideSubtitle: true,
-      isHide: true,
-    });
-  },
-  fetch() {
-    this.$store.commit("header", {
-      title: this.article.articleTitle || "无题",
-      isHideSubtitle: true,
-      isHide: true,
-    });
-  },
-  methods: {
-    handleReply() {},
-  },
-  async asyncData({ app, params }) {
-    let id = parseInt(params.id || 0);
-    let article;
-    let comments;
-    try {
-      const articleRes = await app.$api.getArticleById(id);
-      const commentRes = await app.$api.getCommentTree(id);
-      article = articleRes.ok ? articleRes.data : null;
-      comments = commentRes.ok ? commentRes.data : null;
-    } catch (e) {
-      console.log(e);
-    }
-    return {
-      article,
-      comments,
-    };
-  },
   computed: {
-    tags() {
-      if (this.article.articleTags) return this.article.articleTags.split(" ");
+    ...mapState(["archive"]),
+    header() {
+      return {
+        title: this.archive ? this.archive.title : "无题",
+
+        subtitle: this.archive ? this.archive.description : "无题",
+        isHideSubtitle: true,
+        isHide: true,
+      };
     },
+
+    /*
+    archive() {
+      return this.$store.state.archive || {};
+    }*/
+  },
+  methods: {},
+  async fetch({ store, params }) {
+    const id = parseInt(params.id);
+    await store.dispatch("archive", { id });
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 #main {
   margin-top: 0rem;
 }
 
-.article {
+.archive {
+  // padding: .5rem;
+  // box-shadow: var(--shadow);
 }
 
-.markdown {
-  overflow: hidden;
+.markdown,
+.comments,
+.banner {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .comments {
   overflow: hidden;
   padding: 1rem;
+  margin-bottom: 1rem;
   background-color: var(--card);
   .comment-header {
     color: var(--text);
@@ -108,8 +87,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 50vh;
+  padding: 0;
+  text-shadow: var(--shadow);
   @media screen and (max-width: $mobile) {
     height: 33vh;
   }
@@ -127,7 +107,7 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
   }
   .header {
     z-index: 1;
@@ -164,12 +144,15 @@ export default {
   }
 }
 @media screen and(max-width: $mobile) {
-  .markdown,.comments {
+  .banner,
+  .markdown,
+  .comments {
     border-radius: 0;
     margin: 0 !important;
+    padding: 0 !important;
   }
   #main {
-    margin-top: -3rem;
+    // margin-top: -3rem;
   }
 }
 </style>

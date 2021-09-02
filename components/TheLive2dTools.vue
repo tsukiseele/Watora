@@ -9,14 +9,10 @@
     small,
     @click="$emit(btn.on)"
   )
-    SvgIcon(:type="iconType", :path="btn.icon")
+    i.material-icons {{ btn.icon }}
   .tool-btn(:id="isHidden ? options.on : ''", small, @click="onHidden")
-    SvgIcon(
-      v-if="options && options.icon",
-      :type="iconType",
-      :path="hideIcon"
-    )
-    i(v-else) {{ hideIcon }}
+    i.material-icons(v-if="options && options.icon") {{ btn.icon }}
+    i.material-icons(v-else) {{ hideIcon }}
 </template>
 
 <script>

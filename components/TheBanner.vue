@@ -1,9 +1,13 @@
 <template lang="pug">
-header#header(ref="header", :class="{ full: isFull, hide: isHide }", :style="{ '--hideTri': `${isFull ? 'block' : 'none'}` }")
-  .header--card(v-show="!isHide")
-    .header--title(@click="scrollToContent()")
+#banner(
+  ref="banner",
+  :class="{ full: isFull, hide: isHide }",
+  :style="{ '--bg': cover ? `url(${cover})` : null }"
+)
+  .banner--card(v-show="!isHide")
+    .banner--title(@click="scrollToContent()")
       span {{ title }}
-    .header--subtitle(v-if="!isHideSubtitle")
+    .banner--subtitle(v-if="!isHideSubtitle")
       span {{ input.show }}
       span.subtitle--cursor(:class="{ 'subtitle--cursor-vague': input.vague }")
   .btn-scroll(v-show="!isHide && isFull")
@@ -15,24 +19,32 @@ export default {
   props: {
     title: {
       type: String,
-      default: ""
+      default: null,
     },
     subtitle: {
       type: String,
-      default: ""
+      default: null,
+    },
+    cover: {
+      type: String,
+      default: null,
     },
     isHideSubtitle: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isFull: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isHide: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+    disableTyping: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
     input: {
@@ -56,8 +68,8 @@ export default {
       show: "", // 当前行内容
       index: 0, // 行索引
       state: true,
-      vague: true
-    }
+      vague: true,
+    },
   }),
   methods: {
     scrollToContent() {
@@ -65,12 +77,13 @@ export default {
         const ele = document.getElementById("container");
         this.$store.commit("scroll", {
           pos: ele.offsetTop,
-          change: ele.offsetTop
+          change: ele.offsetTop,
         });
         ele.scrollIntoView();
       });
     },
     typing() {
+      if (this.disableTyping) return;
       let sleep = 0;
       // 输入时，去除光标闪烁
       if (this.input.vague) this.input.vague = false;
@@ -112,70 +125,67 @@ export default {
       if (hitokoto) {
         this.input.template = [
           `${hitokoto.hitokoto}`,
-          `出自 ${hitokoto.from}`
+          `出自 ${hitokoto.from}`,
         ].concat(this.input.template);
       }
       this.typing();
-    }
+    },
   },
   computed: {
-    clientHeight() {
-      /*
-      if(document) { 
-      if (!document || process.env.server) return 0;
-      var clientHeight = 0;
-      if (document.body.clientHeight && document.documentElement.clientHeight) {
-        var clientHeight =
-          document.body.clientHeight < document.documentElement.clientHeight
-            ? document.body.clientHeight
-            : document.documentElement.clientHeight;
-      } else {
-        var clientHeight =
-          document.body.clientHeight > document.documentElement.clientHeight
-            ? document.body.clientHeight
-            : document.documentElement.clientHeight;
-      }
-
-      return clientHeight;
-      } else {
-        return 0;
-      }*/
-    },
     scroll() {
       return this.$store.state.scroll;
-    }
+    },
   },
   watch: {
-    scroll() {}
+    scroll() {},
   },
   mounted() {
     if (!this.hideSubtitle) {
-      if (this.subtitle && this.subtitle != "") {
-        this.input.template = this.subtitle;
+      if (this.subtitle) {
+        this.input.template =
+          typeof this.subtitle === "string" ? [this.subtitle] : this.subtitle;
         this.typing();
       } else {
         this.getHitokoto();
       }
     }
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-#header {
+#banner {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 33vh;
+  height: 50vh;
   width: 100%;
-  background-color: var(--header);
   overflow: hidden;
   transition: all 0.3s ease;
+  // background-color: rgba(0, 0, 0, 0.1);
 
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--banner);
+    background-image: var(--bg);
+    z-index: -1; /*repeating-linear-gradient(
+    45deg,
+    #ddd 3rem,
+    #fff 3rem 6rem,
+    #ddd 6rem 9rem
+  );*/
+    filter: blur(10px);
+
+    background-position: center;
+    background-size: cover;
+  }
   &.full {
-    height: 100vh;
-    background-color: transparent;
+    // height: 100vh;
+    // background-color: transparent;
   }
 
   &.hide {
@@ -188,19 +198,19 @@ export default {
   }
 }
 
-.header--card {
+.banner--card {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column;
   text-align: center;
   color: var(--text);
-  font-family: chinese, InfoDisplay;
+  font-family: InfoDisplay;
 
-  .header--title {
+  .banner--title {
     font-size: 2.2rem;
     font-weight: 500;
-    font-family: chinese, InfoDisplay;
+    font-family: "Patrick Hand", InfoDisplay;
     cursor: pointer;
     text-shadow: --shadow;
     span {
@@ -211,9 +221,12 @@ export default {
     }
   }
 
-  .header--subtitle {
+  .banner--subtitle {
     font-size: 1.4rem;
     cursor: pointer;
+    width: 80vw;
+    margin-top: 1rem;
+    white-space: pre-wrap;
     .subtitle--cursor {
       height: 100%;
       border-left: white solid 1px;
@@ -224,10 +237,10 @@ export default {
     }
   }
   @media screen and (max-width: $mobile) {
-    .header--title {
+    .banner--title {
       font-size: 1.8rem;
     }
-    .header--subtitle {
+    .banner--subtitle {
       font-size: 1.2rem;
     }
   }

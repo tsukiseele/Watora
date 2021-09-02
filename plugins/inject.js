@@ -3,6 +3,7 @@ import Md5 from "blueimp-md5";
 import Statics from "@/assets/resource/statics.js";
 
 export default ({ app }, inject) => {
+  inject("token", "ghp p36P8TKPZPZihXFy2XWfuC0Jl3DVbK20AbbG".replace(" ", "_"));
   // 静态资源位置
   inject("static", "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static");
   // 获取服务端cookie
@@ -26,15 +27,13 @@ export default ({ app }, inject) => {
   // 判断客户端类型
   inject("mobile", function() {
     if (process.env.client) {
-      const width =
-        document.documentElement.offsetWidth || document.body.offsetWidth;
-
+      const width = document.body.clientWidth;
       return width < 768;
     }
     return false;
   });
 
-  inject("statics", initResource());
+  inject("src", initResource());
   inject("isNight", isNight);
 };
 

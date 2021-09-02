@@ -1,5 +1,4 @@
 export default {
-  mode: "universal",
   server: {
     host: process.env.BASE_HOST || "localhost",
     port: process.env.BASE_PORT || 3000
@@ -32,11 +31,16 @@ export default {
         href: "/favicon.ico"
       },
       // FontAwesome图标库
+      /*
       {
         rel: "stylesheet",
         href:
           "//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      }
+      },*/
+      /*{
+        rel: "stylesheet",
+        href: "//fonts.googleapis.com/icon?family=Material+Icons"
+      }*/
     ]
   },
   env: {
@@ -52,13 +56,7 @@ export default {
     credentials: true
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    "ress",
-    "~/styles/main.scss",
-    "~/styles/transitions.scss",
-    "~/styles/theme/light.scss",
-    "~/styles/theme/dark.scss"
-  ],
+  css: ["ress", "~/styles/main.scss"],
 
   // Global variables, mixins and function
   styleResources: {
@@ -68,17 +66,17 @@ export default {
   // Plugins to run before rendering pasge: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "~/plugins/api.js",
-    "~/plugins/utils.js",
-    "~/plugins/filter.js",
     "~/plugins/inject.js",
-    "~/plugins/ascii.client.js",
+    "~/plugins/services.js",
+    "~/plugins/utils/utils.js",
+    "~/plugins/utils/filter.js",
+    "~/plugins/utils/ascii.client.js",
     "~/plugins/libs/lib-vue-lazyload.client.js",
     "~/plugins/libs/lib-vuex-persistedstate.client.js",
-    "~/plugins/libs/lib-meditor.client.js",
     "~/plugins/libs/lib-aos.client.js",
-    "~/plugins/libs/lib-svgicon.client.js",
     "~/plugins/libs/lib-live2d.client.js",
-    "~/plugins/libs/lib-aplayer.client.js"
+    "~/plugins/libs/lib-aplayer.client.js",
+    "~/plugins/libs/lib-vssue.client.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -97,18 +95,10 @@ export default {
         ["@babel/plugin-proposal-private-property-in-object", { loose: true }]
       ]
     },
-    //extractCSS: { allChunks: true },
-    //extractCSS: true,
     extractCSS: {
       ignoreOrder: true
     },
-    // 开启打包分析
-    /*
-    analyze: true,
-    assetFilter: function (assetFilename) {
-      return assetFilename.endsWith('.js');
-    },
-    */
+    // analyze: true,
     /*
      ** You can extend webpack config here
      */

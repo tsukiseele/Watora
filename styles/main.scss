@@ -1,12 +1,16 @@
-
-
+@import "./loading.scss";
+@import "./transitions.scss";
+@import "./theme/light.scss";
+@import "./theme/dark.scss";
+@import "./fonts.scss";
 /** 全局变量 **/
 :root {
   --redius: 5px;
 }
+
 /** 根样式 **/
 :root {
-  font-family: InfoDisplay, Titillium Web, "Sarasa Gothic SC",
+  font-family: "Noto Sans TC", InfoDisplay, Titillium Web, "Sarasa Gothic SC",
     "Source Han Sans CN", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
     sans-serif;
   font-weight: 300;
@@ -30,11 +34,6 @@
 @font-face {
   font-family: "InfoDisplay";
   src: url("https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/fonts/InfoDisplay.woff");
-}
-
-@font-face {
-  font-family: "chinese";
-  src: url("https://cdn.jsdelivr.net/gh/tsukiseele/statics/watora/fonts/chinese.font.woff");
 }
 
 *::-webkit-scrollbar {
@@ -184,13 +183,17 @@ a {
   @media screen and (min-width: $mobile) {
     width: $mobile;
   }
+  @media screen and (min-width: 1080px) {
+    width: 1080px;
+  }
 }
 
 .card {
   background: var(--card);
-  border-radius: 4px;
+  border-radius: var(--redius);
   transition: 0.3s ease;
-  padding: 1rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
   box-shadow: var(--shadow);
   &hover:hover {
     background: var(--card-active);
