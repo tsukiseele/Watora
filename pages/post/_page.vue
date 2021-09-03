@@ -55,8 +55,15 @@ export default {
     isLoading: false,
     itemActive: null,
     isAosOnce: true,
+    _timer: null,
   }),
-
+  mounted() {
+    this.$nextTick(() => {
+      this._timer = setTimeout(() => {
+        this.$aos.refresh();
+      });
+    });
+  },
   watch: {
     itemActive(newVal, oldVal) {
       if (newVal) {
@@ -93,7 +100,6 @@ export default {
       };
     },
   },
-
   methods: {
     async onChange(page) {
       this.$router.push({ params: { page } });
@@ -117,6 +123,9 @@ export default {
       store.dispatch("labels"),
       store.dispatch("categorys"),
     ]);
+  },
+  beforeDestroy() {
+    clearTimeout(this._timer);
   },
 };
 </script>

@@ -1,4 +1,6 @@
 export default ({ app, $axios }, inject) => {
+  $axios.defaults.headers.common["Authorization"] =
+    "token ghp_n18ZgXZ17iwZWA3" + "qXsja5pYSoAeQ112EhHKa";
   inject("api", {
     // 登录
     async login(params) {
@@ -42,27 +44,27 @@ export default ({ app, $axios }, inject) => {
       return await $axios.$get(`/api/link`);
     },
     async addLink(link) {
-      return await $axios.$put(`/api/link`, link)
+      return await $axios.$put(`/api/link`, link);
     },
     // 图片
     async getImageByHash(hash) {
-      return await $axios.$get(`/api/image/hash/${hash}`)
+      return await $axios.$get(`/api/image/hash/${hash}`);
     },
     async getAllImage() {
-      return await $axios.$get(`/api/image`)
+      return await $axios.$get(`/api/image`);
     },
     async getImageOfRange(index, count) {
-      return await $axios.$get(`/api/image?index=${index}&count=${count}`)
+      return await $axios.$get(`/api/image?index=${index}&count=${count}`);
     },
     async addImage(image) {
       return await $axios.$put(`/api/image`, image);
     },
     async uploadImage(file) {
       let formData = new FormData();
-      formData.append("image", file)
+      formData.append("image", file);
       return await $axios.$post(`/api/upload/image`, formData, {
         header: { "Content-Type": "multipart/form-data" }
-      })
+      });
     }
   });
-}
+};

@@ -31,7 +31,7 @@ export default () => {
                          %cWatora %ccreated by %c@tsukiseele%c - 2021
   
                          https://github.com/tsukiseele/watora`;
-  /*
+
   console.log(
     ascii,
     "color: #5692ab",
@@ -39,7 +39,7 @@ export default () => {
     "color: black",
     "color: #77428D",
     "color: black"
-  );*/
+  );
   // --primary: rgba(139, 207, 222, 1);
   // --primary-dark: rgba(49, 98, 135, 1);
 };

@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 export default ({store}) => {
   createPersistedState(store)
 }*/
+
 import Vuex from "vuex";
 import persistedState from "vuex-persistedstate";
 export default new Vuex.Store({

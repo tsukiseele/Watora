@@ -126,7 +126,7 @@ export default {
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
 
-    this.initMusicList();
+    // this.initMusicList();
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
