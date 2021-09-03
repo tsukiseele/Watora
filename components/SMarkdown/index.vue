@@ -112,8 +112,12 @@ export default {
   }
   pre,
   code {
-    padding: .5rem;
+    padding: 0.5rem;
     border-radius: 5px;
+  }
+  .table-wrap {
+    overflow: auto;
+    width: 100%;
   }
 }
 .markdown-preview {
@@ -122,9 +126,5 @@ export default {
 .markdown-content {
   overflow: hidden;
   padding: 0 0.5rem;
-}
-.table-wrap {
-  overflow: auto;
-  width: 100%;
 }
 </style>

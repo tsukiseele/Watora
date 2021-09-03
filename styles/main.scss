@@ -174,18 +174,18 @@ a {
 
 /** 特殊样式 **/
 #main {
-  margin: 0 auto;
+  // margin: 0 auto;
   min-height: 100vh;
   overflow: hidden;
-  width: 100%;
+  // width: 100%;
   padding: 0;
-
+/*
   @media screen and (min-width: $mobile) {
     width: $mobile;
   }
   @media screen and (min-width: 1080px) {
     width: 1080px;
-  }
+  }*/
 }
 
 .card {

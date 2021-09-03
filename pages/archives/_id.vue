@@ -58,8 +58,9 @@ export default {
 }
 
 .archive {
-  // padding: .5rem;
+  margin: 0 .5rem;
   // box-shadow: var(--shadow);
+
 }
 
 .markdown,

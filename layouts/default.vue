@@ -135,15 +135,37 @@ export default {
 };
 </script>
 
+<style lang="scss">
+body {
+  // background-image: repeating-linear-gradient(45deg, #ccc 3rem, #fff 3rem 6rem, #ccc 6rem 9rem);
+  background-image: url(https://api.paugram.com/wallpaper?source=gt);
+  // background-color: red;
+  background-position: center;
+  background-attachment: fixed;
+}
+</style>
 <style lang="scss" scoped>
 @media screen and (max-width: $mobile) {
   #app {
     overflow-x: hidden;
   }
 }
+
 #app {
   position: relative;
-  background: var(--background);
+  // background: var(--background);
+  background-color: white;
+  width: 1080px;
+  // width: $mobile;
+  margin: 0 auto;
+  box-shadow: var(--shadow);
+
+  @media screen and (max-width: 1080px) {
+    width: $mobile;
+  }
+    @media screen and (max-width: $mobile) {
+    width: 100vw;
+  }
 }
 #background {
   position: fixed;

@@ -1,6 +1,6 @@
 <script>
 export default {
-  async asyncData({ app, redirect }) {
+  fetch({ app, redirect }) {
     redirect("/post/1")
   }
 };

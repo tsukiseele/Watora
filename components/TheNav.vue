@@ -64,20 +64,22 @@ export default {
 <style lang="scss">
 .nav-wrap {
   position: relative;
+  width: inherit;
 }
+
 #nav {
+  width: inherit;
   position: fixed;
   display: flex;
   top: 0;
-  width: 100%;
   height: var(--nav-height);
   padding: 0 2rem;
   color: var(--text);
   background: transparent;
   transition: all 0.3s ease-in-out;
   user-select: none;
-  z-index: 9;
 
+  z-index: 9;
   // backdrop-filter: blur(10px);
 
   &:hover {

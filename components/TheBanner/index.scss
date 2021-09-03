@@ -1,0 +1,130 @@
+#banner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  // background-color: rgba(0, 0, 0, 0.1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    // background-color: var(--banner);
+    background-image: var(--bg);
+    /*z-index: -1; repeating-linear-gradient(
+    45deg,
+    #ddd 3rem,
+    #fff 3rem 6rem,
+    #ddd 6rem 9rem
+  );*/
+    filter: blur(10px);
+
+    background-position: center;
+    background-size: cover;
+  }
+  &.full {
+    // height: 100vh;
+    // background-color: transparent;
+  }
+
+  &.hide {
+    height: 3rem;
+    background-color: var(--card);
+  }
+
+  @media screen and(max-width: $mobile) {
+    height: 33vh;
+  }
+}
+
+.banner--card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  text-align: center;
+  color: var(--text);
+  font-family: InfoDisplay;
+  z-index: 1;
+
+  .banner--title {
+    font-size: 2.2rem;
+    font-weight: 500;
+    font-family: "Patrick Hand", InfoDisplay;
+    cursor: pointer;
+    text-shadow: --shadow;
+    span {
+      transition: color 0.3s ease;
+    }
+    :hover {
+      color: var(--text);
+    }
+  }
+
+  .banner--subtitle {
+    font-size: 1.4rem;
+    cursor: pointer;
+    width: 80vw;
+    margin-top: 1rem;
+    white-space: pre-wrap;
+    .subtitle--cursor {
+      height: 100%;
+      border-left: white solid 1px;
+      margin-left: 0.2rem;
+    }
+    .subtitle--cursor-vague {
+      animation: cursor-vague 1s ease infinite;
+    }
+  }
+  @media screen and (max-width: $mobile) {
+    .banner--title {
+      font-size: 1.8rem;
+    }
+    .banner--subtitle {
+      font-size: 1.2rem;
+    }
+  }
+}
+.btn-scroll {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  // background-color: #fff;
+  height: 50px;
+  width: 50px;
+  color: white;
+  cursor: pointer;
+  animation: float 3s linear infinite;
+  z-index: 1;
+}
+
+@keyframes cursor-vague {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes float {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-10px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
