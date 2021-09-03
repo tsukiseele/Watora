@@ -1,5 +1,5 @@
-const lineReg = new RegExp(".+", "gm");///.+/gm;
-const imgReg = new RegExp(
+const regLine = new RegExp(".+", "gm");///.+/gm;
+const regImg = new RegExp(
   "\\[(.*?)\\].*?(https?:\\/\\/.*?.(?:jpg|jpeg|png|gif))",
   "g"
 ); ///^\[(.*?)\].*?(https?:\/\/.*?\.(?:jpg|jpeg|png|gif))/g; // 匹配文章封面
@@ -11,7 +11,7 @@ const imgReg = new RegExp(
 function getPartList(post) {
   let match;
   const result = [];
-  while ((match = lineReg.exec(post))) {
+  while ((match = regLine.exec(post))) {
     result.push(match[0]);
   }
   return result;
@@ -22,7 +22,7 @@ function getPartList(post) {
  * @returns {Cover} { title, url }
  */
 function getImage(content) {
-  const cover = imgReg.exec(content);
+  const cover = regImg.exec(content);
   if (cover && cover.length > 2) {
     return {
       title: cover[1],
