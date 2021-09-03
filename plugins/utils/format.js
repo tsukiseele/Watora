@@ -1,8 +1,9 @@
-const regLine = new RegExp(".+", "gm");///.+/gm;
+const regLine = new RegExp(".+", "gm");
 const regImg = new RegExp(
-  "\\[(.*?)\\].*?(https?:\\/\\/.*?.(?:jpg|jpeg|png|gif))",
+  "\\[(.*?)\\].*?(https?:\\/\\/.+?.(?:jpg|jpeg|png|gif).*?)",
   "g"
-); ///^\[(.*?)\].*?(https?:\/\/.*?\.(?:jpg|jpeg|png|gif))/g; // 匹配文章封面
+);
+
 /**
  * 将文本行转换为列表
  * @param {String} post
@@ -19,56 +20,67 @@ function getPartList(post) {
 /**
  * 获取Markdown文本的图片数据
  * @param {String} content
- * @returns {Cover} { title, url }
+ * @returns {Array<Cover>} [{ title, url }, ...]
  */
-function getImage(content) {
-  const cover = regImg.exec(content);
-  if (cover && cover.length > 2) {
-    return {
-      title: cover[1],
-      url: cover[2]
-    };
+function getImages(content) {
+  const images = [];
+  let match;
+  while ((match = regImg.exec(content))) {
+    if (match.length > 2) {
+      images.push({
+        title: match[1],
+        url: match[2]
+      });
+    }
   }
-  return cover;
+  return images;
 }
 /**
  * 替换资源链接为 jsDelivr CDN链接
  * @param {String} post 文章上下文
- * @param {Array<String>} lines 文章行列表
+ * @param {Array<Image>} images 图片
  */
-function useCdn(post, lines) {
-  lines.forEach(line => {
-    const image = getImage(line);
+function useCdn(content, images) {
+  images.forEach(image => {
     if (image && image.url) {
       const cdnUrl = image.url
         .replace("raw.githubusercontent.com", "cdn.jsdelivr.net/gh")
         .replace(/\/(main|master)\//g, "/");
-      post.replace(image.url, cdnUrl);
+      content.replace(image.url, cdnUrl);
     }
   });
+  return content;
 }
-
 /**
  *
  */
-export const formatPost = post => {
-  // 获取所有行
-  const lines = getPartList(post.body);
+export const formatPost = ({
+  body,
+  title,
+  created_at: createAt,
+  labels,
+  milestone: category,
+  number: id
+}) => {
+  const images = getImages(body);
   // 使用 CDN
-  const content = useCdn(post.body, lines);
+  const content = useCdn(body, images);
+  // 获取所有行
+  const lines = getPartList(content);
   // 获取封面图 （默认为第一张图片）
-  const cover = getImage(lines[0]) || { title: null, url: null };
-  // 获取描述，有封面使用第二行，没有则使用第一行
-  const description = cover.url ? lines[1] : lines[0];
+  const cover = images[0] || { title: null, url: null };
+  // 获取描述，查找首个非图片行
+  const description = lines.find(line => !getImages(line).length);
+  //
   return {
     content,
     cover,
     description,
-    title: post.title,
-    createAt: post.created_at,
-    labels: post.labels,
-    category: post.milestone,
-    id: post.number
+    title,
+    createAt,
+    labels,
+    category,
+    id
   };
 };
 
@@ -156,7 +168,7 @@ export const parseTime = (time, format = "{y}-{m}-{d} {h}:{i}:{s}") => {
     s: date.getSeconds(),
     a: date.getDay()
   };
-  const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
+  const timeStr = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key];
     if (key === "a") {
       return ["日", "一", "二", "三", "四", "五", "六"][value];
@@ -166,5 +178,5 @@ export const parseTime = (time, format = "{y}-{m}-{d} {h}:{i}:{s}") => {
     }
     return value || 0;
   });
-  return time_str;
+  return timeStr;
 };

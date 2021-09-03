@@ -137,8 +137,15 @@ export default {
 
 <style lang="scss">
 body {
-  // background-image: repeating-linear-gradient(45deg, #ccc 3rem, #fff 3rem 6rem, #ccc 6rem 9rem);
-  background-image: url(https://api.paugram.com/wallpaper?source=gt);
+  background-image: repeating-linear-gradient(
+    45deg,
+    #ccc 1px,
+    transparent 1px 2px,
+    #ccc 2px 3px,
+    transparent 3px 4px
+  );
+  background-color: wheat;
+  // background-image: url(https://api.paugram.com/wallpaper?source=gt);
   // background-color: red;
   background-position: center;
   background-attachment: fixed;
@@ -163,8 +170,8 @@ body {
   @media screen and (max-width: 1080px) {
     width: $mobile;
   }
-    @media screen and (max-width: $mobile) {
-    width: 100vw;
+  @media screen and (max-width: $mobile) {
+    width: 100%;
   }
 }
 #background {

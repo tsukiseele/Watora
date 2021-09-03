@@ -3,7 +3,7 @@
   TheBanner(
     v-if="archive",
     :title="archive.title",
-    :cover="archive.cover.src",
+    :cover="archive.cover.url",
     :subtitle="header.subtitle",
     :disableTyping="false"
   )
@@ -58,9 +58,8 @@ export default {
 }
 
 .archive {
-  margin: 0 .5rem;
+  margin: 0 0.5rem;
   // box-shadow: var(--shadow);
-
 }
 
 .markdown,

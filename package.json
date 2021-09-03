@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=dev BASE_URL=http://localhost/ nuxt",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=prod SERVER_PORT=3000 BASE_URL=https://www.tsukiseele.com/ nuxt start ",
+    "start": "cross-env NODE_ENV=prod BASE_URL=http://localhost/ nuxt start ",
     "analyze": "nuxt build --analyze",
     "generate": "nuxt generate"
   },

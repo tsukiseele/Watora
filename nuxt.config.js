@@ -1,7 +1,7 @@
 export default {
   server: {
     host: process.env.BASE_HOST || "localhost",
-    port: process.env.BASE_PORT || 3000
+    port: process.env.BASE_PORT || 80
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -29,7 +29,7 @@ export default {
         rel: "icon",
         type: "image/x-icon",
         href: "/favicon.ico"
-      },
+      }
       // FontAwesome图标库
       /*
       {
