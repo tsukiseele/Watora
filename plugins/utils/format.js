@@ -1,33 +1,75 @@
+const lineReg = new RegExp(".+", "gm");///.+/gm;
+const imgReg = new RegExp(
+  "\\[(.*?)\\].*?(https?:\\/\\/.*?.(?:jpg|jpeg|png|gif))",
+  "g"
+); ///^\[(.*?)\].*?(https?:\/\/.*?\.(?:jpg|jpeg|png|gif))/g; // 匹配文章封面
 /**
- * 格式化文章
+ * 将文本行转换为列表
+ * @param {String} post
+ * @returns {Array<String>}
  */
-const regex = /^(.+)?\r\n\s*(.+)?\r\n/; // 匹配第一个段落的内容
-const coverRegex = /^\[(.+)\].*(http.*(?:jpg|jpeg|png|gif))/; // 匹配文章封面
-export const formatPost = post => {
-  const result = { };
-  const desc = regex.exec(post.body);
-  const cover = coverRegex.exec(desc[1]);
-  if (cover && cover.length === 3) {
-    result.cover = {
-      title: cover[1],
-      src: cover[2]
-    };
-    result.description = desc[2];
-  } else {
-    result.cover = {
-      title: "",
-      src: "" //resource.images.placeholder
-    };
-    result.description = desc[1];
+function getPartList(post) {
+  let match;
+  const result = [];
+  while ((match = lineReg.exec(post))) {
+    result.push(match[0]);
   }
-  // console.log(resource.images.placeholder);
-  result.title = post.title;
-  result.content = post.body;
-  result.createAt = post.created_at;
-  result.labels = post.labels;
-  result.category = post.milestone;
-  result.id = post.number;
   return result;
+}
+/**
+ * 获取Markdown文本的图片数据
+ * @param {String} content
+ * @returns {Cover} { title, url }
+ */
+function getImage(content) {
+  const cover = imgReg.exec(content);
+  if (cover && cover.length > 2) {
+    return {
+      title: cover[1],
+      url: cover[2]
+    };
+  }
+  return cover;
+}
+/**
+ * 替换资源链接为 jsDelivr CDN链接
+ * @param {String} post 文章上下文
+ * @param {Array<String>} lines 文章行列表
+ */
+function useCdn(post, lines) {
+  lines.forEach(line => {
+    const image = getImage(line);
+    if (image && image.url) {
+      const cdnUrl = image.url
+        .replace("raw.githubusercontent.com", "cdn.jsdelivr.net/gh")
+        .replace(/\/(main|master)\//g, "/");
+      post.replace(image.url, cdnUrl);
+    }
+  });
+}
+
+/**
+ *
+ */
+export const formatPost = post => {
+  // 获取所有行
+  const lines = getPartList(post.body);
+  // 使用 CDN
+  const content = useCdn(post.body, lines);
+  // 获取封面图 （默认为第一张图片）
+  const cover = getImage(lines[0]) || { title: null, url: null };
+  // 获取描述，有封面使用第二行，没有则使用第一行
+  const description = cover.url ? lines[1] : lines[0];
+  return {
+    content,
+    cover,
+    description,
+    title: post.title,
+    createAt: post.created_at,
+    labels: post.labels,
+    category: post.milestone,
+    id: post.number
+  };
 };
 
 /**
@@ -103,8 +145,8 @@ export const formatPage = (data, type) => {
 /**
  * 日期转换
  */
-export const parseTime = (time, format = '{y}-{m}-{d} {h}:{i}:{s}') => {
-  const date = new Date(time)
+export const parseTime = (time, format = "{y}-{m}-{d} {h}:{i}:{s}") => {
+  const date = new Date(time);
   const formatObj = {
     y: date.getFullYear(),
     m: date.getMonth() + 1,
@@ -112,17 +154,17 @@ export const parseTime = (time, format = '{y}-{m}-{d} {h}:{i}:{s}') => {
     h: date.getHours(),
     i: date.getMinutes(),
     s: date.getSeconds(),
-    a: date.getDay(),
-  }
+    a: date.getDay()
+  };
   const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
-    let value = formatObj[key]
-    if (key === 'a') {
-      return ['日', '一', '二', '三', '四', '五', '六'][value]
+    let value = formatObj[key];
+    if (key === "a") {
+      return ["日", "一", "二", "三", "四", "五", "六"][value];
     }
     if (result.length > 0 && value < 10) {
-      value = '0' + value
+      value = "0" + value;
     }
-    return value || 0
-  })
-  return time_str
-}
+    return value || 0;
+  });
+  return time_str;
+};

@@ -27,7 +27,7 @@
         SPostItem(
           :key="index",
           :title="item.title",
-          :cover="item.cover",
+          :cover="item.cover.url",
           :date="item.createAt",
           :labels="item.labels",
           :description="item.description",
