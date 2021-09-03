@@ -11,6 +11,7 @@ export const state = () => ({
   archives: [],
   archive: {},
   labels: [],
+  categorys: [],
   header: {
     title: "",
     subtitle: "",
@@ -65,6 +66,9 @@ export const mutations = {
   },
   labels(state, labels) {
     state.labels = labels;
+  },
+  categorys(state, categorys) {
+    state.categorys = categorys;
   }
 };
 
@@ -94,5 +98,8 @@ export const actions = {
   async labels({ commit }) {
     // 如果没有找到就请求
     commit("labels", await this.$service.getLabels());
+  },
+  async categorys({ commit }) {
+    commit("categorys", await this.$service.getMilestones());
   }
 };

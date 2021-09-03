@@ -12,7 +12,9 @@
       .markdown
         client-only
           SMarkdown(:content="archive.content")
-      SComment(:title="this.$route.path")
+
+      client-only
+        SComment(:title="this.$route.path")
 </template>
 
 <script>
@@ -38,14 +40,9 @@ export default {
         isHide: true,
       };
     },
-
-    /*
-    archive() {
-      return this.$store.state.archive || {};
-    }*/
   },
   methods: {},
-  async fetch({ store, params }) {
+  async asyncData({ store, params }) {
     const id = parseInt(params.id);
     await store.dispatch("archive", { id });
   },

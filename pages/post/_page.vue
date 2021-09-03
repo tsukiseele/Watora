@@ -10,32 +10,29 @@
     :cover="$src.images.backgrounds[7]"
   )
   main#main
-    .aside-wrap(
-      :class="{ down: !isMobile && /*scroll.change < 0 && */ scroll.pos > bannerHeight() }"
-    )
-      TheInfoCard(
-        :icon="res.icon",
-        :class="asideClasses",
-        :style="asideStyles"
-      )
+    .aside-wrap
+      TheInfoCard(:icon="res.icon")
       .sticky
         SLabelClouds.card(:labels="labels")
-        TheArchives(:archives="arch")
+        TheCategory(:categorys="categorys")
     .post
       .error(v-if="error") {{ error }}
-      .post-item-wrap(v-for="(item, index) in archives")
+      .post-item-wrap(
+        v-for="(item, index) in archives",
+        :key="index",
+        :data-aos="index % 2 == 0 ? 'fade-left' : 'fade-right'",
+        :data-aos-once="isAosOnce"
+      )
         SPostItem(
-          :key="index",
           :title="item.title",
           :cover="item.cover.url",
           :date="item.createAt",
           :labels="item.labels",
           :description="item.description",
           :to="`/archives/${item.id || ''}`",
-          :placeholder="res.placeholder",
-          :data-aos="index % 2 == 0 ? 'fade-left' : 'fade-right'",
-          :data-aos-once="isAosOnce"
+          :placeholder="res.placeholder"
         )
+
       SPagination(
         :current="page",
         @change="onChange",
@@ -58,10 +55,6 @@ export default {
     isLoading: false,
     itemActive: null,
     isAosOnce: true,
-    // 侧栏
-    asideStyles: {},
-    asideClasses: {},
-    asidePos: null,
   }),
 
   watch: {
@@ -87,7 +80,7 @@ export default {
     },*/,
   },
   computed: {
-    ...mapState(["page", "scroll", "archives", "labels"]),
+    ...mapState(["page", "scroll", "archives", "labels", "categorys"]),
     isMobile() {
       return this.$store.getters.isMobile;
     },
@@ -100,6 +93,7 @@ export default {
       };
     },
   },
+
   methods: {
     async onChange(page) {
       this.$router.push({ params: { page } });
@@ -121,6 +115,7 @@ export default {
         count: 10,
       }),
       store.dispatch("labels"),
+      store.dispatch("categorys"),
     ]);
   },
 };

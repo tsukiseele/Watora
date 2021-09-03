@@ -68,7 +68,10 @@ export const formatPost = ({
   // 获取所有行
   const lines = getPartList(content);
   // 获取封面图 （默认为第一张图片）
-  const cover = images[0] || { title: null, url: null };
+  const cover = images[0] || {
+    title: "",
+    url: "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/icon/icon.png"
+  };
   // 获取描述，查找首个非图片行
   const description = lines.find(line => !getImages(line).length);
   //

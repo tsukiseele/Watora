@@ -1,8 +1,9 @@
 export default {
   server: {
-    host: process.env.BASE_HOST || "localhost",
+    host: process.env.BASE_HOST || "0.0.0.0",
     port: process.env.BASE_PORT || 80
   },
+  // target: "static",
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "Watora - TsukiSeele的个人小站",
@@ -73,6 +74,8 @@ export default {
     "~/plugins/utils/ascii.client.js",
     "~/plugins/libs/lib-vue-lazyload.client.js",
     "~/plugins/libs/lib-vuex-persistedstate.client.js",
+
+    "~/plugins/utils/marked.client.js",
     "~/plugins/libs/lib-aos.client.js",
     "~/plugins/libs/lib-live2d.client.js",
     "~/plugins/libs/lib-aplayer.client.js",
