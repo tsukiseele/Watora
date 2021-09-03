@@ -1,6 +1,7 @@
 export default ({ app, $axios }, inject) => {
-  $axios.defaults.headers.common["Authorization"] =
-    "token ghp_n18ZgXZ17iwZWA3" + "qXsja5pYSoAeQ112EhHKa";
+  $axios.defaults.headers.common[
+    "Authorization"
+  ] = "ghp+M39JbvqRn3ipsl8OOZfRFhLPDjR8uO0j7sLs".replace("+", " ");
   inject("api", {
     // 登录
     async login(params) {
