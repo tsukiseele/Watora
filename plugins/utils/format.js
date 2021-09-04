@@ -40,16 +40,18 @@ function getImages(content) {
  * @param {String} post 文章上下文
  * @param {Array<Image>} images 图片
  */
-function useCdn(content, images) {
+function initContent(content) {
+  const images = getImages(content);
   images.forEach(image => {
     if (image && image.url) {
       const cdnUrl = image.url
         .replace("raw.githubusercontent.com", "cdn.jsdelivr.net/gh")
         .replace(/\/(main|master)\//g, "/");
-      content.replace(image.url, cdnUrl);
+      content = content.replace(image.url, cdnUrl);
+      image.url = cdnUrl;
     }
   });
-  return content;
+  return { content, images };
 }
 /**
  *
@@ -62,19 +64,17 @@ export const formatPost = ({
   milestone: category,
   number: id
 }) => {
-  const images = getImages(body);
   // 使用 CDN
-  const content = useCdn(body, images);
-  // 获取所有行
-  const lines = getPartList(content);
+  const { content, images } = initContent(body);
   // 获取封面图 （默认为第一张图片）
   const cover = images[0] || {
     title: "",
     url: "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/icon/icon.png"
   };
   // 获取描述，查找首个非图片行
-  const description = lines.find(line => !getImages(line).length);
-  //
+  const description = getPartList(content).find(
+    line => !getImages(line).length
+  );
   return {
     content,
     cover,
