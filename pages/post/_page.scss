@@ -17,9 +17,9 @@
   flex: 1;
   margin: 0 0.5rem 0 0;
   .sticky {
-    top: calc(var(--nav-height) + 1rem);
+    top: var(--nav-height);
     position: sticky;
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 0;
   }
 }
 @media screen and (max-width: $mobile) {

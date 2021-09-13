@@ -11,8 +11,15 @@ export default {
       default: null,
     },
   },
-  data: () => ({}),
+  data: () => ({
+    navMenu: []
+  }),
   created() {},
+  watch: {
+    markdown(newVal) {
+      this.titleNav();
+    }
+  },
   computed: {
     markdown() {
       try {
@@ -23,8 +30,6 @@ export default {
       return null;
     },
   },
-  methods: {},
-
   created() {
     /*
     if (this.$isNight()) {
@@ -35,7 +40,9 @@ export default {
       require("highlight.js/styles/stackoverflow-light.css");
     }*/
   },
-  mounted() {},
+  mounted() {
+    // this.titleNav()
+  },
 };
 </script>
 
@@ -66,10 +73,33 @@ export default {
   }
 }
 .markdown-preview {
+  // display: flex;
+  overflow-y: visible;
   background-color: var(--card);
+  position: relative;
+  // align-items: stretch;
 }
 .markdown-content {
+  flex: 1;
   overflow: hidden;
   padding: 0 0.5rem;
+}
+.aside {
+  position: relative;
+  width: 200px;
+  right: 0;
+  // align-self: stretch;
+}
+.aside .nav-menu {
+  
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: flex-start;
+
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    padding-left: .5rem;
+  }
 }
 </style>
