@@ -74,15 +74,26 @@ export const mutations = {
 }
 
 export const actions = {
+  /**
+   * 获取与
+   * @param {Context} context 上下文
+   * @param {Object} params 分页参数
+   * @returns {Array<Archive>} 文章列表
+   */
   async archives({ commit, state }, { page, count }) {
     if (state.page === page) return
-    const archives = [];
-    (await this.$service.getArchives(page, count)).forEach(item => {
+    const archives = []
+    ;(await this.$service.getArchives(page, count)).forEach(item => {
       archives.push(formatPost(item))
     })
     commit('page', page)
     commit('archives', archives)
   },
+  /**
+   * 通过id获取文章
+   * @param {Context} context 上下文
+   * @param {Object} id 文章id
+   */
   async archive({ commit, state }, { id }) {
     let archive = null
     // 先从缓存里面找
@@ -92,10 +103,18 @@ export const actions = {
     // 如果没有找到就请求
     commit('archive', archive || formatPost(await this.$service.getArchiveById(id)))
   },
+  /**
+   * 获取标签列表
+   * @param {Context} context 上下文
+   */
   async labels({ commit }) {
     // 如果没有找到就请求
     commit('labels', await this.$service.getLabels())
   },
+  /**
+   * 获取分类列表
+   * @param {Context} context 上下文
+   */
   async categorys({ commit }) {
     commit('categorys', await this.$service.getMilestones())
   }

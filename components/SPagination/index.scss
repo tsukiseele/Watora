@@ -1,5 +1,6 @@
 .pagination-wrap {
   position: relative;
+  user-select: none;
 }
 .pagination-loading {
   position: absolute;
@@ -69,9 +70,6 @@
     margin: 0.3rem;
     border-radius: 4px;
     box-shadow: var(--shadow);
-
-    &:hover {
-    }
   }
   .active {
     border: 2px solid pink;

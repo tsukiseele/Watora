@@ -1,32 +1,23 @@
 <template lang="pug">
-img#back-top(
-  v-if="$mobile",
-  ref="back",
-  :src="img",
-  :class="{ hide: scroll.pos < 500 }",
-  @click="handleBackTop()",
-  draggable="false",
-  oncontextmenu="return false"
-)
+img#back-top(v-if='!isMobile', ref='back', :src='img', :class='{ hide: scroll.pos < 500 }', @click='handleBackTop()', draggable='false', oncontextmenu='return false')
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 export default {
   data: () => ({
-    img:
-      "https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/assets/back-top.png",
+    img: 'https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/assets/back-top.png',
   }),
   computed: {
-    scroll() {
-      return this.$store.getters.scroll;
-    },
+    ...mapState(['scroll']),
+    ...mapGetters(['isMobile']),
   },
   methods: {
     handleBackTop() {
-      document.getElementById("app").scrollIntoView();
+      document.getElementById('app').scrollIntoView()
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

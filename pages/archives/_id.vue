@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -27,7 +27,8 @@ export default {
     },
   }),
   computed: {
-    ...mapState(['isMobile', 'archive']),
+    ...mapState(['archive']),
+    ...mapGetters(['isMobile']),
     header() {
       return {
         title: this.archive ? this.archive.title : '无题',
@@ -39,7 +40,7 @@ export default {
   },
   methods: {
     onNavClick(item) {
-      const target = document.getElementById(item.title.replace(" ", "-").toLowerCase());
+      const target = document.getElementById(item.title.replace(" ", "-").toString().toLowerCase());
       target && target.scrollIntoView({ behavior: 'smooth' })
     },
   },

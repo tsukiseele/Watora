@@ -71,7 +71,6 @@
           width: 100%;
         }
         &:hover::after {
-          
           // content: '#';
           // color: black;
         }
@@ -110,7 +109,7 @@
   @media screen and (max-width: $mobile) {
     height: 33vh;
   }
-  /* 遮罩层*/
+  /* 遮罩层 */
   &::after {
     content: '';
     position: absolute;

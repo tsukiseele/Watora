@@ -22,20 +22,11 @@ export default {
   fetch() {
     this.$store.commit("header", { title: "『友链』" });
   },
-  async asyncData({ app }) {
-    let links = [];
-    try {
-      const res = await app.$api.getAllLink();
-      if (res.ok) {
-        links = res.data;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    return {
-      links
-    };
-  }
+   async fetch({ store, params }) {
+    await Promise.all([
+      store.dispatch("categorys"),
+    ]);
+  },
 };
 </script>
 

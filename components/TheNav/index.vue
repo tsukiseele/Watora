@@ -7,7 +7,7 @@
     .nav-title(@click="$router.push('/')") {{ title }}
     .nav-spacer
     //- , :class="{ 'menu-dark': scroll.pos > 100 }"
-    ul.nav-menu(v-show="isMobile === false")
+    ul.nav-menu(v-if="!isMobile")
       li(v-for="(lk, i) in links", :key="i", @click="$router.push(lk.to)")
         i.material-icons {{ lk.icon }}
         .menu-title {{ lk.name }}

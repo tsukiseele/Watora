@@ -1,7 +1,7 @@
 export default {
   // https://github.com/tsukiseele/blog.git
   server: {
-    host: process.env.BASE_HOST || '0.0.0.0',
+    host: process.env.BASE_HOST || 'localhost',
     port: process.env.BASE_PORT || 80
   },
   // target: "static",
