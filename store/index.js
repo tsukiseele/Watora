@@ -90,7 +90,7 @@ export const actions = {
       archive = state.archives.find(item => Number(item.id) === id)
     }
     // 如果没有找到就请求
-    commit('archive', (archive = archive || formatPost(await this.$service.getArchiveById(id))))
+    commit('archive', archive || formatPost(await this.$service.getArchiveById(id)))
   },
   async labels({ commit }) {
     // 如果没有找到就请求

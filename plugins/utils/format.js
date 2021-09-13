@@ -62,8 +62,8 @@ export const formatPost = ({ body, title, created_at: createAt, labels, mileston
   // 获取描述，查找首个非图片行
   const description = getPartList(markdown).find(line => !getImages(line).length)
   // 生成导航菜单
-  const menu = getTitles(markdown)
-  return { markdown, cover, description, title, createAt, labels, category, id, menu }
+  const nav = getTitles(markdown)
+  return { markdown, cover, description, title, createAt, labels, category, id, nav }
 }
 /**
  *

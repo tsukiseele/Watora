@@ -7,9 +7,10 @@
         .markdown
           client-only
             SMarkdown(:content='archive.markdown')
-        .aside(v-if="archive.menu && archive.menu.length > 0")
-          ul.aside-menu
-            li.aside-menu-item(v-for='item in archive.menu') {{ item.level + " - " + item.title }}
+        .aside(v-if="!isMobile && archive.nav && archive.nav.length > 0")
+          ul.aside-nav
+            li.aside-nav-item(v-for='(item, i) in archive.nav' :key="i" :class='"h" + item.level' ) 
+              span.aside-nav-text(@click="onNavClick(item)") {{  item.title }}
       client-only
         SComment(:title='this.$route.path')
 </template>
@@ -26,7 +27,7 @@ export default {
     },
   }),
   computed: {
-    ...mapState(['archive']),
+    ...mapState(['isMobile', 'archive']),
     header() {
       return {
         title: this.archive ? this.archive.title : '无题',
@@ -37,8 +38,9 @@ export default {
     },
   },
   methods: {
-    onNavClick(target) {
-      document.getElementById(target.title).scrollIntoView({ behavior: 'smooth' })
+    onNavClick(item) {
+      const target = document.getElementById(item.title.replace(" ", "-").toLowerCase());
+      target && target.scrollIntoView({ behavior: 'smooth' })
     },
   },
   async fetch({ store, params }) {
