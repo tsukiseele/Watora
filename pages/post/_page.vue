@@ -95,16 +95,7 @@ export default {
   methods: {
     async onChange(page) {
       this.$router.push({ params: { page } })
-    },
-    bannerHeight() {
-      if (process.client) {
-        const banner = document.getElementById('banner')
-        if (banner) {
-          return banner.offsetHeight
-        }
-        return NaN
-      }
-    },
+    }
   },
   async fetch({ store, params }) {
     await Promise.all([

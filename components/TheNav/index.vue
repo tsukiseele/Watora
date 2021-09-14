@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex"
 export default {
   data: () => ({
     title: "雫『Watora』",
@@ -57,12 +58,8 @@ export default {
     ],
   }),
   computed: {
-    scroll() {
-      return this.$store.state.scroll;
-    },
-    isMobile() {
-      return this.$store.getters.isMobile;
-    },
+    ...mapState(['scroll']),
+    ...mapGetters(['isMobile'])
   },
 };
 </script>

@@ -1,16 +1,15 @@
 <template lang="pug">
 #container
-  TheBanner(v-if='archive', :title='archive.title', :cover='archive.cover.url', :subtitle='header.subtitle', :disableTyping='false')
+  TheBanner(v-if='archive', :title='header.title', :cover='header.url', :subtitle='header.subtitle', :disableTyping='false')
   main#main
     .archive
       .content
         .markdown
           client-only
-            SMarkdown(:content='archive.markdown')
-        .aside(v-if="!isMobile && archive.nav && archive.nav.length > 0")
-          ul.aside-nav
-            li.aside-nav-item(v-for='(item, i) in archive.nav' :key="i" :class='"h" + item.level' ) 
-              span.aside-nav-text(@click="onNavClick(item)") {{  item.title }}
+            SMarkdown(:content='archive.markdown', @activeChange='onMarkdownScroll')
+        .aside(v-if='!isMobile')
+          .aside-view
+            STitleNav(:nav='archive.nav' :activeIndex="activeIndex")
       client-only
         SComment(:title='this.$route.path')
 </template>
@@ -20,11 +19,7 @@ import { mapState, mapGetters } from 'vuex'
 
 export default {
   data: () => ({
-    markdown: {
-      toolbars: {
-        fullscreen: false,
-      },
-    },
+    activeIndex: null
   }),
   computed: {
     ...mapState(['archive']),
@@ -32,23 +27,22 @@ export default {
     header() {
       return {
         title: this.archive ? this.archive.title : '无题',
-        subtitle: this.archive ? this.archive.description : '无题',
+        subtitle: this.archive ? this.archive.description : '',
+        cover: this.archive ? this.archive.cover.url : null,
         isHideSubtitle: true,
         isHide: true,
       }
     },
   },
   methods: {
-    onNavClick(item) {
-      const target = document.getElementById(item.title.replace(" ", "-").toString().toLowerCase());
-      target && target.scrollIntoView({ behavior: 'smooth' })
+    onMarkdownScroll({ index, item }) {
+      this.activeIndex = index
     },
   },
   async fetch({ store, params }) {
     const id = parseInt(params.id)
     await store.dispatch('archive', { id })
-  },
-  mounted() {},
+  }
 }
 </script>
 

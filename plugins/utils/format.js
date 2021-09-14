@@ -73,9 +73,11 @@ export const formatPost = ({ body, title, created_at: createAt, labels, mileston
 function getTitles(markdown) {
   let match = null
   const menu = []
+  let index = 0
   while ((match = regTitles.exec(markdown))) {
     if (match.length > 2) {
-      menu.push({ level: match[1].length, title: match[2] })
+      menu.push({ level: match[1].length, id: `md-title${index ? `-${index}` : ''}`, title: match[2] })
+      index++
     }
   }
   return menu

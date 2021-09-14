@@ -1,18 +1,9 @@
 <template lang="pug">
 #app
-  //- (:style="{ 'background-image': background }")
   //- #background(:style="{ 'background-image': background }")
   TheNav
-  //- TheHeader(
-  //-   :title="header.title",
-  //-   :subtitle="header.subtitle",
-  //-   :isFull="header.isFull",
-  //-   :isHide="header.isHide",
-  //-   :isHideSubtitle="header.isHideSubtitle"
-  //- )
   main
     Nuxt
-
   //- 页脚
   TheFooter
   //- 播放器
@@ -108,7 +99,7 @@ export default {
     },
     handleResize() {
       if (document) {
-        this.windowWidth = document.body.clientWidth;
+        this.windowWidth = document.documentElement.clientWidth;
       }
     },
     // 夜晚改变主题
@@ -137,14 +128,21 @@ export default {
 
 <style lang="scss">
 body {
+  /*
   background-image: repeating-linear-gradient(
     45deg,
-    #ccc 1px,
-    transparent 1px 2px,
-    #ccc 2px 3px,
-    transparent 3px 4px
+    #ccc 2px,
+    transparent 2px 4px,
+    #ccc 4px 6px,
+    transparent 6px 8px
+  );*/
+  background-image: repeating-linear-gradient(
+    45deg,
+    #ccc 16px,
+    transparent 16px 32px,
+    #ccc 32px 48px,
   );
-  background-color: wheat;
+  background-color: #8491c3;//#ffec47;
   // background-image: url(https://api.paugram.com/wallpaper?source=gt);
   // background-color: red;
   background-position: center;

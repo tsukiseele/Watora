@@ -1,4 +1,5 @@
 export default ({ app, $axios }, inject) => {
+  $axios.defaults.headers.common['Authorization'] = 'ghp+M39JbvqRn3ipsl8OOZfRFhLPDjR8uO0j7sLs'.replace('+', ' ')
   inject('service', {
     async getArchives(page, count) {
       return await $axios.$get(

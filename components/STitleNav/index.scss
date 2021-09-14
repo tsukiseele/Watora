@@ -1,0 +1,70 @@
+.title-nav-view {
+  position: relative;
+  max-height: 67vh;
+  overflow-x: hidden;
+  margin-top: 1rem;
+  // padding-left: 1rem;
+}
+.title-nav {
+  font-size: .9rem;
+  font-family: "Microsoft YaHei";
+  .h1 + .h2,
+  .h2 + .h3,
+  .h3 + .h4,
+  .h4 + .h5,
+  .h5 + .h6 {
+    margin-left: 1rem;
+  }
+  .title-nav-item {
+    display: block;
+    user-select: none;
+
+    cursor: pointer;
+    &.active .title-nav-text {
+      font-weight: bold;
+    }
+    &:hover {
+      .title-nav-text::before {
+        width: 100%;
+      }
+      .title-nav-text::after {
+        // content: '#';
+        // color: black;
+      }
+    }
+    .title-nav-text {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      padding-left: 1rem;
+      color: teal;
+      cursor: pointer;
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 0.67rem;
+        border-left: 1px solid teal;
+        border-bottom: 1px solid teal;
+        vertical-align: top;
+        transition: 0.2s ease;
+        font-size: 1.5rem;
+        color: teal;
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: teal;
+        transition: 0.2s ease;
+      }
+    }
+  }
+}

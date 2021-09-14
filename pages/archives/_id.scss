@@ -7,7 +7,6 @@
 #main {
   margin-top: 0rem;
 }
-
 .archive {
   margin: 0 0.5rem;
   // box-shadow: var(--shadow);
@@ -19,64 +18,11 @@
   flex: 1;
   overflow: hidden;
 }
-
 .aside {
   position: sticky;
   top: var(--nav-height);
   flex: 0 0 200px;
   align-self: flex-start;
-  padding: 1rem 1rem;
-  .aside-nav {
-    .h1 + .h2,
-    .h2 + .h3,
-    .h3 + .h4,
-    .h4 + .h5,
-    .h5 + .h6 {
-      margin-left: 1rem;
-    }
-    .aside-nav-item {
-      user-select: none;
-      .aside-nav-text {
-        position: relative;
-        display: inline-block;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        max-width: 200px;
-        cursor: pointer;
-        padding-left: 1rem;
-        color: teal;
-        &::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          height: 100%;
-          width: 2px;
-          background-color: teal;
-          transition: 0.2s ease;
-          font-size: 1.5rem;
-          color: teal;
-        }
-        &::before {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background-color: teal;
-          transition: 0.2s ease;
-        }
-        &:hover::before {
-          width: 100%;
-        }
-        &:hover::after {
-          // content: '#';
-          // color: black;
-        }
-      }
-    }
-  }
 }
 .markdown,
 .comments,
