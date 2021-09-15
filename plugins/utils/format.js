@@ -33,7 +33,7 @@ function getImages(markdown) {
 }
 /**
  * 替换资源链接为 jsDelivr CDN链接
- * @param {String} markdown 
+ * @param {String} markdown
  * @return {String, Array<Image>} { markdown, images[{ title, url }, ...] }
  */
 function initContent(markdown) {
@@ -45,8 +45,10 @@ function initContent(markdown) {
       image.url = cdnUrl
     }
   })
-  
   return { markdown, images }
+}
+export const formatGallery = ({ body }) => {
+  return initContent(body).images
 }
 /**
  * @param {Post} post 响应body

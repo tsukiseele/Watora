@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  TheBanner
   
 </template>
 
@@ -15,5 +15,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import './_id.scss';
 </style>

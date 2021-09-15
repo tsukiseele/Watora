@@ -12,8 +12,12 @@
         :class='[cardAnimationClass, { __err__: v._error }]',
         :style='{ padding: (isMobile ? mobileGap : gap) / 2 + "px", width: isMobile ? "" : colWidth + "px" }'
       )
-        a.img-inner-box(:data-index='i', @click='$emit("itemClick", { value: v, index: i })')
-          a.img-wraper(v-if='v[srcKey]', @click='$emit("itemCoverClick", { value: v, index: i })', :style='{ width: imgWidth_c + "px", height: v._height ? v._height + "px" : false }')
+        .img-inner-box(@click='$emit("itemClick", {v, i})' :data-index='i')
+          .img-wraper(
+            v-if='v[srcKey]',
+            @click='$emit("itemCoverClick", {v, i})'
+            :style='{ width: imgWidth_c + "px", height: v._height ? v._height + "px" : false }'
+          )
             img(:src='v[srcKey]')
           slot(:index='i', :value='v')
       .over(v-if='over', ref='over')
@@ -23,7 +27,7 @@
 <script>
 export default {
   /**
-   * Event:
+   * Event: 
    * @itemClick Item 点击事件
    * @ItemCoverClick Item 封面点击事件
    */

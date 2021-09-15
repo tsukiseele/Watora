@@ -1,17 +1,18 @@
 <template lang="pug">
-#app
-  //- #background(:style="{ 'background-image': background }")
-  TheNav
-  main
-    Nuxt
-  //- 页脚
-  TheFooter
-  //- 播放器
-  //- TheAPlayer(:musics="musics")
-  //- Live2d，仅PC端
-  //- TheLive2d(v-if="!isMobile", ref="live2d")
-  //- 返回顶部
-  TheBackTop
+#back
+  #app
+    //- #background(:style="{ 'background-image': background }")
+    TheNav
+    main
+      Nuxt
+    //- 页脚
+    TheFooter
+    //- 播放器
+    //- TheAPlayer(:musics="musics")
+    //- Live2d，仅PC端
+    //- TheLive2d(v-if="!isMobile", ref="live2d")
+    //- 返回顶部
+    TheBackTop
 </template>
 
 <script>
@@ -26,25 +27,25 @@ export default {
       // 判断客户端，防止重复渲染；
       if (process.client) {
         // return "linear-gradient(45deg, pink 20%, hotpink 20% 40%, pink 40% 60%, hotpink 60% 80%, pink 80%);"
-        return `url(${this.$static}/bg/${this.getRandomNumber(1, 20)}.webp)`;
+        return `url(${this.$static}/bg/${this.getRandomNumber(1, 20)}.webp)`
       }
     },
     isMobile() {
-      return this.$store.getters.isMobile;
+      return this.$store.getters.isMobile
     },
     header() {
-      return this.$store.state.header;
+      return this.$store.state.header
     },
     live2dText() {
-      return this.$store.state.live2dText;
+      return this.$store.state.live2dText
     },
   },
   watch: {
     live2dText(newVal) {
-      if (this.$refs.live2d) this.$refs.live2d.showMessage(newVal);
+      if (this.$refs.live2d) this.$refs.live2d.showMessage(newVal)
     },
     windowWidth(newVal) {
-      this.$store.commit("clientWidth", newVal);
+      this.$store.commit('clientWidth', newVal)
     },
   },
   methods: {
@@ -53,21 +54,21 @@ export default {
      */
     async getMusicList(url) {
       try {
-        let result = await this.$axios.$get(url);
+        let result = await this.$axios.$get(url)
         if (result.code == 200) {
-          const musics = [];
+          const musics = []
           for (const music of result.playlist.tracks) {
             musics.push({
               name: music.name,
               artist: music.ar[0].name,
               cover: music.al.picUrl,
               url: `https://music.163.com/song/media/outer/url?id=${music.id}.mp3`,
-            });
+            })
           }
-          return musics;
+          return musics
         }
       } catch (e) {}
-      return undefined;
+      return undefined
     },
     async initMusicList() {
       /** 歌曲API列表 */
@@ -75,31 +76,28 @@ export default {
       const apis = [
         // `http://www.hjmin.com/playlist/detail?id=${this.playlistId}`,
         `https://api.imjad.cn/cloudmusic/?type=playlist&id=${this.playlistId}`,
-      ];
+      ]
       for (const api of apis) {
-        const result = await this.getMusicList(api);
+        const result = await this.getMusicList(api)
         if (result) {
-          return (this.musics = result);
+          return (this.musics = result)
         }
       }
     },
     getRandomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+      return Math.floor(Math.random() * (max - min + 1)) + min
     },
     handleScroll() {
-      const newPos =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
-      const scroll = this.$store.getters.scroll;
-      this.$store.commit("scroll", {
+      const newPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      const scroll = this.$store.getters.scroll
+      this.$store.commit('scroll', {
         pos: newPos,
         change: scroll && scroll.pos ? newPos - scroll.pos : 0,
-      });
+      })
     },
     handleResize() {
       if (document) {
-        this.windowWidth = document.documentElement.clientWidth;
+        this.windowWidth = document.documentElement.clientWidth
       }
     },
     // 夜晚改变主题
@@ -110,24 +108,40 @@ export default {
     },
   },
   beforeMount() {
-    this.changeTheme();
+    this.changeTheme()
   },
   mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
+    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
 
     // this.initMusicList();
   },
   destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
-    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleResize)
   },
-};
+}
 </script>
 
 <style lang="scss">
-body {
+#back {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.5) 1rem, transparent 1rem 2rem, rgba(255, 255, 255, 0.5) 2rem 3rem);
+    background-color: #8491c3; //#ffec47;
+    // background-image: url(https://api.paugram.com/wallpaper?source=gt);
+    // background-color: red;
+    background-position: center;
+    background-attachment: fixed;
+  }
   /*
   background-image: repeating-linear-gradient(
     45deg,
@@ -136,17 +150,6 @@ body {
     #ccc 4px 6px,
     transparent 6px 8px
   );*/
-  background-image: repeating-linear-gradient(
-    45deg,
-    #ccc 16px,
-    transparent 16px 32px,
-    #ccc 32px 48px,
-  );
-  background-color: #8491c3;//#ffec47;
-  // background-image: url(https://api.paugram.com/wallpaper?source=gt);
-  // background-color: red;
-  background-position: center;
-  background-attachment: fixed;
 }
 </style>
 <style lang="scss" scoped>

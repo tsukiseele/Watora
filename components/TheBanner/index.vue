@@ -2,7 +2,7 @@
 #banner(
   ref="banner",
   :class="{ full: isFull, hide: isHide }",
-  :style="{ '--bg': cover ? `url(${cover})` : null }"
+  :style="{ 'background-image': cover ? `url(${cover})` : null }"
 )
   .banner--card(v-show="!isHide")
     .banner--title(@click="scrollToContent()")

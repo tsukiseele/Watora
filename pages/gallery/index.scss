@@ -1,0 +1,18 @@
+#gallery {
+  // min-height: 200vh;
+  .gallery-list {
+  }
+}
+::v-deep {
+  a::before,
+  a::after {
+    display: none;
+  }
+  .vue-waterfall-easy-container {
+    .vue-waterfall-easy-scroll {
+      overflow: hidden;
+      .vue-waterfall-easy {
+      }
+    }
+  }
+}

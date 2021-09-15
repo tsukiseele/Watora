@@ -31,9 +31,10 @@ export default {
         const titles = document.querySelectorAll(".markdown [id^='md-title']")
         if (titles.length === 0) return
         let title, i
-        for (i = 0; i < titles.length; i++)
-          if (titles[i].getBoundingClientRect().top > 0)
-            break
+        for (i = 0; i < titles.length; i++) {
+          const rect = titles[i].getBoundingClientRect()
+          if (rect.top - rect.height > 0) break
+        }
         this.$emit('activeChange', { index: i - 1, item: title })
         clearTimeout(this._timer)
         this._timer = null

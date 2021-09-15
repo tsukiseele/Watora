@@ -12,8 +12,13 @@
         :class='[cardAnimationClass, { __err__: v._error }]',
         :style='{ padding: (isMobile ? mobileGap : gap) / 2 + "px", width: isMobile ? "" : colWidth + "px" }'
       )
-        a.img-inner-box(:data-index='i', @click='$emit("itemClick", { value: v, index: i })')
-          a.img-wraper(v-if='v[srcKey]', @click='$emit("itemCoverClick", { value: v, index: i })', :style='{ width: imgWidth_c + "px", height: v._height ? v._height + "px" : false }')
+        component.img-inner-box(:is='isRouterLink && linkRange == "card" ? "router-link" : "SALink"', :data-index='i', :to='linkRange == "card" ? v[hrefKey] : false')
+          component.img-wraper(
+            v-if='v[srcKey]',
+            :is='isRouterLink && linkRange == "img" ? "router-link" : "SALink"',
+            :to='linkRange == "img" ? v[hrefKey] : false',
+            :style='{ width: imgWidth_c + "px", height: v._height ? v._height + "px" : false }'
+          )
             img(:src='v[srcKey]')
           slot(:index='i', :value='v')
       .over(v-if='over', ref='over')
@@ -22,11 +27,10 @@
 
 <script>
 export default {
-  /**
-   * Event:
-   * @itemClick Item 点击事件
-   * @ItemCoverClick Item 封面点击事件
-   */
+  /*
+  components: {
+    alink
+  },*/
   props: {
     width: {
       // 容器宽度

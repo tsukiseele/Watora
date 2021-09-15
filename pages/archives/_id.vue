@@ -1,15 +1,14 @@
 <template lang="pug">
 #container
-  TheBanner(v-if='archive', :title='header.title', :cover='header.url', :subtitle='header.subtitle', :disableTyping='false')
+  TheBanner(v-if='archive', :title='header.title', :cover='header.cover', :subtitle='header.subtitle', :disableTyping='false')
   main#main
     .archive
       .content
         .markdown
           client-only
             SMarkdown(:content='archive.markdown', @activeChange='onMarkdownScroll')
-        .aside(v-if='!isMobile')
-          .aside-view
-            STitleNav(:nav='archive.nav' :activeIndex="activeIndex")
+        .aside(v-if='!isMobile && archive.nav && archive.nav.length > 0')
+          STitleNav(:nav='archive.nav' :activeIndex="activeIndex")
       client-only
         SComment(:title='this.$route.path')
 </template>

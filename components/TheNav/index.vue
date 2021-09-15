@@ -41,6 +41,11 @@ export default {
         icon: "home",
       },
       {
+        name: "画廊",
+        to: "/gallery",
+        icon: "collections"
+      },
+      {
         name: "归档",
         to: "/timeline",
         icon: "bookmark",

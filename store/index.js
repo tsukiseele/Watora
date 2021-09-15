@@ -1,4 +1,4 @@
-import { formatPost, formatNavMenu } from '@/plugins/utils/format.js'
+import { formatPost, formatNavMenu, formatGallery } from '@/plugins/utils/format.js'
 
 export const state = () => ({
   page: 0,
@@ -10,6 +10,7 @@ export const state = () => ({
   },
   archives: [],
   archive: {},
+  images: [],
   menu: [],
   labels: [],
   categorys: [],
@@ -70,6 +71,9 @@ export const mutations = {
   },
   categorys(state, categorys) {
     state.categorys = categorys
+  },
+  images(state, images) {
+    state.images = images
   }
 }
 
@@ -102,6 +106,15 @@ export const actions = {
     }
     // 如果没有找到就请求
     commit('archive', archive || formatPost(await this.$service.getArchiveById(id)))
+  },
+  async images({ commit, state }) {
+    let images = state.images || []
+    if (images.length > 0) return
+    ;(await this.$service.getArchives(1, 999)).forEach(item => {
+      images.push(...formatGallery(item))
+    })
+    images = images.slice(0, 20)
+    commit('images', images)
   },
   /**
    * 获取标签列表

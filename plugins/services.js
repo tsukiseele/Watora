@@ -42,6 +42,7 @@ export default ({ app, $axios }, inject) => {
       const url = `${blog}/issues?state=closed&labels=${upperType}`
       const resp = await $axios.$get(url)
       return resp[0]
-    }
+    },
+    
   })
 }
