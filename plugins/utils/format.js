@@ -1,17 +1,45 @@
 const regLines = new RegExp('.+', 'gm')
 const regImages = new RegExp('\\[(.*?)\\].*?(https?:\\/\\/.+?.(?:jpg|jpeg|png|gif).*?)', 'g')
-const regTitles = RegExp('^(#+)\\s+(.+)', 'gm')
+const regTitles = new RegExp('^(#+)\\s+(.+)', 'gm')
+const regBranches = new RegExp('(main|master)\\/', 'g')
+
+const RAW_URL = 'raw.githubusercontent.com'
+const CDN_URL = 'cdn.jsdelivr.net/gh'
+
 /**
- * 将文本行转换为列表
+ * 替换资源链接为 jsDelivr CDN链接
  * @param {String} markdown
+ * @return {String, Array<Image>} { markdown, images[{ title, url }, ...] }
  */
-function getPartList(markdown) {
-  let match
-  const result = []
-  while ((match = regLines.exec(markdown))) {
-    result.push(match[0])
+function initMarkdown(markdown) {
+  const images = getImages(markdown)
+  if (RAW_URL && CDN_URL) {
+    images.forEach(image => {
+      if (image && image.url) {
+        const cdnUrl = image.url.replace(RAW_URL, CDN_URL).replace(regBranches, '')
+        markdown = markdown.replace(image.url, cdnUrl)
+        image.url = cdnUrl
+      }
+    })
   }
-  return result
+  return { markdown, images }
+}
+/**
+ *
+ * @param {String} markdown
+ * @returns
+ */
+function getTitles(markdown) {
+  let match = null
+  const menu = []
+  let index = 0
+  while ((match = regTitles.exec(markdown))) {
+    if (match.length > 2) {
+      menu.push({ level: match[1].length, id: `md-title${index ? `-${index}` : ''}`, title: match[2] })
+      index++
+    }
+  }
+  return menu
 }
 /**
  * 获取Markdown文本的图片数据
@@ -32,57 +60,41 @@ function getImages(markdown) {
   return images
 }
 /**
- * 替换资源链接为 jsDelivr CDN链接
+ * 将文本行转换为列表
  * @param {String} markdown
- * @return {String, Array<Image>} { markdown, images[{ title, url }, ...] }
  */
-function initContent(markdown) {
-  const images = getImages(markdown)
-  images.forEach(image => {
-    if (image && image.url) {
-      const cdnUrl = image.url.replace('raw.githubusercontent.com', 'cdn.jsdelivr.net/gh').replace(/\/(main|master)\//g, '/')
-      markdown = markdown.replace(image.url, cdnUrl)
-      image.url = cdnUrl
-    }
-  })
-  return { markdown, images }
+function getLines(markdown) {
+  let match
+  const result = []
+  while ((match = regLines.exec(markdown))) {
+    result.push(match[0])
+  }
+  return result
 }
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export const formatGallery = ({ body }) => {
-  return initContent(body).images
+  return initMarkdown(body).images
 }
 /**
  * @param {Post} post 响应body
  */
 export const formatPost = ({ body, title, created_at: createAt, labels, milestone: category, number: id }) => {
   // 使用 CDN
-  const { markdown, images } = initContent(body)
+  const { markdown, images } = initMarkdown(body)
   // 获取封面图 （默认为第一张图片）
   const cover = images[0] || {
     title: '',
     url: 'x'
   }
   // 获取描述，查找首个非图片行
-  const description = getPartList(markdown).find(line => !getImages(line).length)
+  const description = getLines(markdown).find(line => !getImages(line).length)
   // 生成导航菜单
   const nav = getTitles(markdown)
   return { markdown, cover, description, title, createAt, labels, category, id, nav }
-}
-/**
- *
- * @param {String} markdown
- * @returns
- */
-function getTitles(markdown) {
-  let match = null
-  const menu = []
-  let index = 0
-  while ((match = regTitles.exec(markdown))) {
-    if (match.length > 2) {
-      menu.push({ level: match[1].length, id: `md-title${index ? `-${index}` : ''}`, title: match[2] })
-      index++
-    }
-  }
-  return menu
 }
 /**
  * 格式化分类

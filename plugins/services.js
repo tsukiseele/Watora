@@ -1,10 +1,12 @@
 export default ({ app, $axios }, inject) => {
   $axios.defaults.headers.common['Authorization'] = 'ghp+M39JbvqRn3ipsl8OOZfRFhLPDjR8uO0j7sLs'.replace('+', ' ')
+
+  // $axios.defaults.baseURL = 'https://api.github.com/repos/chanshiyucx/blog'
   inject('service', {
-    async getArchives(page, count) {
-      return await $axios.$get(
+    getArchives({page, count}) {
+      return $axios.$get(
         //`https://api.github.com/repos/tsukiseele/Watora/issues`, //?page=${query.id}&per_page=10
-        `https://api.github.com/repos/chanshiyucx/blog/issues`,
+        `/issues`,
         {
           params: {
             page: page,
@@ -14,10 +16,10 @@ export default ({ app, $axios }, inject) => {
         }
       )
     },
-    async getArchiveById(number) {
-      return await $axios.$get(
+    getArchiveById(number) {
+      return $axios.$get(
         // `https://api.github.com/repos/tsukiseele/Watora/issues/${number}`
-        `https://api.github.com/repos/chanshiyucx/blog/issues/${number}`,
+        `/issues/${number}`,
         {
           params: {
             state: 'open'
@@ -25,24 +27,24 @@ export default ({ app, $axios }, inject) => {
         }
       )
     },
-    async getLabels() {
-      return await $axios.$get(
+    getLabels() {
+      return $axios.$get(
         // `https://api.github.com/repos/tsukiseele/Watora/labels`
-        `https://api.github.com/repos/chanshiyucx/blog/labels`
+        `/labels`
       )
     },
-    async getMilestones() {
-      return await $axios.$get(
+    getMilestones() {
+      return $axios.$get(
         // `https://api.github.com/repos/tsukiseele/Watora/milestones``
-        `https://api.github.com/repos/chanshiyucx/blog/milestones`
+        `/milestones`
       )
     },
-    async getPage(type) {
+    getPage(type) {
       const upperType = type.replace(/^\S/, s => s.toUpperCase())
-      const url = `${blog}/issues?state=closed&labels=${upperType}`
-      const resp = await $axios.$get(url)
-      return resp[0]
+      return $axios.$get(`/issues?state=closed&labels=${upperType}`)
     },
-    
+    getInspiration({page, count}) {
+      return $axios.$get(`/issues?state=closed&labels=inspiration&page=${page}&per_page=${count}`)
+    }
   })
 }

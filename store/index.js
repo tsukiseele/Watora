@@ -87,7 +87,7 @@ export const actions = {
   async archives({ commit, state }, { page, count }) {
     if (state.page === page) return
     const archives = []
-    ;(await this.$service.getArchives(page, count)).forEach(item => {
+    ;(await this.$service.getArchives({ page, count })).forEach(item => {
       archives.push(formatPost(item))
     })
     commit('page', page)
@@ -108,9 +108,9 @@ export const actions = {
     commit('archive', archive || formatPost(await this.$service.getArchiveById(id)))
   },
   async images({ commit, state }) {
-    let images = state.images || []
-    if (images.length > 0) return
-    ;(await this.$service.getArchives(1, 999)).forEach(item => {
+    if (state.images.length > 0) return
+    let images = []
+    ;(await this.$service.getArchives({ page: 1, count: 999 })).forEach(item => {
       images.push(...formatGallery(item))
     })
     images = images.slice(0, 20)

@@ -4,7 +4,7 @@ export default {
     host: process.env.BASE_HOST || 'localhost',
     port: process.env.BASE_PORT || 80
   },
-  // target: "static",
+  ssr: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Watora - TsukiSeele的个人小站',
@@ -31,30 +31,13 @@ export default {
         type: 'image/x-icon',
         href: '/favicon.ico'
       }
-      // FontAwesome图标库
-      /*
-      {
-        rel: "stylesheet",
-        href:
-          "//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      },*/
-      /*{
-        rel: "stylesheet",
-        href: "//fonts.googleapis.com/icon?family=Material+Icons"
-      }*/
     ]
   },
-  env: {
-    SERVER_HOST: process.env.SERVER_HOST || 'localhost',
-    SERVER_PORT: process.env.SERVER_PORT || 80,
-    BASE_URL: process.env.BASE_URL || 'http://localhost:10737'
-  },
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost',
+    baseURL: 'https://api.github.com/repos/chanshiyucx/blog',
     retry: {
       retries: 3
-    },
-    credentials: true
+    }
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['ress', '~/styles/main.scss'],
