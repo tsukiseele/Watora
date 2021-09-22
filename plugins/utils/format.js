@@ -112,7 +112,7 @@ export const formatCategory = category => {
  * 格式化灵感
  */
 export const formatInspiration = inspiration => {
-  inspiration.forEach(o => (o.date = parseTime(o.created_at, '{y}年{m}月{d}日')))
+  inspiration.forEach(o => (o.date = new Date(o.created_at).format('y年m月d日')))
   return inspiration
 }
 

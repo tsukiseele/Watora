@@ -1,4 +1,4 @@
-import { formatPost, formatNavMenu, formatGallery } from '@/plugins/utils/format.js'
+import { formatPost, formatNavMenu, formatGallery, formatPage } from '@/plugins/utils/format.js'
 
 export const state = () => ({
   page: 0,
@@ -11,6 +11,8 @@ export const state = () => ({
   archives: [],
   archive: {},
   images: [],
+  inspiration: [],
+  about: {},
   menu: [],
   labels: [],
   categorys: [],
@@ -74,6 +76,12 @@ export const mutations = {
   },
   images(state, images) {
     state.images = images
+  },
+  inspiration(state, inspiration) {
+    state.inspiration = inspiration
+  },
+  about(state, about) {
+    state.about = about
   }
 }
 
@@ -107,6 +115,11 @@ export const actions = {
     // 如果没有找到就请求
     commit('archive', archive || formatPost(await this.$service.getArchiveById(id)))
   },
+  /**
+   *
+   * @param {*} param0
+   * @returns
+   */
   async images({ commit, state }) {
     if (state.images.length > 0) return
     let images = []
@@ -130,5 +143,23 @@ export const actions = {
    */
   async categorys({ commit }) {
     commit('categorys', await this.$service.getMilestones())
+  },
+  /**
+   *
+   * @param {*} param0
+   * @param {*} param1
+   */
+  async inspiration({ commit }, { page, count }) {
+    commit('inspiration', formatInspiration(await this.$service.getInspiration({ page, count })))
+  },
+  /**
+   *
+   * @param {*} param0
+   */
+  async about({ commit }) {
+    const about = await this.$service.getPage('about')
+    if (about && about[0]) {
+      commit('about', formatPage(about[0], 'about'))
+    }
   }
 }

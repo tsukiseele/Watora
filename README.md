@@ -8,7 +8,7 @@
 - `vssue` - 以Github Issues作为评论系统
 - `marked.js` - Markdown支持
 - `highlight.js` - 代码高亮
-- `@moefe/aplayer` - 网页播放器
+- `@moefe/vue-aplayer` - 网页播放器
 - `live2d-vue` - Live2d看板娘
 ### 常见问题
 - 如何关闭SSR，部署为静态页面

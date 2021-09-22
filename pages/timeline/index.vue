@@ -1,5 +1,7 @@
 <template lang="pug">
-#container
+#timeline
+  
+//- #container
   main#main
     .timeline
       .timeline-group(v-for='(group, key) in timeline', :key='key')
@@ -20,6 +22,7 @@ export default {
   fetch() {
     this.$store.commit('header', { title: '『时间线』' })
   },
+  /*
   async asyncData({ app }) {
     let archives
     const res = await app.$api.getAllArticles()
@@ -29,7 +32,7 @@ export default {
     return {
       archives,
     }
-  },
+  },*/
   computed: {
 
   },
