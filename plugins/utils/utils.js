@@ -1,9 +1,7 @@
 /**
  * 将Date格式化为指定格式
- * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q)，可以用 1-2 个占位符，
- * 年(y)可以用 1-45 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
- * (new Date()).format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
- * (new Date()).format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+ * new Date().format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+ * new Date().format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
  * @param {String} fmt
  * @returns
  */
@@ -16,7 +14,7 @@ Date.prototype.format = function (fmt = 'yyyy-MM-dd hh:mm:ss') {
     'm+': this.getMinutes(),
     's+': this.getSeconds(),
     'q+': Math.floor((this.getMonth() + 3) / 3),
-    S: this.getMilliseconds()
+    'S+': this.getMilliseconds()
   }
   for (const k in o) {
     const match = new RegExp(k).exec(fmt)
