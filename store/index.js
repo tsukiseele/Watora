@@ -98,6 +98,7 @@ export const actions = {
     ;(await this.$service.getArchives({ page, count })).forEach(item => {
       archives.push(formatPost(item))
     })
+    console.log(archives);
     commit('page', page)
     commit('archives', archives)
   },

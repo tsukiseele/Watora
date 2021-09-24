@@ -18,10 +18,14 @@
   .title-nav-item {
     display: block;
     user-select: none;
-
     cursor: pointer;
     &.active .title-nav-text {
-      font-weight: bold;
+      color: white;
+      padding: 0 1rem;
+      &::before {
+        height: 100%;
+        width: 100%;
+      }
     }
     &:hover {
       .title-nav-text::before {
@@ -42,6 +46,7 @@
       padding-left: 1rem;
       color: teal;
       cursor: pointer;
+      transition: all .3s ease;
       &::after {
         content: '';
         position: absolute;
@@ -64,6 +69,7 @@
         height: 1px;
         background-color: teal;
         transition: 0.2s ease;
+        z-index: -1;
       }
     }
   }

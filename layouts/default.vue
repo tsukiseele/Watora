@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 export default {
   data: () => ({
     playlistId: 6760099512,
@@ -23,21 +24,13 @@ export default {
     windowWidth: 0,
   }),
   computed: {
+    ...mapState(['header', 'live2dText']),
+    ...mapGetters(['isMobile']),
     background() {
       // 判断客户端，防止重复渲染；
       if (process.client) {
-        // return "linear-gradient(45deg, pink 20%, hotpink 20% 40%, pink 40% 60%, hotpink 60% 80%, pink 80%);"
         return `url(${this.$static}/bg/${this.getRandomNumber(1, 20)}.webp)`
       }
-    },
-    isMobile() {
-      return this.$store.getters.isMobile
-    },
-    header() {
-      return this.$store.state.header
-    },
-    live2dText() {
-      return this.$store.state.live2dText
     },
   },
   watch: {

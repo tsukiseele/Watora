@@ -1,7 +1,8 @@
-export default ({ app, $axios }, inject) => {
-  $axios.defaults.headers.common['Authorization'] = 'ghp+M39JbvqRn3ipsl8OOZfRFhLPDjR8uO0j7sLs'.replace('+', ' ')
+import config from '@/plugins/config.js'
 
-  // $axios.defaults.baseURL = 'https://api.github.com/repos/chanshiyucx/blog'
+export default ({ app, $axios }, inject) => {
+  $axios.defaults.headers.common['Authorization'] = config.token.replace('+', '_')
+  $axios.defaults.baseURL = `https://api.github.com/repos/${config.username}/${config.repository}`;
   inject('service', {
     getArchives({ page, count }) {
       return $axios.$get(`/issues`, {

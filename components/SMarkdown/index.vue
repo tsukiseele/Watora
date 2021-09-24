@@ -42,14 +42,6 @@ export default {
     },
   },
   created() {
-    /*
-    if (this.$isNight()) {
-      console.log(this.$isNight());
-      console.log("===================================");
-      require("highlight.js/styles/atom-one-dark.css");
-    } else {
-      require("highlight.js/styles/stackoverflow-light.css");
-    }*/
   },
   mounted() {
     window.addEventListener('scroll', this.getNavPos)
@@ -63,6 +55,9 @@ export default {
 <style lang="scss">
 // @import "highlight.js/styles/atom-one-dark.css";
 @import 'highlight.js/styles/stackoverflow-light.css';
+
+@import './theme.scss';
+
 @import './index.scss';
 /*
 :root[theme="dark"] {
@@ -70,54 +65,6 @@ export default {
 }*/
 </style>
 
-<style lang="scss" scoped>
-::v-deep {
-  img {
-    width: 100%;
-    object-fit: cover;
-  }
-  pre,
-  code {
-    padding: 0.5rem;
-    border-radius: 5px;
-  }
-  .table-wrap {
-    overflow: auto;
-    width: 100%;
-  }
-}
-.markdown-preview {
-  // display: flex;
-  overflow-y: visible;
-  background-color: var(--card);
-  position: relative;
-  // align-items: stretch;
-}
-.markdown-content {
-  flex: 1;
-  overflow: hidden;
-  padding: 0 0.5rem;
-}
-.aside {
-  position: relative;
-  width: 200px;
-  right: 0;
-  // align-self: stretch;
-}
-.aside .nav-menu {
-  flex: 0 0 300px;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  align-items: flex-start;
+<style lang="scss">
 
-  .h1,
-  .h2,
-  .h3,
-  .h4,
-  .h5,
-  .h6 {
-    padding-left: 0.5rem;
-  }
-}
 </style>

@@ -24,6 +24,7 @@
           :date='item.createAt',
           :labels='item.labels',
           :description='item.description',
+          :category='item.category'
           :to='`/archives/${item.id || ""}`',
           :placeholder='res.placeholder',
           :data-aos='index % 2 == 0 ? "fade-left" : "fade-right"',
@@ -61,7 +62,8 @@ export default {
       if (newVal) {
         this.$store.commit('live2dText', `要阅读『${newVal} 』吗?`)
       }
-    } /*
+    }
+    /*
     $route: {
       handler(to, from) {
         if (process.client) {

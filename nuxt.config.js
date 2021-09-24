@@ -34,7 +34,7 @@ export default {
     ]
   },
   axios: {
-    baseURL: 'https://api.github.com/repos/chanshiyucx/blog',
+    // baseURL: 'https://api.github.com/repos/chanshiyucx/blog',
     retry: {
       retries: 3
     }
@@ -49,7 +49,7 @@ export default {
 
   // Plugins to run before rendering pasge: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/api.js',
+    '~/plugins/config.js',
     '~/plugins/inject.js',
     '~/plugins/services.js',
     '~/plugins/utils/utils.js',

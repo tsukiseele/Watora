@@ -26,17 +26,13 @@ renderer.code = function code(_code, infostring, escaped) {
       _code = out
     }
   }
-  if (!lang) {
-    return `
-      <pre class="hljs">
-        <code>${_code}</code>
-        <i id="${id}" class="icon icon-clipboard code-copy"></i>
-      </pre>`
-  }
+  const langClass = this.options.langPrefix + lang
   return `
-    <pre class="hljs ${this.options.langPrefix + lang}">
-      <code class="${this.options.langPrefix + lang}">${_code}</code>
-      <i id="${id}" class="icon icon-clipboard code-copy"></i>
+    <pre class="hljs${lang ? ` ${langClass}` : ''}">
+      <code class="${lang ? `${langClass}` : ''}">${_code}</code>
+      <div class="code-options">
+        <i id="${id}" class="material-icons">content_paste</i>
+      </div>
     </pre>\n`
 }
 
@@ -44,7 +40,7 @@ renderer.table = function(header, body) {
   if (body) body = `<tbody>${body}</tbody>`
   return `<div class="table-wrap">\n<table>\n<thead>\n${header}</thead>\n${body}</table>\n</div>\n`
 }
-renderer.heading = function (text, level, raw, slugger) {
+renderer.heading = function(text, level, raw, slugger) {
   return `<h${level} id="${slugger.slug('md-title')}">\n${raw}\n</h${level}>\n`
 }
 marked.setOptions({

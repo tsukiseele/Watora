@@ -12,7 +12,7 @@
         SChip(:text="label.name", icon="sell")
   .item-category 
     i.category-icon.material-icons bookmark
-    span.category-text {{ category || '未分类' }}
+    span.category-text {{ category ? category.title : '未分类' }}
 </template>
 
 <script>
@@ -37,10 +37,6 @@ export default {
     labels: {
       type: Array,
       default: () => [],
-    },
-    type: {
-      type: String,
-      default: null,
     },
     category: {
       type: Object,
