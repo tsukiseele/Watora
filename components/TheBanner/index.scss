@@ -7,20 +7,14 @@
   width: 100%;
   overflow: hidden;
   transition: all 0.3s ease;
-
-    background-position: center;
-    background-size: cover;
+  background-position: center;
+  background-size: cover;
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     height: 100%;
     width: 100%;
-    background-image:  repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, .1) 1rem,
-    rgba(255, 255, 255, .3) 1rem 2rem,
-    rgba(255, 255, 255, .1) 2rem 3rem
-  );
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 1rem, rgba(255, 255, 255, 0.2) 1rem 2rem, rgba(255, 255, 255, 0.1) 2rem 3rem);
     background-position: center;
     background-size: cover;
     z-index: 0;
@@ -53,9 +47,9 @@
   .banner--title {
     font-size: 2.2rem;
     font-weight: 500;
-    font-family: "Patrick Hand", InfoDisplay;
+    font-family: 'Patrick Hand', InfoDisplay;
     cursor: pointer;
-    text-shadow: --shadow;
+    text-shadow: 3px 3px 0px white;
     span {
       transition: color 0.3s ease;
     }
