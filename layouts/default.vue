@@ -128,8 +128,10 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.5) 1rem, transparent 1rem 2rem, rgba(255, 255, 255, 0.5) 2rem 3rem);
-    background-color: #8491c3; //#ffec47;
+    background-image: url(/bg.webp);
+    background-size: cover;
+    // background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.5) 1rem, transparent 1rem 2rem, rgba(255, 255, 255, 0.5) 2rem 3rem);
+    // background-color: #8491c3; //#ffec47;
     // background-image: url(https://api.paugram.com/wallpaper?source=gt);
     // background-color: red;
     background-position: center;
