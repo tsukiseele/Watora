@@ -1,4 +1,3 @@
-// }
 .markdown-preview {
   // display: flex;
   overflow-y: visible;
@@ -22,13 +21,16 @@
   pre {
     position: relative;
     .code-options {
+      display: inline-block;
       position: absolute;
       top: 0;
       right: 0;
-      padding: 1rem;
+      padding: 0 1rem;
       margin: 0;
+      line-height: 10px;
       i {
         padding: 0;
+        cursor: pointer;
       }
     }
   }
@@ -37,27 +39,3 @@
     width: 100%;
   }
 }
-/*
-.aside {
-  position: relative;
-  width: 200px;
-  right: 0;
-  // align-self: stretch;
-}
-.aside .nav-menu {
-  flex: 0 0 300px;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  align-items: flex-start;
-
-  .h1,
-  .h2,
-  .h3,
-  .h4,
-  .h5,
-  .h6 {
-    padding-left: 0.5rem;
-  }
-}
-*/

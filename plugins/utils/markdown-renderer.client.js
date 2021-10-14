@@ -29,9 +29,9 @@ renderer.code = function code(_code, infostring, escaped) {
   const langClass = this.options.langPrefix + lang
   return `
     <pre class="hljs${lang ? ` ${langClass}` : ''}">
-      <code class="${lang ? `${langClass}` : ''}">${_code}</code>
+      <code class="${lang ? ` ${langClass}` : ''}" id="${id}">${_code}</code>
       <div class="code-options">
-        <i id="${id}" class="material-icons">content_paste</i>
+        <i data-copy="${id}" class="material-icons md-code-copy">content_paste</i>
       </div>
     </pre>\n`
 }

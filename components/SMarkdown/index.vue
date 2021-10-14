@@ -8,11 +8,11 @@ export default {
   props: {
     content: {
       type: String,
-      default: null,
-    },
+      default: null
+    }
   },
   data: () => ({
-    _timer: null,
+    _timer: null
   }),
   computed: {
     markdown() {
@@ -22,7 +22,7 @@ export default {
         console.log(error)
       }
       return null
-    },
+    }
   },
   methods: {
     getNavPos() {
@@ -40,15 +40,26 @@ export default {
         this._timer = null
       }, 200)
     },
+    initCopy() {
+      const copyEls = document.getElementsByClassName('md-code-copy')
+      copyEls.forEach(element => {
+        element.onclick = e => {
+          const codeId = element.getAttribute('data-copy')
+          const codeContent = document.getElementById(codeId).textContent
+          navigator.clipboard.writeText(codeContent)
+        }
+      })
+    }
   },
-  created() {
-  },
+  created() {},
   mounted() {
     window.addEventListener('scroll', this.getNavPos)
+
+    this.initCopy()
   },
   destroyed() {
     window.removeEventListener('scroll', this.getNavPos)
-  },
+  }
 }
 </script>
 
@@ -65,6 +76,4 @@ export default {
 }*/
 </style>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
