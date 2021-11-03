@@ -20,6 +20,12 @@
   }
   pre {
     position: relative;
+    line-height: 0;
+    padding: 1rem;
+    code {
+      line-height: 1.3rem;
+      padding: .5rem 0;
+    }
     .code-options {
       display: inline-block;
       position: absolute;
@@ -28,6 +34,7 @@
       padding: 0 1rem;
       margin: 0;
       line-height: 10px;
+      user-select: none;
       i {
         padding: 0;
         cursor: pointer;
