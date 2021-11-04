@@ -20,16 +20,17 @@
 #### 部署在Glitch（无需服务器及域名）
 由于是服务器端渲染，我们需要将项目部署到Node环境中，
 我们可以使用[Glitch](https://glitch.com/)进行部署。
-缺点是页面长时间无人范围会进入休眠
+缺点是页面长时间无人范围会进入休眠，钞能力可以解决这个问题
 
 #### 部署在Github Pages （无需服务器及域名，无SSR）
 [Github Pages](https://pages.github.com/)
+稳定可靠的部署方案，但是不支持SSR
 
 #### 部署在云服务器（需要服务器及域名）
-```zsh
-# 安装Node
-```
+自行搭建环境，需要有一定的动手能力
 
+
+### 调试与运行
 ```zsh
 # 安装依赖
 # install dependencies

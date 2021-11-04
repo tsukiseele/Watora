@@ -1,6 +1,6 @@
 <template lang="pug">
 #gallery
-  TheBanner(:cover='banner.cover')
+  TheBanner(:title='banner.title', :cover='banner.cover')
   .gallery-list
     client-only
       SWaterfall(:disableScroll='true', :imgsArr='images', srcKey='url', @itemClick='onItemClick')
@@ -11,13 +11,14 @@ import { mapState } from 'vuex'
 export default {
   data: () => ({
     banner: {
+      title: '画廊',
       cover: null,
     },
     imgsArr: [],
   }),
   computed: {
     images() {
-      return [ ...this.$store.state.images ]
+      return [...this.$store.state.images]
     },
   },
   methods: {

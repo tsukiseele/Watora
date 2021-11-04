@@ -47,7 +47,7 @@ export default {
      */
     async getMusicList(url) {
       try {
-        let result = await this.$axios.$get(url)
+        const result = await this.$axios.$get(url)
         if (result.code == 200) {
           const musics = []
           for (const music of result.playlist.tracks) {

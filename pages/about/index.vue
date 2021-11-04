@@ -8,6 +8,7 @@
       i.fa.fa-quote-right
     .description(v-for='(part, i) in about', :key='i')
       .subtitle {{ part.title }}
+      .key {{ i }}
       SMarkdown(:content="part.content")
 </template>
 <script>
@@ -15,7 +16,7 @@ import { mapState } from 'vuex'
 export default {
   data: () => ({
     header: {
-      title: 'ABOUT',
+      title: '关于',
       subtitle: '',
     },
   }),

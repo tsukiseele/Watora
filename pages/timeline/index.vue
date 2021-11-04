@@ -1,6 +1,7 @@
 <template lang="pug">
 #timeline
-  
+  TheBanner(:title='header.title', :subtitle='header.subtitle', :isFull='header.isFull', :isHide='header.isHide', :isHideSubtitle='header.isHideSubtitle')
+  .timeline
 //- #container
   main#main
     .timeline
@@ -16,6 +17,10 @@
 <script>
 export default {
   data: () => ({
+      header: {
+      title: '归档',
+      subtitle: '',
+    },
     archives: [],
     error: null,
   }),
