@@ -15,14 +15,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data: () => ({
-      header: {
+    header: {
       title: '归档',
-      subtitle: '',
+      subtitle: ''
     },
     archives: [],
-    error: null,
+    error: null
   }),
   fetch() {
     this.$store.commit('header', { title: '『时间线』' })
@@ -39,15 +40,17 @@ export default {
     }
   },*/
   computed: {
-
+    ...mapState(['categorys', 'inspiration'])
   },
   mounted() {
-    console.log(this.timeline)
-
+    console.log(this.inspiration)
   },
   async fetch({ store, params }) {
-    await Promise.all([store.dispatch('categorys')])
-  },
+    // const result = await Promise.all([])
+    // store.dispatch('categorys')
+    store.dispatch('inspiration')
+    // console.log(result)
+  }
 }
 </script>
 

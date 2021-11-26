@@ -110,7 +110,7 @@ export const actions = {
     let archive = null
     // 先从缓存里面找
     if (state.archives) {
-      archive = state.archives.find(item => Number(item.id) === id)
+      archive = state.archives.find(item => item.id == id)
     }
     // 如果没有找到就请求
     commit('archive', archive || formatPost(await this.$service.getArchiveById(id)))
