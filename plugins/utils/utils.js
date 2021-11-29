@@ -6,15 +6,16 @@
  * @returns
  */
 Date.prototype.format = function (fmt = 'yyyy-MM-dd hh:mm:ss') {
+  const date = this instanceof Date ? this : new Date(this)
   const o = {
-    'y+': this.getFullYear(),
-    'M+': this.getMonth() + 1,
-    'd+': this.getDate(),
-    'h+': this.getHours(),
-    'm+': this.getMinutes(),
-    's+': this.getSeconds(),
-    'q+': Math.floor((this.getMonth() + 3) / 3),
-    'S+': this.getMilliseconds()
+    'y+': date.getFullYear(),
+    'M+': date.getMonth() + 1,
+    'd+': date.getDate(),
+    'h+': date.getHours(),
+    'm+': date.getMinutes(),
+    's+': date.getSeconds(),
+    'q+': Math.floor((date.getMonth() + 3) / 3),
+    'S+': date.getMilliseconds()
   }
   for (const k in o) {
     const match = new RegExp(k).exec(fmt)
