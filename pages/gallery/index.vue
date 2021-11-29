@@ -3,11 +3,15 @@
   TheBanner(:title='banner.title', :cover='banner.cover')
   .gallery-list
     client-only
-      SWaterfall(:disableScroll='true', :imgsArr='images', srcKey='url', @itemClick='onItemClick')
+      SSimpleWaterfall(:items="images" imageKey="url")
+        template(v-slot="{ index, item }")
+          span {{ item.title }}
+      //- SWaterfall(:disableScroll='true', :imgsArr='images', srcKey='url', @itemClick='onItemClick')
 </template>
 
 <script>
 import { mapState } from 'vuex'
+
 export default {
   data: () => ({
     banner: {
