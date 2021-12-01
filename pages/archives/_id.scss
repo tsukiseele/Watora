@@ -8,7 +8,7 @@
   margin-top: 0rem;
 }
 .archive {
-  margin: 0 0.5rem;
+  margin: 0 2rem;
   // box-shadow: var(--shadow);
 }
 .content {
@@ -115,5 +115,8 @@
   }
   #main {
     // margin-top: -3rem;
+  }
+  .archive {
+    margin: 0 1rem;
   }
 }

@@ -6,7 +6,7 @@ export const state = () => ({
   live2dText: '',
   scroll: {
     pos: 0,
-    change: 0
+    change: 0,
   },
   archives: [],
   archive: {},
@@ -16,13 +16,14 @@ export const state = () => ({
   menu: [],
   labels: [],
   categorys: [],
+  friends: [],
   header: {
     title: '',
     subtitle: '',
     isHideSubtitle: false,
     isFull: false,
-    isHide: false
-  }
+    isHide: false,
+  },
 })
 
 export const getters = {
@@ -43,7 +44,7 @@ export const getters = {
   },
   archives(state) {
     return state.archives
-  }
+  },
 }
 
 export const mutations = {
@@ -82,7 +83,10 @@ export const mutations = {
   },
   about(state, about) {
     state.about = about
-  }
+  },
+  friends(state, friends) {
+    state.friends = friends
+  },
 }
 
 export const actions = {
@@ -153,7 +157,7 @@ export const actions = {
     commit('inspiration', formatInspiration(await this.$service.getInspiration({ page, count })))
   },
   /**
-   *
+   * 获取关于
    * @param {*} param0
    */
   async about({ commit }) {
@@ -161,5 +165,17 @@ export const actions = {
     if (about && about[0]) {
       commit('about', formatPage(about[0], 'about'))
     }
-  }
+  },
+  /**
+   * 获取友链
+   */
+  async friends({ commit }) {
+    const friends = await this.$service.getPage('friend')
+    if (friends && friends[0]) {
+      console.log(friends[0])
+      console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+      console.log(formatPage(friends[0], 'friend'));
+      commit('friends', formatPage(friends[0], 'friend'))
+    }
+  },
 }

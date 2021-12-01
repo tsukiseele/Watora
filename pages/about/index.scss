@@ -5,20 +5,22 @@
     text-align: center;
     font-size: 1.5rem;
   }
-}
+} 
 .about {
+  margin: 0 2rem;
   .blockquote {
     display: flex;
     line-height: 5rem;
     padding: 1rem;
     color: var(--text);
     i {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
-    .fa-quote-left {
+    .quote-left {
       align-self: flex-start;
+      transform: rotateZ(180deg);
     }
-    .fa-quote-right {
+    .quote-right {
       align-self: flex-end;
     }
     .quote-content {
@@ -28,5 +30,8 @@
       align-self: center;
       font-size: 1.5rem;
     }
+  }
+  hr {
+    margin-bottom: 1rem;
   }
 }

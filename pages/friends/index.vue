@@ -5,15 +5,16 @@
     subtitle="",
   )
   main#main
-    ul
-      li(v-for='category in categorys' :key="number" ) {{ category.description }}
+    ul.friends
+      li.friend(v-for='(friend, index) in friends' :key='index' @click="onLinkClick(friend)" :style="{ '--cover' : `url(${friend.cover})` }")
+        img.friend-avatar(:src='friend.avatar')
+        span.friend-name {{ friend.name }}
     //- .list 
       .card(
         v-for="(link, index) in links",
         :key="index",
         data-aos="flip-left",
-        data-aos-once="true"
-      )
+        data-aos-once="true")
         img.link-icon(:src="link.linkIcon")
         .link-wrap 
           .link-name.single-line {{ link.linkName }}
@@ -25,10 +26,15 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['categorys']),
+    ...mapState(['friends']),
   },
   async fetch({ store, params }) {
-    await store.dispatch('categorys')
+    await store.dispatch('friends')
+  },
+  methods: {
+    onLinkClick(friend) {
+      window.open(friend.link, '_blank')
+    },
   },
 }
 </script>

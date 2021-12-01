@@ -1,13 +1,58 @@
-
 #container {
 }
 
 #main {
+  .friends {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    .friend {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 33%;
+      cursor: pointer;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.33);
+        background-image: var(--cover);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center right;
+        transform: translateY(-100%);
+        transition: 0.3s;
+      }
+      &:hover {
+        &::after {
+          transform: translateY(0);
+        }
+      }
+      .friend-avatar {
+        width: 4rem;
+        height: 4rem;
+        object-fit: cover;
+      }
+      .friend-name {
+        flex: 1;
+        padding-left: 0.5rem;
+      }
+    }
+  }
 }
+/*
 .list {
   display: flex;
   flex-wrap: wrap;
 }
+
 .card {
   display: flex;
   margin: 0.5rem;
@@ -56,4 +101,4 @@
     // width: calc(100% / 2 - 1rem);
     width: 100%;
   }
-}
+}*/

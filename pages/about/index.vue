@@ -3,10 +3,11 @@
   TheBanner(:title='header.title', :subtitle='header.subtitle', :isFull='header.isFull', :isHide='header.isHide', :isHideSubtitle='header.isHideSubtitle')
   .about
     .blockquote
-      i.material-icon.home
+      i.quote-left.material-icons format_quote
       .quote-content TECH OTAKUS SAVE THE WORLD
-      i.fa.fa-quote-right
+      i.quote-right.material-icons format_quote
     .description(v-for='(part, i) in about', :key='i')
+      hr
       .subtitle {{ part.title }}
       SMarkdown(:content="part.content")
 </template>

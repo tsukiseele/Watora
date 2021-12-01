@@ -1,12 +1,13 @@
 @import "./icons.scss";
 // @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-// @import url("//fonts.googleapis.com/icon?family=Material+Icons");
-// @import url("//fonts.googleapis.com/icon?family=Material+Icons+Round");
 // @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
-@import url("//fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+@import url("//fonts.googleapis.com/icon?family=Material+Icons");
+// @import url("//fonts.googleapis.com/icon?family=Material+Icons+Round");
+// @import url("//fonts.googleapis.com/icon?family=Material+Icons+Outlined");
 .material-icons {
-  font-family: "Material Icons Outlined" !important;
+  // font-family: "Material Icons Outlined" !important;
+  font-family: "Material Icons" !important;
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
