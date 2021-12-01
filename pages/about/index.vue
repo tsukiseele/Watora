@@ -8,7 +8,6 @@
       i.fa.fa-quote-right
     .description(v-for='(part, i) in about', :key='i')
       .subtitle {{ part.title }}
-      .key {{ i }}
       SMarkdown(:content="part.content")
 </template>
 <script>
@@ -30,8 +29,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import './index.scss';
-
-.content {
-}
 </style>
 
