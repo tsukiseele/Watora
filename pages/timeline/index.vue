@@ -5,7 +5,7 @@
     .timeline-group(v-for='(group, date) in timeline' :key="date")
       span.timeline-date {{ date }}
       div.timeline-list
-        a.timeline-item(v-for='item in group' :key='item.id' :href="`/archives/${item.id}`" @click.parent='$router.push(`/archives/${item.id}`)')
+        a.timeline-item(v-for='item in group' :key='item.id' :href="`/archives/${item.id}`" @click.prevent='$router.push(`/archives/${item.id}`)')
           span.timeline-day {{ item.createAt | formatDate('dd')}}
           span {{ item.title }}
 </template>
