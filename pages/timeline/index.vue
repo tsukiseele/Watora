@@ -3,19 +3,11 @@
   TheBanner(:title='header.title', :subtitle='header.subtitle', :isFull='header.isFull', :isHide='header.isHide', :isHideSubtitle='header.isHideSubtitle')
   .timeline
     .timeline-group(v-for='(group, date) in timeline' :key="date")
-      span {{ date }}
-      a.timeline-item(v-for='item in group' :key='item.id' :href="`/archives/${item.id}`" @click.parent='$router.push(`/archives/${item.id}`)')
-        span {{ item.title }}
-//- #container
-  main#main
-    .timeline
-      .timeline-group(v-for='(group, key) in timeline', :key='key')
-        p.timeline-group-title {{ key }}
-        .timeline-item(v-for='(item, index) in group', :key='index', @click='$router.push(`/archives/${item.articleId}`)')
-          span.timeline-item-tags
-            i.fa.fa-tag(style='padding: 0 0.2rem') 
-            span {{ item.articleType || "未分类" }}
-          span.timeline-item-title {{ item.articleTitle }}
+      span.timeline-date {{ date }}
+      div.timeline-list
+        a.timeline-item(v-for='item in group' :key='item.id' :href="`/archives/${item.id}`" @click.parent='$router.push(`/archives/${item.id}`)')
+          span.timeline-day {{ item.createAt | formatDate('dd')}}
+          span {{ item.title }}
 </template>
 
 <script>

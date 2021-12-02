@@ -114,7 +114,7 @@ export const formatTimeline = posts => {
   const archives = posts.map(item => formatPost(item))
   const timeline = {}
   Object.values(archives).forEach(archive => {
-    const timestrap = new Date(archive.createAt).format('yyyy-mm-dd')
+    const timestrap = new Date(archive.createAt).format('yyyy-MM')
     if (timeline[timestrap]) {
       timeline[timestrap].push(archive)
     } else {
