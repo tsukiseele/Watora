@@ -3,7 +3,7 @@
   TheBanner(:title='banner.title', :cover='banner.cover')
   .gallery-list
     client-only
-      SSimpleWaterfall(:items="images" imageKey="url")
+      SSimpleWaterfall(:items="images" imageKey="url" :itemWidth="240 " :gap='20')
         template(v-slot="{ index, item }")
           span {{ item.title }}
       //- SWaterfall(:disableScroll='true', :imgsArr='images', srcKey='url', @itemClick='onItemClick')
@@ -15,7 +15,7 @@ import { mapState } from 'vuex'
 export default {
   data: () => ({
     banner: {
-      title: '画廊',
+      title: '相册',
       cover: null,
     },
     imgsArr: [],

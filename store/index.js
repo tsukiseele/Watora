@@ -1,4 +1,4 @@
-import { formatPost, formatNavMenu, formatGallery, formatPage } from '@/plugins/utils/format.js'
+import { formatPost, formatNavMenu, formatGallery, formatTimeline, formatPage } from '@/plugins/utils/format.js'
 
 export const state = () => ({
   page: 0,
@@ -17,6 +17,7 @@ export const state = () => ({
   labels: [],
   categorys: [],
   friends: [],
+  timeline: [],
   header: {
     title: '',
     subtitle: '',
@@ -87,6 +88,9 @@ export const mutations = {
   friends(state, friends) {
     state.friends = friends
   },
+  timeline(state, timeline) {
+    state.timeline = timeline
+  }
 }
 
 export const actions = {
@@ -127,11 +131,21 @@ export const actions = {
   async images({ commit, state }) {
     if (state.images.length > 0) return
     let images = []
-    ;(await this.$service.getArchives({ page: 1, count: 999 })).forEach(item => {
+    ;(await this.$service.getArchives({ page: 1, count: 99 })).forEach(item => {
       images.push(...formatGallery(item))
     })
     images = images.slice(0, 20)
     commit('images', images)
+  },
+  /**
+   * 获取时间线
+   * @param {*} param0 
+   * @returns 
+   */
+  async timeline({ commit, state }) {
+    if (state.timeline.length) return
+    const timeline = formatTimeline((await this.$service.getArchives({ page: 1, count: 99 })))
+    commit('timeline', timeline)
   },
   /**
    * 获取标签列表
@@ -172,9 +186,6 @@ export const actions = {
   async friends({ commit }) {
     const friends = await this.$service.getPage('friend')
     if (friends && friends[0]) {
-      console.log(friends[0])
-      console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-      console.log(formatPage(friends[0], 'friend'));
       commit('friends', formatPage(friends[0], 'friend'))
     }
   },

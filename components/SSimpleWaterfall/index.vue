@@ -2,10 +2,9 @@
   .simple-waterfall
     slot(name="header")
     .list
-      .list-item(v-for="(item, index) in items" :key="index")
+      .list-item(v-for="(item, index) in items" :key="index" @click="$emit('click', item)")
         img.list-item--image(:src="imageKey ? item[imageKey] : item.src")
-        .list-item--title {{ item.title }}
-          slot(:index='i', :item='item')
+        slot(:index='index', :item='item')
     slot(name="footer")
 </template>
 
@@ -14,45 +13,46 @@ export default {
   props: {
     items: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     imageKey: {
       type: String,
-      default: null,
+      default: null
     },
     itemWidth: {
       type: Number,
-      default: 250,
+      default: 250
     },
     gap: {
       type: Number,
-      default: 20,
+      default: 20
     },
     evenly: {
       type: Boolean,
-      default: false,
+      default: false
     },
     maxColumn: {
       type: Number,
-      default: null,
+      default: null
     },
     height: {
       type: Number | String,
-      default: null,
-    },
+      default: null
+    }
   },
   data: () => ({
     column: null,
-    resizeObserver: null,
+    resizeObserver: null
   }),
   watch: {
     async items() {
+      this.$emit('load')
       await this.getImageSize()
       this.fall()
-    },
+      this.$emit('loaded')
+    }
   },
   methods: {
-    
     responsive() {
       /*
       if (column) {
@@ -63,12 +63,12 @@ export default {
       // 获取当前页面的宽度
       const containerWidth = this.$el.offsetWidth
       // 若传入列数，则使用，否则自动计算：实际列数 = 页面宽度 / (图片宽度 + 间距)
-      this.column = Math.floor(containerWidth / (this.itemWidth + this.gap))
-      this.column = this.column > this.maxColumn ? this.maxColumn : this.column
+      this.column = Math.floor((containerWidth - this.gap) / (this.itemWidth + this.gap))
+      this.column = this.maxColumn && this.column > this.maxColumn ? this.maxColumn : this.column
       // 若传入平均间距，则自动计算，否则使用传入的间距
-      const realGap = this.evenly ? (containerWidth - this.itemWidth * column) / (column - 1) : this.gap
+      const realGap = this.evenly ? (containerWidth - this.itemWidth * this.column) / (this.column - 1) : this.gap
       // 若传入平均间距，则为0，否则自动计算
-      const margin = this.evenly ? realGap : (containerWidth - (this.itemWidth + realGap) * column + realGap) / 2
+      const margin = this.evenly ? realGap : (containerWidth - (this.itemWidth + realGap) * this.column + realGap) / 2
       // 获取所有需要布局的项
       const itemEls = this.$el.querySelectorAll('.list-item')
       // 数组，保存最低高度
@@ -82,7 +82,7 @@ export default {
         // 遍历所有的外层容器
         const height = itemEl.offsetHeight
         // 如果当前处在第一行
-        if (i < column) {
+        if (i < this.column) {
           top = 0
           left = (this.itemWidth + realGap) * i + margin
           heightArr.push(height)
@@ -99,54 +99,40 @@ export default {
       this.$el.style.height = this.height ? this.height : Math.max(...heightArr) + 'px'
     },
     async getImageSize() {
-      const promiseArr = []
-      this.items.forEach(image =>
-        promiseArr.push(
-          new Promise((resolve, reject) => {
-            let timeout = 0
-            const check = () => {
-              const img = new Image()
-              img.src = this.imageKey ? image[this.imageKey] : image.src
-              console.log(image)
+      await Promise.allSettled(this.items.map(
+        item =>
+          new Promise(resolve => {
+            const img = new Image()
+            img.src = this.imageKey ? item[this.imageKey] : item.src
+            img.onload = img.onerror = e => {
               if (img.width > 0 && img.height > 0) {
-                clearInterval(set)
-                image._height = img.height
-                resolve({ width: img.width, height: img.height })
+                item._height = img.height
               }
-              if (timeout > 10000) {
-                clearInterval(set)
-                reject()
-              }
-              timeout += 100
+              resolve({ width: img.width, height: img.height })
             }
-            const set = setInterval(check, 100)
           })
-        )
-      )
-      await Promise.allSettled(promiseArr)
+      ))
     },
     // 监听组件变化
     listenLayoutChanged() {
       this.resizeObserver = new ResizeObserver(entries => {
         entries.forEach(ele => {
-          this.response()
+          this.responsive()
         })
       })
       this.resizeObserver.observe(this.$el)
-    },
+    }
   },
   mounted() {
     this.$nextTick(async () => {
       await this.getImageSize()
       this.fall()
     })
-    // window.addEventListener('resize', this.fall)
-    listenLayoutChanged()
+    this.listenLayoutChanged()
   },
   beforeDestroy() {
-    // window.removeEventListener("resize", this.response);
     this.resizeObserver && this.resizeObserver.disconnect()
-  },
+  }
 }
 </script>
 

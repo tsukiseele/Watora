@@ -53,7 +53,7 @@ function getImages(markdown) {
     if (match.length > 2) {
       images.push({
         title: match[1],
-        url: match[2]
+        url: match[2],
       })
     }
   }
@@ -72,9 +72,9 @@ function getLines(markdown) {
   return result
 }
 /**
- * 
- * @param {*} param0 
- * @returns 
+ *
+ * @param {*} param0
+ * @returns
  */
 export const formatGallery = ({ body }) => {
   return initMarkdown(body).images
@@ -88,7 +88,7 @@ export const formatPost = ({ body, title, created_at: createAt, labels, mileston
   // 获取封面图 （默认为第一张图片）
   const cover = images[0] || {
     title: '',
-    url: 'x'
+    url: 'x',
   }
   // 获取描述，查找首个非图片行
   const description = getLines(markdown).find(line => !getImages(line).length)
@@ -107,7 +107,22 @@ export const formatCategory = category => {
   })
   return category
 }
-
+/**
+ * 格式化时间线
+ */
+export const formatTimeline = posts => {
+  const archives = posts.map(item => formatPost(item))
+  const timeline = {}
+  Object.values(archives).forEach(archive => {
+    const timestrap = new Date(archive.createAt).format('yyyy-mm-dd')
+    if (timeline[timestrap]) {
+      timeline[timestrap].push(archive)
+    } else {
+      timeline[timestrap] = [archive]
+    }
+  })
+  return timeline
+}
 /**
  * 格式化灵感
  */
@@ -147,7 +162,7 @@ export const formatPage = (data, type) => {
         const title = o.match(/.+?\r\n/)[0]
         return {
           title,
-          content: o.slice(title.length)
+          content: o.slice(title.length),
         }
       })
       break
@@ -176,7 +191,7 @@ export const parseTime = (time, format = '{y}-{m}-{d} {h}:{i}:{s}') => {
     h: date.getHours(),
     i: date.getMinutes(),
     s: date.getSeconds(),
-    a: date.getDay()
+    a: date.getDay(),
   }
   const timeStr = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]

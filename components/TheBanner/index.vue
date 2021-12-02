@@ -72,11 +72,13 @@ export default {
     scrollToContent() {
       this.$nextTick(() => {
         const ele = document.getElementById('container')
-        this.$store.commit('scroll', {
-          pos: ele.offsetTop,
-          change: ele.offsetTop,
-        })
-        ele.scrollIntoView()
+        if (ele) {
+          this.$store.commit('scroll', {
+            pos: ele.offsetTop,
+            change: ele.offsetTop,
+          })
+          ele.scrollIntoView()
+        }
       })
     },
     getBackground() {

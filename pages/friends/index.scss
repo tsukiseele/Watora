@@ -30,6 +30,7 @@
         transform: translateY(-100%);
         transition: 0.3s;
       }
+      
       &:hover {
         &::after {
           transform: translateY(0);

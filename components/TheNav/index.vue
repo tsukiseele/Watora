@@ -41,7 +41,7 @@ export default {
         icon: "home",
       },
       {
-        name: "画廊",
+        name: "相册",
         to: "/gallery",
         icon: "collections"
       },

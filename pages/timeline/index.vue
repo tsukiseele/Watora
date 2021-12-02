@@ -2,6 +2,10 @@
 #timeline
   TheBanner(:title='header.title', :subtitle='header.subtitle', :isFull='header.isFull', :isHide='header.isHide', :isHideSubtitle='header.isHideSubtitle')
   .timeline
+    .timeline-group(v-for='(group, date) in timeline' :key="date")
+      span {{ date }}
+      a.timeline-item(v-for='item in group' :key='item.id' :href="`/archives/${item.id}`" @click.parent='$router.push(`/archives/${item.id}`)')
+        span {{ item.title }}
 //- #container
   main#main
     .timeline
@@ -40,16 +44,18 @@ export default {
     }
   },*/
   computed: {
-    ...mapState(['categorys', 'inspiration'])
+    ...mapState(['timeline'])
   },
   mounted() {
-    console.log(this.inspiration)
+    // console.log(this.timeline)
   },
   async fetch({ store, params }) {
     // const result = await Promise.all([])
     // store.dispatch('categorys')
-    store.dispatch('inspiration')
+    await store.dispatch('timeline')
     // console.log(result)
+    
+  console.log(this.timeline);
   }
 }
 </script>
