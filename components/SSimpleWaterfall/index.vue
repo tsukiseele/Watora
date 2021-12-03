@@ -42,7 +42,8 @@ export default {
   },
   data: () => ({
     column: null,
-    resizeObserver: null
+    resizeObserver: null,
+    resizeTimer: null,
   }),
   watch: {
     async items() {
@@ -54,10 +55,10 @@ export default {
   },
   methods: {
     responsive() {
-      /*
-      if (column) {
-      }*/
-      this.fall()
+      const newColumn = Math.floor(containerWidth / (this.itemWidth + this.gap))
+      if (newColumn != this.column) {
+        this.fall()
+      }
     },
     fall() {
       // 获取当前页面的宽度
@@ -116,9 +117,14 @@ export default {
     // 监听组件变化
     listenLayoutChanged() {
       this.resizeObserver = new ResizeObserver(entries => {
-        entries.forEach(ele => {
-          this.responsive()
-        })
+        if (this.resizeTimer) return
+        this.resizeTimer = setTimeout(() => {
+          // entries.forEach(ele => {
+          this.response()
+          // })
+          clearTimeout(this.resizeTimer)
+          this.resizeTimer = null
+        }, 300)
       })
       this.resizeObserver.observe(this.$el)
     }
