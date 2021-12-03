@@ -16,39 +16,21 @@ export default {
   data: () => ({
     header: {
       title: '归档',
-      subtitle: ''
+      subtitle: '',
     },
     archives: [],
-    error: null
+    error: null,
   }),
   fetch() {
     this.$store.commit('header', { title: '『时间线』' })
   },
-  /*
-  async asyncData({ app }) {
-    let archives
-    const res = await app.$api.getAllArticles()
-    if (res.ok) {
-      archives = res.data
-    }
-    return {
-      archives,
-    }
-  },*/
   computed: {
-    ...mapState(['timeline'])
+    ...mapState(['timeline']),
   },
-  mounted() {
-    // console.log(this.timeline)
-  },
+  mounted() {},
   async fetch({ store, params }) {
-    // const result = await Promise.all([])
-    // store.dispatch('categorys')
     await store.dispatch('timeline')
-    // console.log(result)
-    
-  console.log(this.timeline);
-  }
+  },
 }
 </script>
 

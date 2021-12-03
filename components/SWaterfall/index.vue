@@ -183,7 +183,6 @@ export default {
     },
     imgsArr(newV, oldV) {
       if (this.imgsArr_c.length > newV.length || (this.imgsArr_c.length > 0 && newV[0] && !newV[0]._height)) {
-        // console.log('reset')
         this.reset()
       }
       this.preload()
