@@ -1,26 +1,26 @@
 <template lang="pug">
 .pagination-wrap
   .pagination
-    .pagination-first(:class="{ disable: current === 1 }", @click="onClick(1)")
+    .pagination-first(:class="{ disable: current == 1 }", @click="onClick(1)")
       i.material-icons first_page
     .pagination-pre(
-      :class="{ disable: current === 1 }",
+      :class="{ disable: current == 1 }",
       @click="onClick(current - 1)"
     )
       i.material-icons navigate_before
     .pagination-page(
       v-for="n in range",
       :key="n",
-      :class="{ active: n === current }",
-      @click="n === current ? null : onClick(n)"
+      :class="{ active: n == current }",
+      @click="n == current ? null : onClick(n)"
     ) {{ n }}
     .pagination-next(
-      :class="{ disable: current === size }",
+      :class="{ disable: current == size }",
       @click="onClick(current + 1)"
     )
       i.material-icons navigate_next
     .pagination-last(
-      :class="{ disable: current === size }",
+      :class="{ disable: current == size }",
       @click="onClick(size)"
     )
       i.material-icons last_page
