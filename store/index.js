@@ -130,12 +130,7 @@ export const actions = {
    */
   async images({ commit, state }) {
     if (state.images.length > 0) return
-    let images = []
-    ;(await this.$service.getArchives({ page: 1, count: 99 })).forEach(item => {
-      images.push(...formatGallery(item))
-    })
-    images = images.slice(0, 20)
-    commit('images', images)
+    commit('images', [].concat(...(await this.$service.getArchives({ page: 1, count: 99 })).map(item => formatGallery(item))).slice(0, 20))
   },
   /**
    * 获取时间线

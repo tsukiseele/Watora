@@ -13,32 +13,32 @@ export default {
   props: {
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     imageKey: {
       type: String,
-      default: null
+      default: null,
     },
     itemWidth: {
       type: Number,
-      default: 250
+      default: 250,
     },
     gap: {
       type: Number,
-      default: 20
+      default: 20,
     },
     evenly: {
       type: Boolean,
-      default: false
+      default: false,
     },
     maxColumn: {
       type: Number,
-      default: null
+      default: null,
     },
     height: {
       type: Number | String,
-      default: null
-    }
+      default: null,
+    },
   },
   data: () => ({
     column: null,
@@ -51,12 +51,11 @@ export default {
       await this.getImageSize()
       this.fall()
       this.$emit('loaded')
-    }
+    },
   },
   methods: {
     responsive() {
-      const newColumn = Math.floor(containerWidth / (this.itemWidth + this.gap))
-      if (newColumn != this.column) {
+      if (this.$el) {
         this.fall()
       }
     },
@@ -65,7 +64,7 @@ export default {
       const containerWidth = this.$el.offsetWidth
       // 若传入列数，则使用，否则自动计算：实际列数 = 页面宽度 / (图片宽度 + 间距)
       this.column = Math.floor((containerWidth - this.gap) / (this.itemWidth + this.gap))
-      this.column = this.maxColumn && this.column > this.maxColumn ? this.maxColumn : this.column
+      this.column = this.maxColumn && this.column > this.maxColumn ? this.maxColumn : this.column || 1
       // 若传入平均间距，则自动计算，否则使用传入的间距
       const realGap = this.evenly ? (containerWidth - this.itemWidth * this.column) / (this.column - 1) : this.gap
       // 若传入平均间距，则为0，否则自动计算
@@ -100,34 +99,39 @@ export default {
       this.$el.style.height = this.height ? this.height : Math.max(...heightArr) + 'px'
     },
     async getImageSize() {
-      await Promise.allSettled(this.items.map(
-        item =>
-          new Promise(resolve => {
-            const img = new Image()
-            img.src = this.imageKey ? item[this.imageKey] : item.src
-            img.onload = img.onerror = e => {
-              if (img.width > 0 && img.height > 0) {
-                item._height = img.height
+      await Promise.allSettled(
+        this.items.map(
+          item =>
+            new Promise(resolve => {
+              const img = new Image()
+              img.src = this.imageKey ? item[this.imageKey] : item.src
+              img.onload = img.onerror = e => {
+                if (img.width > 0 && img.height > 0) {
+                  item._height = img.height
+                }
+                resolve({ width: img.width, height: img.height })
               }
-              resolve({ width: img.width, height: img.height })
-            }
-          })
-      ))
+            })
+        )
+      )
     },
     // 监听组件变化
     listenLayoutChanged() {
       this.resizeObserver = new ResizeObserver(entries => {
-        if (this.resizeTimer) return
-        this.resizeTimer = setTimeout(() => {
-          // entries.forEach(ele => {
-          this.response()
-          // })
-          clearTimeout(this.resizeTimer)
-          this.resizeTimer = null
-        }, 300)
+        if (entries && entries.length) {
+          if (this.resizeTimer) return
+          this.resizeTimer = setTimeout(() => {
+            // entries.forEach(ele => {
+            console.log('this.responsive()')
+            this.responsive()
+            // })
+            clearTimeout(this.resizeTimer)
+            this.resizeTimer = null
+          }, 300)
+        }
       })
       this.resizeObserver.observe(this.$el)
-    }
+    },
   },
   mounted() {
     this.$nextTick(async () => {
@@ -138,7 +142,7 @@ export default {
   },
   beforeDestroy() {
     this.resizeObserver && this.resizeObserver.disconnect()
-  }
+  },
 }
 </script>
 

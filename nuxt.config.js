@@ -2,7 +2,7 @@ export default {
   // https://github.com/tsukiseele/blog.git
   server: {
     host: process.env.BASE_HOST || 'localhost',
-    port: process.env.BASE_PORT || 80
+    port: process.env.BASE_PORT || 3000
   },
   ssr: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
