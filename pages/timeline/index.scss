@@ -21,10 +21,12 @@
     display: flex;
     align-items: flex-start;
     padding: 0.33rem 1rem;
+    border-bottom: 1px solid #eee;
   }
   .timeline-date {
     display: block;
     font-family: 'Courier New', '等距更纱黑体 SC', 'Consolas', Courier, monospace;
+    font-size: 1.1rem;
   }
   .timeline-day {
     font-family: 'Courier New', '等距更纱黑体 SC', 'Consolas', Courier, monospace;
@@ -34,6 +36,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-end;
   }
 
   .timeline-item {
@@ -41,7 +44,8 @@
     margin-left: 2rem;
     border-radius: 5px;
     transition: background 0.3s ease;
-
+    // line-height: 1.5rem;
+    // display: inline-block;
     &:hover {
       background: var(--card-active);
       .timeline-item-title {
