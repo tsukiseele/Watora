@@ -5,9 +5,10 @@
     .timeline-group(v-for='(group, date) in timeline' :key="date")
       span.timeline-date {{ date }}
       div.timeline-list
-        a.timeline-item(v-for='item in group' :key='item.id' :href="`/archives/${item.id}`" @click.prevent='$router.push(`/archives/${item.id}`)')
-          span.timeline-day {{ item.createAt | formatDate('dd')}}
-          span {{ item.title }}
+        div(v-for='item in group' :key='item.id')
+          a.timeline-item(:href="`/archives/${item.id}`" @click.prevent='$router.push(`/archives/${item.id}`)')
+            span.timeline-day {{ item.createAt | formatDate('dd')}}
+            span {{ item.title }}
 </template>
 
 <script>
@@ -15,40 +16,23 @@ import { mapState } from 'vuex'
 export default {
   data: () => ({
     header: {
-      title: '归档',
-      subtitle: ''
+      title: '时间线',
+      subtitle: '',
     },
     archives: [],
-    error: null
+    error: null,
   }),
+  /*
   fetch() {
     this.$store.commit('header', { title: '『时间线』' })
-  },
-  /*
-  async asyncData({ app }) {
-    let archives
-    const res = await app.$api.getAllArticles()
-    if (res.ok) {
-      archives = res.data
-    }
-    return {
-      archives,
-    }
   },*/
   computed: {
-    ...mapState(['timeline'])
+    ...mapState(['timeline']),
   },
-  mounted() {
-    // console.log(this.timeline)
-  },
+  mounted() {},
   async fetch({ store, params }) {
-    // const result = await Promise.all([])
-    // store.dispatch('categorys')
     await store.dispatch('timeline')
-    // console.log(result)
-    
-  console.log(this.timeline);
-  }
+  },
 }
 </script>
 

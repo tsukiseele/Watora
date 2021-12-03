@@ -3,14 +3,13 @@
   TheBanner(:title='banner.title', :cover='banner.cover')
   .gallery-list
     client-only
-      SSimpleWaterfall(:items="images" imageKey="url" :itemWidth="240 " :gap='20')
+      SSimpleWaterfall(:items="images" imageKey="url" :itemWidth="isMobile ? 170 : 240" :gap='isMobile ? 10 : 20')
         template(v-slot="{ index, item }")
           span {{ item.title }}
-      //- SWaterfall(:disableScroll='true', :imgsArr='images', srcKey='url', @itemClick='onItemClick')
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -21,9 +20,8 @@ export default {
     imgsArr: [],
   }),
   computed: {
-    images() {
-      return [...this.$store.state.images]
-    },
+    ...mapState(['images']),
+    ...mapGetters(['isMobile']),
   },
   methods: {
     onItemClick(cover) {
@@ -33,7 +31,9 @@ export default {
   async fetch({ store, params }) {
     await store.dispatch('images')
   },
-  mounted() {},
+  mounted() {
+    console.log(this.imae)
+  },
 }
 </script>
 

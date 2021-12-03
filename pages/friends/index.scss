@@ -8,7 +8,7 @@
     padding: 2rem;
     .friend {
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
       width: 33%;
       cursor: pointer;
@@ -30,7 +30,7 @@
         transform: translateY(-100%);
         transition: 0.3s;
       }
-      
+
       &:hover {
         &::after {
           transform: translateY(0);
@@ -48,6 +48,20 @@
     }
   }
 }
+@media screen and (max-width: $mobile) {
+  #main {
+    .friends {
+      padding: 1rem;
+      .friend {
+        width: 50%;
+        &::after {
+          background-position: center;
+        }
+      }
+    }
+  }
+}
+
 /*
 .list {
   display: flex;
