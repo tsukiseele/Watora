@@ -10,8 +10,19 @@
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 10;
     background-color: rgba(32, 32, 32, 0.3);
   }
+}
+.zoom-enter-active {
+  transition: 0.3s ease-out;
+}
+.zoom-leave-active {
+  transition: 0.2s ease-in;
+}
+.zoom-enter,
+.zoom-leave-to {
+  opacity: 0;
 }
 .markdown-content {
   flex: 1;

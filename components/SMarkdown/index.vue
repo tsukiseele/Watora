@@ -1,7 +1,7 @@
 <template lang="pug">
 .markdown-preview
   .markdown-content(v-html='markdown')
-  transition(name='fade')
+  transition(name='zoom')
     .markdown-image-preview-modal(v-if='previewEl' @click="cancelPreview")
 </template>
 
@@ -43,11 +43,12 @@ export default {
       if (this._timer) return
       this._timer = setTimeout(() => {
         this.getNavPos()
-        // this.cancelPreview()
+        this.cancelPreview()
         clearTimeout(this._timer)
         this._timer = null
       }, 200)
     },
+    /*
     onWhellScroll(e) {
       if (this.previewEl) {
         const match = /scale\((.+?)\)/g.exec(this.previewEl.style.transform)
@@ -57,10 +58,10 @@ export default {
           this.previewEl.style.transform = this.previewEl.style.transform.replace(match[0], `scale(${scale})`)
         }
       }
-    },
+    },*/
     cancelPreview() {
       if (this.previewEl) {
-        this.previewEl.style.transform = `none`
+        this.previewEl.style.transform = 'none'
         this.previewEl.style.zIndex = 0
         this.previewEl = null
       }
@@ -72,33 +73,29 @@ export default {
         const targetTop = (window.innerHeight - elRect.height) / 2
         const scale = elRect.width / elRect.height > window.innerWidth / window.innerHeight ? window.innerWidth / elRect.width : window.innerHeight / elRect.height
         this.previewEl.style.transform = `translateY(${targetTop - elRect.top}px) scale(${scale - 0.05})`
-        this.previewEl.style.zIndex = 9
+        this.previewEl.style.zIndex = 16
       }
     },
     init() {
       this.initCopy()
-      this.initImagePreview()
+      this.initPreview()
     },
     initCopy() {
       document.querySelectorAll('.markdown-content .md-code-copy').forEach(el => (el.onclick = e => navigator.clipboard.writeText(document.getElementById(el.getAttribute('data-copy')).textContent)))
     },
-    initImagePreview() {
-      document.querySelectorAll('.markdown-content img').forEach(imgEl => {
-        imgEl.addEventListener('click', e => this.$nextTick(() => (this.previewEl ? this.cancelPreview() : this.openPreview(e.target))))
-
-        window.addEventListener('wheel', this.onWhellScroll)
-      })
+    initPreview() {
+      document
+        .querySelectorAll('.markdown-content img')
+        .forEach(imgEl => imgEl.addEventListener('click', e => this.$nextTick(() => (this.previewEl ? this.cancelPreview() : this.openPreview(e.target)))))
     },
   },
   created() {},
   mounted() {
     window.addEventListener('scroll', this.onScroll)
-    // window.addEventListener('wheel', this.onWhellScroll)
     this.init()
   },
   destroyed() {
     window.removeEventListener('scroll', this.onScroll)
-    // window.removeEventListener('wheel', this.onWhellScroll)
   },
 }
 </script>
