@@ -1,6 +1,8 @@
 <template lang="pug">
 .markdown-preview
   .markdown-content(v-html='markdown')
+  transition(name='fade')
+    .markdown-image-preview-modal(v-if='previewEl' @click="cancelPreview")
 </template>
 
 <script>
@@ -8,11 +10,12 @@ export default {
   props: {
     content: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
   data: () => ({
-    _timer: null
+    _timer: null,
+    previewEl: null,
   }),
   computed: {
     markdown() {
@@ -22,44 +25,81 @@ export default {
         console.log(error)
       }
       return null
-    }
+    },
   },
   methods: {
     getNavPos() {
+      const titles = document.querySelectorAll(".markdown [id^='md-title']")
+      if (!titles.length) return
+      let title, i
+      for (i = 0; i < titles.length; i++) {
+        title = titles[i]
+        const rect = title.getBoundingClientRect()
+        if (rect.top - rect.height > 0) break
+      }
+      this.$emit('activeChange', { index: i - 1, item: title })
+    },
+    onScroll() {
       if (this._timer) return
       this._timer = setTimeout(() => {
-        const titles = document.querySelectorAll(".markdown [id^='md-title']")
-        if (titles.length === 0) return
-        let title, i
-        for (i = 0; i < titles.length; i++) {
-          const rect = titles[i].getBoundingClientRect()
-          if (rect.top - rect.height > 0) break
-        }
-        this.$emit('activeChange', { index: i - 1, item: title })
+        this.getNavPos()
+        // this.cancelPreview()
         clearTimeout(this._timer)
         this._timer = null
       }, 200)
     },
-    initCopy() {
-      const copyEls = document.getElementsByClassName('md-code-copy')
-      copyEls.forEach(element => {
-        element.onclick = e => {
-          const codeId = element.getAttribute('data-copy')
-          const codeContent = document.getElementById(codeId).textContent
-          navigator.clipboard.writeText(codeContent)
+    onWhellScroll(e) {
+      if (this.previewEl) {
+        const match = /scale\((.+?)\)/g.exec(this.previewEl.style.transform)
+        if (match && match[1]) {
+          e.preventDefault()
+          const scale = e.deltaY > 0 ? match[1] * 1.1 : match[1] * 0.9
+          this.previewEl.style.transform = this.previewEl.style.transform.replace(match[0], `scale(${scale})`)
         }
+      }
+    },
+    cancelPreview() {
+      if (this.previewEl) {
+        this.previewEl.style.transform = `none`
+        this.previewEl.style.zIndex = 0
+        this.previewEl = null
+      }
+    },
+    openPreview(imgEl) {
+      if (imgEl) {
+        this.previewEl = imgEl
+        const elRect = this.previewEl.getBoundingClientRect()
+        const targetTop = (window.innerHeight - elRect.height) / 2
+        const scale = elRect.width / elRect.height > window.innerWidth / window.innerHeight ? window.innerWidth / elRect.width : window.innerHeight / elRect.height
+        this.previewEl.style.transform = `translateY(${targetTop - elRect.top}px) scale(${scale - 0.05})`
+        this.previewEl.style.zIndex = 9
+      }
+    },
+    init() {
+      this.initCopy()
+      this.initImagePreview()
+    },
+    initCopy() {
+      document.querySelectorAll('.markdown-content .md-code-copy').forEach(el => (el.onclick = e => navigator.clipboard.writeText(document.getElementById(el.getAttribute('data-copy')).textContent)))
+    },
+    initImagePreview() {
+      document.querySelectorAll('.markdown-content img').forEach(imgEl => {
+        imgEl.addEventListener('click', e => this.$nextTick(() => (this.previewEl ? this.cancelPreview() : this.openPreview(e.target))))
+
+        window.addEventListener('wheel', this.onWhellScroll)
       })
-    }
+    },
   },
   created() {},
   mounted() {
-    window.addEventListener('scroll', this.getNavPos)
-
-    this.initCopy()
+    window.addEventListener('scroll', this.onScroll)
+    // window.addEventListener('wheel', this.onWhellScroll)
+    this.init()
   },
   destroyed() {
-    window.removeEventListener('scroll', this.getNavPos)
-  }
+    window.removeEventListener('scroll', this.onScroll)
+    // window.removeEventListener('wheel', this.onWhellScroll)
+  },
 }
 </script>
 
@@ -67,13 +107,11 @@ export default {
 // @import "highlight.js/styles/atom-one-dark.css";
 @import 'highlight.js/styles/stackoverflow-light.css';
 
-@import './theme.scss';
-
 @import './index.scss';
+
+@import './theme.scss';
 /*
 :root[theme="dark"] {
   @import "./theme/dark.scss";
 }*/
 </style>
-
-<style lang="scss"></style>

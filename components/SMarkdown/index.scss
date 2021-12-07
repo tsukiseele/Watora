@@ -1,22 +1,35 @@
 .markdown-preview {
   // display: flex;
+  position: relative;
   overflow-y: visible;
   background-color: var(--card);
-  position: relative;
   // align-items: stretch;
+  .markdown-image-preview-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(32, 32, 32, 0.3);
+  }
 }
 .markdown-content {
   flex: 1;
-  overflow: hidden;
+  // overflow: hidden;
   padding: 0 0.5rem;
   img {
+    position: relative;
     width: 100%;
     object-fit: cover;
+    transition: 0.3s;
   }
   pre,
   code {
-    padding: 0.5rem;
+    // padding: 0.5rem;
+    padding: 0.2rem;
+    margin: 0 !important;
     border-radius: 5px;
+    background-color: rgba(64, 64, 64, 0.1);
   }
   pre {
     position: relative;
@@ -24,7 +37,8 @@
     padding: 1rem;
     code {
       line-height: 1.3rem;
-      padding: .5rem 0;
+      padding: 0.5rem 0;
+      background-color: transparent;
     }
     .code-options {
       display: inline-block;
