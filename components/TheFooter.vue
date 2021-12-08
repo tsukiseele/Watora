@@ -12,7 +12,7 @@
         |.
         span.info--spacer |
         |Theme 
-        a.info--theme(href="https://github.com/tsukiseele/Watora" target="_blank") Watora
+        a.info--color-secondary(href="https://github.com/tsukiseele/Watora" target="_blank") Watora
         |.
 </template>
 
@@ -49,7 +49,7 @@ export default {
   color: #00c58e;
 }
 
-.info--theme {
+.info--color-secondary {
   color: rgba(139, 207, 222, 1);
 }
 

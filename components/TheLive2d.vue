@@ -171,9 +171,9 @@ export default {
 
 <style lang="scss">
 .live2d .dialogue-live2d {
-  color: var(--text) !important;
-  background: var(--card-alpha) !important;
-  border: var(--border) !important;
+  color: var(--color-text) !important;
+  background: var(--color-card-alpha) !important;
+  border: var(--color-border) !important;
   box-shadow: 0 3px 9px var(--shadow) !important;
   border-radius: 8px !important;
   width: 192px !important;

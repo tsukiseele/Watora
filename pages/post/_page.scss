@@ -52,7 +52,7 @@
   margin-top: 1rem;
   margin-bottom: 2rem;
   font-weight: 500;
-  color: var(--theme-primary);
+  color: var(--color-primary);
   text-align: center;
   transition: color 0.2s ease;
   z-index: 0;
@@ -73,9 +73,9 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background: var(--background);
+    background: var(--color-background);
     backdrop-filter: blur(10px);
-    border: var(--theme-primary) solid 3px;
+    border: var(--color-primary) solid 3px;
     transition: background 0.3s ease;
     z-index: -1;
   }
@@ -87,7 +87,7 @@
     top: 0;
     width: 0;
     height: 100%;
-    background: var(--theme-primary);
+    background: var(--color-primary);
     transition: width 0.3s ease;
     z-index: -1;
     margin: 0;
@@ -98,8 +98,8 @@
       width: 100%;
     }
     &::before {
-      background: var(--theme-primary);
+      background: var(--color-primary);
     }
-    color: var(--white);
+    color: var(--color-light);
   }
 }

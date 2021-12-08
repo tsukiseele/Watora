@@ -72,7 +72,7 @@
   display: flex;
   margin: 0.5rem;
   width: calc(100% / 3 - 1rem);
-  background: var(--card);
+  background: var(--color-card);
   transition: all 0.3s;
   border-radius: 5px;
   box-shadow: var(--shadow);
@@ -81,7 +81,7 @@
   padding: 1rem;
   cursor: pointer;
   &:hover {
-    background: var(--card);
+    background: var(--color-card);
   }
   .link-icon {
     height: 64px;
@@ -104,11 +104,11 @@
   .link-name {
     font-size: 1.1rem;
     font-weight: normal;
-    color: var(--text-primary);
+    color: var(--color-text-primary);
   }
   .link-info {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
   }
 }
 @media screen and (max-width: $mobile) {

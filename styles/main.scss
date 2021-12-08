@@ -1,18 +1,12 @@
-@import "./loading.scss";
-@import "./transitions.scss";
-@import "./theme/light.scss";
-@import "./theme/dark.scss";
-@import "./fonts.scss";
-/** 全局变量 **/
-:root {
-  --redius: 5px;
-}
+@import './loading.scss';
+@import './transitions.scss';
+@import './theme/light.scss';
+@import './theme/dark.scss';
+@import './fonts.scss';
 
 /** 根样式 **/
 :root {
-  font-family: "Noto Sans TC", InfoDisplay, Titillium Web, "Sarasa Gothic SC",
-    "Source Han Sans CN", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    sans-serif;
+  font-family: var(--sans-serif);
   font-weight: 300;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -26,14 +20,14 @@
 
 /** 全局图标字体 **/
 @font-face {
-  font-family: "Fontello";
-  src: url("/fonts/fontello.woff2");
+  font-family: 'Fontello';
+  src: url('/fonts/fontello.woff2');
 }
 
 /** 全局英文字体 **/
 @font-face {
-  font-family: "InfoDisplay";
-  src: url("https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/fonts/InfoDisplay.woff");
+  font-family: 'InfoDisplay';
+  src: url('https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static/fonts/InfoDisplay.woff');
 }
 
 *::-webkit-scrollbar {
@@ -57,7 +51,7 @@
 /** 初始化样式 **/
 
 hr {
-  background: var(--border);
+  background: var(--color-border);
   height: 1px;
   width: 100%;
   border: none;
@@ -69,37 +63,37 @@ ul {
 
 input {
   &:hover {
-    border-bottom: 2px solid var(--theme);
+    border-bottom: 2px solid var(--color-secondary);
   }
 
   &:focus {
-    border-bottom: 2px solid var(--theme);
-    box-shadow: 0 0 9px var(--theme);
+    border-bottom: 2px solid var(--color-secondary);
+    box-shadow: 0 0 9px var(--color-secondary);
   }
 
   outline: none;
-  border-bottom: 2px solid var(--theme-primary);
+  border-bottom: 2px solid var(--color-primary);
   transition: 0.2s;
   padding: 0.25rem 0.5rem;
   margin: 0.5rem 0;
 }
 
-input[type="button"],
-input[type="file"] {
+input[type='button'],
+input[type='file'] {
   &:hover {
-    border: 1px solid var(--theme);
+    border: 1px solid var(--color-secondary);
   }
 
   &:active {
-    border: 1px solid var(--theme);
+    border: 1px solid var(--color-secondary);
   }
 
   &:focus {
-    border: 1px solid var(--theme);
-    box-shadow: 0 0 9px var(--theme);
+    border: 1px solid var(--color-secondary);
+    box-shadow: 0 0 9px var(--color-secondary);
   }
 
-  border: 1px solid var(--theme-primary);
+  border: 1px solid var(--color-primary);
   border-radius: 3px;
   transition: 0.2s;
   padding: 0.25rem 0.5rem;
@@ -113,11 +107,11 @@ a {
 
   &:link,
   &:visited {
-    color: var(--text);
+    color: var(--color-text);
   }
 
   &::before {
-    content: " " attr(href);
+    content: ' ' attr(href);
     font-family: Fontello, InfoDisplay;
     position: absolute;
     left: 0;
@@ -136,7 +130,7 @@ a {
   }
 
   &::after {
-    content: "";
+    content: '';
     background: currentColor;
     position: absolute;
     bottom: 0;
@@ -179,7 +173,7 @@ a {
   overflow: hidden;
   // width: 100%;
   padding: 0;
-/*
+  /*
   @media screen and (min-width: $mobile) {
     width: $mobile;
   }
@@ -189,14 +183,14 @@ a {
 }
 
 .card {
-  background: var(--card);
+  background: var(--color-card);
   border-radius: var(--redius);
   transition: 0.3s ease;
   margin: 0.5rem;
   padding: 0.5rem;
   box-shadow: var(--shadow);
   &hover:hover {
-    background: var(--card-active);
+    background: var(--color-card-active);
   }
 }
 
@@ -211,7 +205,7 @@ a {
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     background: currentColor;
     position: absolute;
     bottom: 0;

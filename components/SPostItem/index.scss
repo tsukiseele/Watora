@@ -5,7 +5,7 @@
   flex-direction: row;
   padding: 0.5rem;
   margin: 0.5rem;
-  background: var(--card);
+  background: var(--color-card);
   transition: all 0.3s;
   box-shadow: var(--shadow);
   cursor: pointer;
@@ -13,7 +13,7 @@
   backdrop-filter: blur(10px);
 
   &:hover {
-    background: var(--card-active);
+    background: var(--color-card-active);
     .item-cover {
       filter: brightness(0.8);
       transform: none;
@@ -37,20 +37,20 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    color: var(--text);
+    color: var(--color-text);
     padding: 0 0 0 1rem;
     .item-title {
       font-size: 1.4rem;
       font-weight: normal;
-      color: var(--text);
+      color: var(--color-text);
       transition: color 0.3s;
       &:hover {
-        color: var(--text-primary);
+        color: var(--color-text-primary);
       }
     }
     .item-preview {
       flex: 1;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       word-break: break-word;
       white-space: normal;
       text-overflow: ellipsis;
@@ -71,7 +71,7 @@
     $height: 2rem;
     position: absolute;
     text-align: center;
-    color: var(--theme-primary);
+    color: var(--color-primary);
     background: currentColor;
     width: 6.6rem;
     font-size: 0.8rem;
@@ -96,13 +96,13 @@
     }
     .category-icon {
       display: inline-block;
-      color: var(--text);
+      color: var(--color-text);
       font-size: 1.2rem;
       vertical-align: middle;
       margin: 0 0.5rem 0 -0.5rem;
     }
     .category-text {
-      color: var(--text);
+      color: var(--color-text);
       margin: 0rem;
       font-size: 0.8rem;
       vertical-align: middle;

@@ -156,7 +156,7 @@ export default {
 
 #app {
   position: relative;
-  // background: var(--background);
+  // background: var(--color-background);
   background-color: white;
   width: 1080px;
   // width: $mobile;

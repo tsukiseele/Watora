@@ -9,7 +9,7 @@
 
 #main {
   margin: 1rem auto;
-  background: var(--card);
+  background: var(--color-card);
   border-radius: 0.5rem;
 }
 
@@ -19,6 +19,7 @@
 
   .timeline-group {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     padding: 0.33rem 1rem;
     border-bottom: 1px solid #eee;
@@ -26,12 +27,11 @@
   .timeline-date {
     display: block;
     font-family: 'Courier New', '等距更纱黑体 SC', 'Consolas', Courier, monospace;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
-  .timeline-day {
-    font-family: 'Courier New', '等距更纱黑体 SC', 'Consolas', Courier, monospace;
-    padding-right: .67rem;
-  }
+
   .timeline-list {
     display: flex;
     flex-direction: column;
@@ -47,25 +47,29 @@
     // line-height: 1.5rem;
     // display: inline-block;
     &:hover {
-      background: var(--card-active);
+      background: var(--color-card-active);
       .timeline-item-title {
-        padding-left: 1rem;
+        // padding-left: 1rem;
       }
     }
   }
-
+  .timeline-item-day {
+    padding-right: 0.67rem;
+  }
   .timeline-item-title {
-    color: var(--text-primary);
+    color: var(--color-text-primary);
     font-weight: 300;
     font-family: InfoDisplay;
     padding: 0 0.33rem;
     transition: padding 0.3s;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .timeline-item-tags {
-    // border: 1px solid var(--theme-primary);
+    // border: 1px solid var(--color-primary);
     border-radius: 3px;
-    color: var(--text);
+    color: var(--color-text);
     font-weight: 300;
     font-size: 0.8rem;
     padding: 0.125rem;

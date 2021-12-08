@@ -67,7 +67,7 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: var(--card);
+  background-color: var(--color-card);
   user-select: none;
   cursor: pointer;
   width: 36px;
@@ -76,9 +76,9 @@ export default {
   svg,
   i {
     transition: 0.2s ease;
-    color: var(--text);
+    color: var(--color-text);
     &:hover {
-      color: var(--text-primary);
+      color: var(--color-text-primary);
     }
   }
 }

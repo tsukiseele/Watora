@@ -6,9 +6,9 @@
       span.timeline-date {{ date }}
       div.timeline-list
         div(v-for='item in group' :key='item.id')
-          a.timeline-item(:href="`/archives/${item.id}`" @click.prevent='$router.push(`/archives/${item.id}`)')
-            span.timeline-day {{ item.createAt | formatDate('dd')}}
-            span {{ item.title }}
+          span.timeline-item
+            span.timeline-item-day {{ item.createAt | formatDate('dd')}}
+            a.timeline-item-title(:href="`/archives/${item.id}`" @click.prevent='$router.push(`/archives/${item.id}`)') {{ item.title }}
 </template>
 
 <script>

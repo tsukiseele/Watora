@@ -11,18 +11,18 @@
   display: inline-block;
   vertical-align: middle;
   border-radius: math.div($height, 2) !important;
-  color: var(--text);
+  color: var(--color-text);
   font-size: 0.8rem;
   line-height: $height;
   padding: 0 0.5rem;
   margin: 0 5px;
-  border: thin solid var(--border);
+  border: thin solid var(--color-border);
   transition: border 0.3s ease;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.12);
   &:hover {
-    border: thin solid var(--text-primary);
+    border: thin solid var(--color-text-primary);
     background-color: rgba(0, 0, 0, 0.2);
-    color: var(--text-primary);
+    color: var(--color-text-primary);
   }
 }

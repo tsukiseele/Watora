@@ -36,7 +36,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--card);
+  background: var(--color-card);
   // border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   box-shadow: var(--shadow);
   .card-icon {
@@ -55,16 +55,16 @@ export default {
     font-size: 1.5rem;
     font-weight: normal;
     font-family: InfoDisplay;
-    color: var(--text-primary);
+    color: var(--color-text-primary);
   }
   .card-info {
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     font-family: InfoDisplay;
     padding: 0 0 1rem 0;
   }
 
   .card-links {
-    color: var(--text);
+    color: var(--color-text);
     cursor: pointer;
     i {
       padding: 0.33rem 1rem;
