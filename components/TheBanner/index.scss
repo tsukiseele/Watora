@@ -25,6 +25,7 @@
   }
   &.hide {
     height: 3rem;
+    background-image: none;
     background-color: var(--color-card);
   }
   @media screen and(max-width: $mobile) {

@@ -2,7 +2,9 @@
 .markdown-preview
   .markdown-content(v-html='markdown')
   transition(name='zoom')
-    .markdown-image-preview-modal(v-if='previewEl' @click="cancelPreview")
+    .markdown-image-preview-modal(v-if='previewEl' @click='cancelPreview')
+  img.markdown-image-preview(v-if='preview' :src='preview' ref='preview')
+
 </template>
 
 <script>
@@ -15,6 +17,7 @@ export default {
   },
   data: () => ({
     _timer: null,
+    preview: null,
     previewEl: null,
   }),
   computed: {
@@ -61,6 +64,7 @@ export default {
     },*/
     cancelPreview() {
       if (this.previewEl) {
+        this.previewEl.style.position = 'static'
         this.previewEl.style.transform = 'none'
         this.previewEl.style.zIndex = 0
         this.previewEl = null
@@ -71,9 +75,21 @@ export default {
         this.previewEl = imgEl
         const elRect = this.previewEl.getBoundingClientRect()
         const targetTop = (window.innerHeight - elRect.height) / 2
+        const targetLeft = (window.innerWidth - elRect.width) / 2
         const scale = elRect.width / elRect.height > window.innerWidth / window.innerHeight ? window.innerWidth / elRect.width : window.innerHeight / elRect.height
-        this.previewEl.style.transform = `translateY(${targetTop - elRect.top}px) scale(${scale - 0.05})`
+        this.previewEl.style.transform = `translate(${targetLeft - elRect.left}px, ${targetTop - elRect.top}px) scale(${scale})`
         this.previewEl.style.zIndex = 16
+        this.previewEl.style.position = 'relative'
+
+        /*
+        this.preview = imgEl.src
+        this.$refs.preview.style.top = targetTop
+
+        this.$refs.preview.style.left = targetLeft
+
+        this.$refs.preview.style.transition = '.3s'
+*/
+
       }
     },
     init() {
@@ -99,6 +115,12 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+.markdown-image-preview {
+  position: fixed;
+  opacity: 0;
+}
+</style>
 
 <style lang="scss">
 // @import "highlight.js/styles/atom-one-dark.css";

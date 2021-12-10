@@ -43,6 +43,12 @@ renderer.table = function(header, body) {
 renderer.heading = function(text, level, raw, slugger) {
   return `<h${level} id="${slugger.slug('md-title')}">\n${raw}\n</h${level}>\n`
 }
+renderer.image = function(href, title, text) {
+  return `<div class="md-image-box">
+  <img class="md-image" src="${href}" alt="${text}" />
+  <span class="md-image-title">${text}</span>
+  </div>`
+}
 marked.setOptions({
   renderer,
   highlight: code => hljs.default.highlightAuto(code).value,

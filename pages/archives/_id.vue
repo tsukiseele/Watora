@@ -1,6 +1,7 @@
 <template lang="pug">
 #container
-  TheBanner(v-if='archive', :title='header.title', :cover='header.cover', :subtitle='header.subtitle', :disableTyping='false')
+  TheBanner(v-if='archive',  :disableTyping='true', :isHide='header.isHide')
+  //- :title='header.title', :cover='header.cover', :subtitle='header.subtitle',
   main#main
     .archive
       .content
@@ -28,7 +29,7 @@ export default {
       return {
         title: this.archive ? this.archive.title : '无题',
         subtitle: this.archive ? this.archive.description : '',
-        cover: this.archive ? this.archive.cover.url : null,
+        // cover: this.archive ? this.archive.cover.url : null,
         isHideSubtitle: true,
         isHide: true,
       }

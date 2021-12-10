@@ -1,5 +1,5 @@
 const regLines = new RegExp('.+', 'gm')
-const regImages = new RegExp('\\[(.*?)\\].*?(https?:\\/\\/.+?.(?:jpg|jpeg|png|gif).*?)', 'g')
+const regImages = new RegExp('!\\[(.*?)\\].*?\\(((?:https?:\\/\\/|\\/\\/).+?\\.(?:webp|png|gif|jpg|jpeg|jfif)(?:\\?[\\w_=\\-%]+?|))\\)', 'g')
 const regTitles = new RegExp('^(#+)\\s+(.+)', 'gm')
 const regBranches = new RegExp('(main|master)\\/', 'g')
 

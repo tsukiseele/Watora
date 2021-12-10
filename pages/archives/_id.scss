@@ -8,20 +8,21 @@
   margin-top: 0rem;
 }
 .archive {
-  margin: 0 2rem;
-  // box-shadow: var(--shadow);
 }
 .content {
   display: flex;
 }
 .markdown {
   flex: 1;
+  width: 0;
+  margin: 0 .5rem;
 }
 .aside {
   position: sticky;
   top: var(--nav-height);
   flex: 0 0 200px;
   align-self: flex-start;
+  margin: 0 .5rem;
 }
 .markdown,
 .comments,

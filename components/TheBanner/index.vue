@@ -1,12 +1,12 @@
 <template lang="pug">
 #banner(ref='banner', :class='{ full: isFull, hide: isHide }', :style='{ "background-image": background }')
-  .banner--card(v-show='!isHide')
+  .banner--card(v-if='!isHide')
     .banner--title(@click='scrollToContent()')
       span {{ title }}
     .banner--subtitle(v-if='!isHideSubtitle')
       span {{ input.show }}
       span.subtitle--cursor(:class='{ "subtitle--cursor-vague": input.vague }')
-  .btn-scroll(v-show='!isHide && isFull')
+  .btn-scroll(v-if='!isHide && isFull')
     i.fa.fa-chevron-down.fa-lg(@click='scrollToContent()')
 </template>
 
