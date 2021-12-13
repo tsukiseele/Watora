@@ -2,13 +2,12 @@
   font-size: 16px;
   line-height: 1.8em;
   letter-spacing: 1px;
-  font-family:  "Microsoft YaHei", "Lucida Grande", "Lucida Sans Unicode", Helvetica;
-  font-weight: lighter;
+  font-weight: normal;
+  font-family: var(--font-sans-serif);
   
   table, code, kbd, pre, samp {
     letter-spacing: 0.5px;
     font-size: 14px;
-    font-family: Consolas, Roboto, 'Courier New', Inconsolata, Courier, "Microsoft YaHei", "Lucida Grande", "Lucida Sans Unicode", Helvetica, monospace !important;
     margin: auto 5px;
   }
 

@@ -24,6 +24,7 @@
     padding: 0.33rem 1rem;
     border-bottom: 1px solid #eee;
   }
+  
   .timeline-date {
     display: block;
     font-family: 'Courier New', '等距更纱黑体 SC', 'Consolas', Courier, monospace;
@@ -56,9 +57,11 @@
       }
     }
   }
+  
   .timeline-item-day {
     padding-right: 0.67rem;
   }
+
   .timeline-item-title {
     color: var(--color-text-primary);
     font-weight: 300;

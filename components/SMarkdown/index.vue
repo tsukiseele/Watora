@@ -53,7 +53,6 @@ export default {
     },
     cancelPreview() {
       if (this.previewEl) {
-        this.previewEl.style.position = 'static'
         this.previewEl.style.transform = 'none'
         this.previewEl.style.zIndex = 0
         this.previewEl = null
@@ -68,7 +67,6 @@ export default {
         const scale = elRect.width / elRect.height > window.innerWidth / window.innerHeight ? window.innerWidth / elRect.width : window.innerHeight / elRect.height
         this.previewEl.style.transform = `translate(${targetLeft - elRect.left}px, ${targetTop - elRect.top}px) scale(${scale})`
         this.previewEl.style.zIndex = 16
-        this.previewEl.style.position = 'relative'
       }
     },
     init() {
@@ -107,7 +105,7 @@ export default {
 
 @import './index.scss';
 
-@import './theme.scss';
+@import './watora.scss';
 /*
 :root[theme="dark"] {
   @import "./theme/dark.scss";

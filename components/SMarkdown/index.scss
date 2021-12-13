@@ -24,65 +24,27 @@
 .zoom-leave-to {
   opacity: 0;
 }
-.markdown-content {
-  flex: 1;
-  padding: 0 0.5rem;
-  .md-image-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // box-shadow: var(--shadow);
-    width: 100%;
-    margin-bottom: .5rem;
-    .md-image {
-      width: 100%;
-      position: relative;
-      object-fit: contain;
-      transition: 0.3s;
-      cursor: pointer;
-      user-select: none;
-      margin: 0 auto;
-    }
 
-    .md-image-title {
-      font-family: var(--font-serif);
-      vertical-align: center;
-      text-decoration: underline;
-      color: teal;
-    }
-  }
-  pre,
-  code {
-    margin: 0 !important;
-    border-radius: 5px;
-    background-color: rgba(64, 64, 64, 0.1);
-  }
+.markdown-content {
+  padding: .5rem;
   pre {
     position: relative;
     line-height: 0;
-    padding: 2.5rem 0.75rem 0.5rem 0.75rem;
     code {
-      line-height: 1.3rem;
-      padding: 0.5rem 0;
-      background-color: transparent;
+      line-height: initial;
     }
     .code-options {
-      display: inline-block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 0 1rem;
-      margin: 0;
-      line-height: 10px;
+      padding: .2rem;
+      text-align: right;
       user-select: none;
       i {
-        padding: 0;
         cursor: pointer;
       }
     }
   }
-  .table-wrap {
-    overflow: auto;
-    width: 100%;
+  img {
+    position: relative;
+    max-width: 100%;
+    transition: .25s ease-out;
   }
 }

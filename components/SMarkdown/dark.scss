@@ -1,26 +1,26 @@
 .markdown-content {
-  $md-font: "Microsoft YaHei", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
-  $md-code-font: Menlo, Consolas, "Courier New", Courier, FreeMono, monospace;
+  $md-font: var(--font-serif);//'Microsoft YaHei', 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
+  $md-code-font: var(--font-monospace);//Menlo, Consolas, 'Courier New', Courier, FreeMono, monospace;
   $md-text: #abb2bf;
   $md-title: #bcc3d0;
   $md-bg: #212121;
   $md-code-bg: #292c34;
   $md-code-color: #7e57c2;
   // $md-link: #f596aa;
-  $md-link: #26A69A;
+  $md-link: #26a69a;
   $md-hr: #f596aa;
-  $md-border: #78909C;
+  $md-border: #78909c;
   $md-block-bg: rgba(127, 127, 127, 0.2);
   $md-colors-1: #ec407a;
   $md-colors-2: #7e57c2;
-  $md-colors-3: #42A5F5;
-  $md-colors-4: #26A69A;
-  $md-colors-5: #9CCC65;
+  $md-colors-3: #42a5f5;
+  $md-colors-4: #26a69a;
+  $md-colors-5: #9ccc65;
   $md-colors-6: #ffca28;
-  $md-colors-7: #78909C;
+  $md-colors-7: #78909c;
   /*  */
-   & {
-     color: $md-text;
+  & {
+    color: $md-text;
     font-family: $md-font;
     font-weight: normal !important;
     padding: 0 1rem !important;
@@ -31,7 +31,7 @@
       background-color: $md-bg;
     }
   }
-  
+
   h1,
   h2,
   h4,
@@ -64,42 +64,34 @@
 
   h3 {
     margin: 16px 0 16px -8px;
-    padding: 0 0 0 6px!important;
+    padding: 0 0 0 6px !important;
     background-color: $md-block-bg;
     &:nth-of-type(7n) {
-      
-    color: $md-colors-1;
+      color: $md-colors-1;
       border-left: 4px solid $md-colors-1;
-      
     }
     &:nth-of-type(7n + 1) {
-      
-    color: $md-colors-2;
+      color: $md-colors-2;
       border-left: 4px solid $md-colors-2;
     }
     &:nth-of-type(7n + 2) {
-      
-    color: $md-colors-3;
+      color: $md-colors-3;
       border-left: 4px solid $md-colors-3;
     }
     &:nth-of-type(7n + 3) {
-      
-    color: $md-colors-4;
+      color: $md-colors-4;
       border-left: 4px solid $md-colors-4;
     }
     &:nth-of-type(7n + 4) {
-      
-    color: $md-colors-5;
+      color: $md-colors-5;
       border-left: 4px solid $md-colors-5;
     }
     &:nth-of-type(7n + 5) {
-      
-    color: $md-colors-6;
+      color: $md-colors-6;
       border-left: 4px solid $md-colors-6;
     }
     &:nth-of-type(7n + 6) {
-      
-    color: $md-colors-7;
+      color: $md-colors-7;
       border-left: 4px solid $md-colors-7;
     }
   }
@@ -131,15 +123,17 @@
     &.list-item-checkbox::after {
       display: none;
     }
-    input[type="checkbox"]::before {
-      color: $md-text!important;
-      background-color: $md-bg!important;
+    input[type='checkbox']::before {
+      color: $md-text !important;
+      background-color: $md-bg !important;
     }
   }
   table {
     width: 100px !important;
     overflow-x: scroll !important;
-    th, td, tr:nth-of-type(even) td {
+    th,
+    td,
+    tr:nth-of-type(even) td {
       color: $md-text;
       background-color: $md-bg;
       border: 1px solid $md-border;
@@ -161,19 +155,19 @@
       margin: 5px 1rem;
     }
     &::after {
-      content: "\f10e";
+      content: '\f10e';
       font-family: Fontello;
       font-size: 1.2rem;
       align-self: flex-end;
     }
     &::before {
-      content: "\f10d";
+      content: '\f10d';
       font-family: Fontello;
       font-size: 1.2rem;
       align-self: flex-start;
     }
   }
-  @media screen and (max-width: $mobile){
+  @media screen and (max-width: $mobile) {
     h1 {
       font-size: 1.5rem;
       border-bottom: 1px solid $md-border;

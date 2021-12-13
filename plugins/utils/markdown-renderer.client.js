@@ -28,11 +28,9 @@ renderer.code = function code(_code, infostring, escaped) {
   }
   const langClass = this.options.langPrefix + lang
   return `
-    <pre class="hljs${lang ? ` ${langClass}` : ''}">
-      <code class="${lang ? ` ${langClass}` : ''}" id="${id}">${_code}</code>
-      <div class="code-options">
-        <i data-copy="${id}" class="material-icons md-code-copy">content_paste</i>
-      </div>
+    <pre class="hljs${lang ? ` ${langClass}` : ''}"><div class="code-options">
+      <i data-copy="${id}" class="material-icons md-code-copy">content_paste</i>
+      </div><code class="${lang ? ` ${langClass}` : ''}" id="${id}">${_code}</code>  
     </pre>\n`
 }
 
@@ -42,13 +40,13 @@ renderer.table = function(header, body) {
 }
 renderer.heading = function(text, level, raw, slugger) {
   return `<h${level} id="${slugger.slug('md-title')}">\n${raw}\n</h${level}>\n`
-}
+} /*
 renderer.image = function(href, title, text) {
   return `<div class="md-image-box">
   <img class="md-image" src="${href}" alt="${text}" />
   <span class="md-image-title">${text}</span>
   </div>`
-}
+}*/
 marked.setOptions({
   renderer,
   highlight: code => hljs.default.highlightAuto(code).value,
