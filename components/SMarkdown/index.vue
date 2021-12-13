@@ -51,17 +51,6 @@ export default {
         this._timer = null
       }, 200)
     },
-    /*
-    onWhellScroll(e) {
-      if (this.previewEl) {
-        const match = /scale\((.+?)\)/g.exec(this.previewEl.style.transform)
-        if (match && match[1]) {
-          e.preventDefault()
-          const scale = e.deltaY > 0 ? match[1] * 1.1 : match[1] * 0.9
-          this.previewEl.style.transform = this.previewEl.style.transform.replace(match[0], `scale(${scale})`)
-        }
-      }
-    },*/
     cancelPreview() {
       if (this.previewEl) {
         this.previewEl.style.position = 'static'
@@ -80,16 +69,6 @@ export default {
         this.previewEl.style.transform = `translate(${targetLeft - elRect.left}px, ${targetTop - elRect.top}px) scale(${scale})`
         this.previewEl.style.zIndex = 16
         this.previewEl.style.position = 'relative'
-
-        /*
-        this.preview = imgEl.src
-        this.$refs.preview.style.top = targetTop
-
-        this.$refs.preview.style.left = targetLeft
-
-        this.$refs.preview.style.transition = '.3s'
-*/
-
       }
     },
     init() {
