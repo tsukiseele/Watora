@@ -1,62 +1,46 @@
 .markdown-content {
   --md-font-monospace: 'JetBrains Mono', HYZhengYuan, 'Fira Code', Menlo, 'Ubuntu Mono', Consolas;
-  --md-font-sans-serif: 'InfoDisplay', sans-serif;
+  --md-font-sans-serif: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;//'InfoDisplay', sans-serif;
   --md-font-serif: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  // font-family: Georgia, 'Times New Roman', Times, serif;
+  // font-family:
   // 全局文本字体/颜色
-  --md-font-content: var(--md-font-monospace);
+  --md-font-content: var(--md-font-sans-serif);
+  --md-color-content: #37474f;
 
-  --md-color-content: teal;
   // 标题文本字体/颜色
-  --md-font-title: var(--md-font-serif);
-  --md-color-title: #204040;
+  --title-font: var(--md-font-serif);
+  --title-color: teal;// #204040;
 
   // 背景颜色
   --md-color-bg: white;
-
   --item-hover-bg-color: #37474f;
 
-  --drake-accent: #429488;
+  --drake-accent: #007f7f;
   --drake-highlight: #429488;
 
   --a-color: var(--drake-highlight);
 
   --variable-color: var(--drake-highlight);
 
-  --outline-active-color: var(--a-color);
   --code-block-font: 'MONACO', 'Consolas', 'Courier New', Courier, monospace;
   --code-block-bg-color: #f0f0f0;
   --code-block-color: var(--md-color-content);
 
-  --blockquote-border-color: var(--drake-accent);
+  --blockquote-border-color: var(--drake-highlight);
   --blockquote-color: var(--md-color-content);
-  --blockquote-bg-color: #f0f0f0;
+  --blockquote-bg-color: rgba(127,127,127,.1);
 
-  --strong-color: var(--md-color-title);
+  --strong-color: var(--title-color);
 
-  --h2-underline-color: var(--md-color-title);
+  --h2-underline-color: var(--title-color);
 
-  --horizontal-divider-color: var(--md-color-title);
-  --height-light-color: var(--drake-highlight);
-  --height-light-border-color: var(--drake-highlight);
-
-  --yaml-color: #676773;
-  --yaml-bg-color: var(--code-block-bg-color);
-
-  --footnotes-bg-color: var(--item-hover-bg-color);
-  --footnotes-highlight: #ffd760;
+  --horizontal-divider-color: var(--title-color);
 
   --table-header-text-color: #f0f0f0;
-  --table-header-bg-color: var(--md-color-content);
-  --table-border-color: var(--table-header-bg-color);
+  --table-header-bg-color: var(--drake-accent);
+  --table-border-color: var(--drake-highlight);
   --table-bg-color: var(--md-color-bg);
-
   --table-n2-bg-color: #f0f0f0;
-
-  --input-bg-color: var(--item-hover-bg-color);
-
-  --btn-hover-bg-color: var(--item-hover-bg-color);
 
   --checkbox-checked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M425.984 726.016l384-384-59.99-61.995-324.01 324.011-152.021-152.021L213.973 512zm384-598.016q36.01 0 61.013 25.984T896 213.974v596.01q0 34.005-25.003 59.99t-61.013 25.983h-596.01q-36.011 0-61.014-25.984t-25.003-59.989v-596.01q0-34.006 25.003-59.99T213.973 128h596.011z' fill='%2365b73b'/%3E%3C/svg%3E");
   --checkbox-unchecked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M810.667 213.333v597.334H213.333V213.333h597.334m0-85.333H213.333C166.4 128 128 166.4 128 213.333v597.334C128 857.6 166.4 896 213.333 896h597.334C857.6 896 896 857.6 896 810.667V213.333C896 166.4 857.6 128 810.667 128z' fill='%23acb7c4'/%3E%3C/svg%3E");
@@ -72,7 +56,6 @@
   letter-spacing: 0;
   margin: 0;
   line-height: 1.8rem;
-  border: 1px solid teal;
 
   /*code block*/
   pre {
@@ -81,13 +64,20 @@
     word-wrap: normal;
     background-color: var(--code-block-bg-color);
     color: var(--code-block-color);
-    border: none;
+    margin: 1rem 0;
+    .code-wrap {
+
+      overflow-x: auto;
+      padding: .5rem;
+    }
   }
   code {
-    padding: 0.5rem !important;
+    // padding: 0.2rem !important;
     font-family: var(--code-block-font);
-    display: block;
-    overflow-x: auto;
+    color: var(--code-block-color);
+    background-color: var(--code-block-bg-color);
+    // display: block;
+    // overflow-x: auto;
   }
 
   /*code snippet*/
@@ -137,6 +127,7 @@
     max-height: 50vh;
     margin: 0.5rem auto;
     border-radius: 2px;
+    cursor: pointer;
   }
 
   body > *:first-child {
@@ -153,13 +144,13 @@
   h4,
   h5,
   h6 {
-    font-family: var(--md-font-title);
+    font-family: var(--title-font);
     position: relative;
     padding-top: 1rem;
     padding-bottom: 0.5rem;
     font-weight: bold;
     cursor: text;
-    color: var(--md-color-title);
+    color: var(--title-color);
   }
 
   h3:hover::before,
@@ -310,7 +301,7 @@
   h6 p {
     margin-top: 0;
   }
-
+  // 列表
   li p.first {
     display: inline-block;
   }
@@ -329,7 +320,10 @@
   ol:last-child {
     margin-bottom: 0;
   }
-
+  .table-wrap {
+    overflow-x: auto;
+  }
+  // 表格
   table {
     margin: 0 auto;
     padding: 0;
@@ -369,21 +363,18 @@
     margin-bottom: 0;
   }
 
-  /*shortcut*/
+  // 键盘
   kbd {
     border: 0.1em solid #5b5b5e;
     background: transparent;
     color: var(--md-color-content);
     margin: 0 0.4rem;
+    font-family: var(--md-font-monospace);
     font-size: 0.95rem;
     padding: 0.3em 0.4em;
     border-radius: 0.4em;
     vertical-align: top;
     box-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.3);
-  }
-
-  .md-task-list-item > input {
-    margin-left: -1.3em;
   }
 
   @media print {
@@ -399,209 +390,5 @@
     pre {
       word-wrap: break-word;
     }
-  }
-
-  .mathjax-block > .code-tooltip {
-    bottom: 0.375rem;
-  }
-
-  .md-image > .md-meta {
-    border-radius: 2px;
-    font-family: initial;
-    padding: 2px 0 0 4px;
-    color: inherit;
-  }
-
-  .md-tag {
-    color: inherit;
-  }
-
-  .md-toc {
-    margin-top: 20px;
-    padding-bottom: 20px;
-  }
-  /*search input*/
-  .form-control {
-    border: none;
-    border-radius: 2px;
-    box-shadow: none;
-  }
-
-  .form-control:focus {
-    box-shadow: none;
-  }
-
-  /** focus mode */
-  .on-focus-mode blockquote {
-    border-left-color: rgba(85, 85, 85, 0.12);
-  }
-
-  header,
-  footer {
-    font-family: initial;
-  }
-
-  /*sidebar*/
-  .file-node-content:hover .file-node-icon,
-  .file-node-content:hover .file-node-open-state {
-    visibility: visible;
-  }
-
-  .sidebar-tabs {
-    border-bottom: none;
-  }
-
-  .file-list-item-summary,
-  .file-list-item-parent-loc,
-  .file-list-item-time,
-  .file-list-item-summary {
-    font-size: 0.9rem !important;
-    font-family: var(--md-font-content);
-  }
-
-  .file-list-item-file-ext-part {
-    display: none;
-  }
-
-  .outline-item {
-    font-size: 1rem;
-  }
-
-  /*footnotes content*/
-  .md-hover-tip .code-tooltip-content {
-    border-radius: 2px;
-  }
-
-  /*footnotes title*/
-  span.md-def-name {
-    padding-right: 3ch;
-    padding-left: 0;
-    position: relative;
-    font-weight: normal;
-  }
-
-  /*footnotes desc*/
-  .footnotes {
-    font-size: 1rem;
-    font-weight: normal;
-    color: var(--md-color-content);
-    position: relative;
-  }
-
-  /*footnotes tooltip text*/
-  .code-tooltip-content .md-plain {
-    font-size: 0.9rem;
-    font-family: inherit;
-  }
-
-  .code-tooltip-content code {
-    padding: 0 2px;
-    font-family: inherit;
-    color: var(--footnotes-highlight);
-    background-color: inherit;
-  }
-
-  .code-tooltip-content a {
-    color: var(--footnotes-highlight);
-  }
-
-  div.code-tooltip-content {
-    box-shadow: 0 0 8px #00000045;
-    background: var(--footnotes-bg-color);
-  }
-
-  .footnotes {
-    opacity: 1;
-  }
-
-  .md-def-name:after {
-    content: '. ^';
-    color: var(--md-color-content);
-  }
-
-  .md-def-footnote .md-def-name:before {
-    content: '';
-    color: var(--md-color-content);
-    position: absolute;
-  }
-
-  .md-def-name:before {
-    content: '';
-    color: var(--md-color-content);
-    position: absolute;
-  }
-
-  .md-content.md-url,
-  .md-def-content.md-def-url.md-auto-disp {
-    text-decoration: none;
-    border-bottom: 0.1rem solid var(--md-color-content);
-  }
-
-  .CodeMirror-scroll::-webkit-scrollbar {
-    display: none;
-  }
-
-  .file-list-item-summary {
-    font-size: 1em;
-  }
-
-  .pin-outline .outline-active {
-    font-weight: 500;
-    color: var(--outline-active-color);
-  }
-
-  .file-list-item.active {
-    border-left: 4px solid var(--drake-accent);
-  }
-
-  /*insert table*/
-  .btn {
-    border-radius: 2px;
-  }
-
-  .modal-content {
-    border-radius: 8px;
-  }
-
-  .btn-primary:hover,
-  .btn-primary:active {
-    background-color: var(--btn-hover-bg-color);
-    color: var(--drake-highlight);
-  }
-
-  .btn-primary {
-    background-color: transparent;
-    color: var(--drake-highlight);
-  }
-
-  .btn-default {
-    background-color: transparent;
-  }
-
-  .btn:active {
-    box-shadow: none;
-    border-color: transparent;
-  }
-
-  .long-btn {
-    width: inherit;
-    min-width: 300px;
-    border: 1px solid var(--md-color-content);
-    border-radius: 6px;
-  }
-
-  header,
-  footer {
-    font-family: var(--md-font-content);
-  }
-  .ty-preferences select {
-    padding-left: 2px;
-  }
-  .preference-item-hint {
-    font-size: 14px;
-  }
-  a.ty-link {
-    color: var(--a-color);
-    margin: 0 0.2rem;
   }
 }

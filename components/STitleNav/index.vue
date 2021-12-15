@@ -29,6 +29,9 @@ export default {
       return this.activeIndex == i ? "active" : '';
     }
   },
+  mounted() {
+    console.log(this.nav);
+  }
 }
 </script>
 

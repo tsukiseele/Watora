@@ -24,27 +24,47 @@
 .zoom-leave-to {
   opacity: 0;
 }
-
+/**
+ * 固有Markdown样式
+ */
 .markdown-content {
-  padding: .5rem;
+  padding: 1.5rem;
   pre {
+    display: block;
     position: relative;
     line-height: 0;
     code {
+      display: inline-block;
       line-height: initial;
     }
     .code-options {
-      padding: .2rem;
-      text-align: right;
+      position: absolute;
+      right: 0;
+      top: 0;
       user-select: none;
       i {
+        color: rgba(0, 128, 128, 0.67);
         cursor: pointer;
+        opacity: 0;
+        transition: 0.25s;
+        &:focus,
+        &:active {
+          color: rgba(0, 96, 96, 1);
+        }
       }
+    }
+    &:hover .code-options i {
+      opacity: 1;
     }
   }
   img {
     position: relative;
     max-width: 100%;
-    transition: .25s ease-out;
+    transition: 0.25s ease-out;
+  }
+}
+@media screen and(max-width: $mobile) {
+  .markdown-content {
+    padding: .5rem;
   }
 }

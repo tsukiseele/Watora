@@ -7,9 +7,9 @@
       .content
         .markdown
           client-only
-            SMarkdown(:content='archive.markdown', @activeChange='onMarkdownScroll', @imageClick="onImageClick")
-        .aside(v-if='!isMobile && archive.nav && archive.nav.length > 0')
-          STitleNav(:nav='archive.nav', :activeIndex="activeIndex")
+            SMarkdown(:content='archive.markdown', @activeChange='onMarkdownScroll', @imageClick="onImageClick" @loaded="onMarkdownLoaded")
+        .aside(v-if='!isMobile && titles && titles.length > 0')
+          STitleNav(:nav='titles', :activeIndex="titlesActiveIndex")
       client-only
         SComment(:title='this.$route.path')
 </template>
@@ -19,8 +19,8 @@ import { mapState, mapGetters } from 'vuex'
 
 export default {
   data: () => ({
-    activeIndex: null,
-    // el: null,
+    titlesActiveIndex: null,
+    titles: null,
   }),
   computed: {
     ...mapState(['archive']),
@@ -36,32 +36,15 @@ export default {
     },
   },
   methods: {
+    onMarkdownLoaded({ html, titles }) {
+      this.titles = titles
+    },
     onMarkdownScroll({ index, item }) {
-      this.activeIndex = index
+      this.titlesActiveIndex = index
     },
-    
     onImageClick(e) {
-      // e.target.style.position = 'fixed';
-      // e.target.style.top = '50%'
-      // e.target.style.left = '50%'
-      // const el = e.target
-      // const offsetY = window.innerHeight / 2
-      // console.log(offsetY)
-      // el.style.transform = `translateY(${offsetY}px)`
-      // console.log(e)
-      // this.el = el
     },
-  },/*
-  mounted() {
-    window.addEventListener('scroll', () => {
-      this.el.style.transform = 'none'
-    })
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', () => {
-
-    });
-  },*/
   async fetch({ store, params }) {
     const id = parseInt(params.id)
     await store.dispatch('archive', { id })

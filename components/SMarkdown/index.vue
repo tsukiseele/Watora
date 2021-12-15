@@ -19,11 +19,15 @@ export default {
     _timer: null,
     preview: null,
     previewEl: null,
+    titles: null,
   }),
   computed: {
     markdown() {
       try {
-        return this.$markdown(this.content)
+        const result = this.$markdown(this.content)
+        this.$emit("loaded", result)
+        this.titles = result.titles
+        return result.html
       } catch (error) {
         console.log(error)
       }
