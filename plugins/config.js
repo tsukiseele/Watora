@@ -4,7 +4,7 @@ export default {
   // 描述
   details: '',
   // 这里需要把 '_' 下划线替换为 '+'
-  token: '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',//'ghp+M39JbvqRn3ipsl8OOZfRFhLPDjR8uO0j7sLs',
+  token: 'ghp+WJ0EBltUhdwG4QnGa0Arhxa6wkSWoP3boZv7',
   // Github 用户名
   username: 'tsukiseele',
 

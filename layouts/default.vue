@@ -1,5 +1,6 @@
 <template lang="pug">
-#back
+#watora
+  #background
   #app
     //- #background(:style="{ 'background-image': background }")
     TheNav
@@ -117,37 +118,23 @@ export default {
 }
 </script>
 
-<style lang="scss">
-#back {
+<style lang="scss" scoped>
+#watora {
   position: relative;
-
-  &::before {
-    content: '';
+  #background {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: url('/bg.webp');
+    background: url('/bg.webp');  
+    // background: url(https://api.paugram.com/wallpaper?source=gt);
+    // background: repeating-linear-gradient(45deg, rgba(0, 128, 128, 1) 0 1rem, transparent 1rem 2rem, rgba(0, 128, 128, 1) 2rem 3rem);
     background-size: cover;
-    // background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.5) 1rem, transparent 1rem 2rem, rgba(255, 255, 255, 0.5) 2rem 3rem);
-    // background-color: #8491c3; //#ffec47;
-    // background-image: url(https://api.paugram.com/wallpaper?source=gt);
-    // background-color: red;
     background-position: center;
     background-attachment: fixed;
   }
-  /*
-  background-image: repeating-linear-gradient(
-    45deg,
-    #ccc 2px,
-    transparent 2px 4px,
-    #ccc 4px 6px,
-    transparent 6px 8px
-  );*/
 }
-</style>
-<style lang="scss" scoped>
 @media screen and (max-width: $mobile) {
   #app {
     overflow-x: hidden;

@@ -1,5 +1,5 @@
 <template lang="pug">
-.post-item(@click="$router.push(to)")
+.post-item(@click="$router.push(to)" :style="backgroundColor")
   .item-cover-box
     img.item-cover(v-lazy="cover || placeholder")
   .item-info 
@@ -51,9 +51,38 @@ export default {
       default: null,
     },
   },
-};
+  data: () => ({
+    backgroundColor: null,
+  }),
+  methods: {
+    getColor(src) {
+      return new Promise((resolve, reject) => {
+        const colorThief = new ColorThief()
+        const img = new Image()
+        img.crossOrigin = 'Anonymous'
+        img.src = src
+        if (img.complete) {
+          resolve(colorThief.getColor(img))
+        } else {
+          img.addEventListener('load', () => resolve(colorThief.getPalette(img)))
+          img.addEventListener('error', () => reject('Image failed to load'))
+        }
+      })
+    },
+  },
+  async mounted() {
+    try {
+      const [dominant, palette1, palette2, palette3] = await this.getColor(this.cover)
+      this.backgroundColor = { backgroundColor: `rgba(${dominant[0]}, ${dominant[1]}, ${dominant[2]}, .67)` }
+      console.log(this.backgroundColor)
+      console.log('colors', dominant, palette1, palette2, palette3)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-@import "./index.scss";
+@import './index.scss';
 </style>

@@ -3,15 +3,14 @@
   TheBanner(v-if='archive',  :disableTyping='true', :isHide='header.isHide')
   //- :title='header.title', :cover='header.cover', :subtitle='header.subtitle',
   main#main
-    .archive
-      .content
-        .markdown
-          client-only
-            SMarkdown(:content='archive.markdown', @activeChange='onMarkdownScroll', @imageClick="onImageClick" @loaded="onMarkdownLoaded")
-        .aside(v-if='!isMobile && titles && titles.length > 0')
-          STitleNav(:nav='titles', :activeIndex="titlesActiveIndex")
-      client-only
-        SComment(:title='this.$route.path')
+    .content
+      .markdown
+        client-only
+          SMarkdown(:content='archive.markdown', @activeChange='onMarkdownScroll', @imageClick="onImageClick" @loaded="onMarkdownLoaded")
+      .aside(v-if='!isMobile && titles && titles.length')
+        STitleNav(:nav='titles', :activeIndex="titlesActiveIndex")
+    client-only
+      SComment(:title='this.$route.path')
 </template>
 
 <script>
@@ -29,9 +28,9 @@ export default {
       return {
         title: this.archive ? this.archive.title : '无题',
         subtitle: this.archive ? this.archive.description : '',
-        // cover: this.archive ? this.archive.cover.url : null,
+        cover: this.archive ? this.archive.cover.url : null,
         isHideSubtitle: true,
-        isHide: true,
+        // isHide: true,
       }
     },
   },
@@ -42,8 +41,32 @@ export default {
     onMarkdownScroll({ index, item }) {
       this.titlesActiveIndex = index
     },
-    onImageClick(e) {
+    onImageClick(e) {},
+    getColor(src) {
+      return new Promise((resolve, reject) => {
+        const colorThief = new ColorThief()
+        const img = new Image()
+        img.crossOrigin = 'Anonymous'
+        img.src = src
+        if (img.complete) {
+          resolve([colorThief.getColor(img), ...colorThief.getPalette(img)])
+        } else {
+          img.addEventListener('load', () => resolve([colorThief.getColor(img), ...colorThief.getPalette(img)]))
+          img.addEventListener('error', () => reject('Image failed to load'))
+        }
+      })
     },
+  },
+  async mounted() {
+    try {
+      const [dominant, palette1, palette2, palette3] = await this.getColor(this.archive.cover.url)
+      document.getElementById('background').style.background = `rgba(${dominant[0]}, ${dominant[1]}, ${dominant[2]}, 1)`
+      // document.getElementById('background').style.background = `rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1)`
+      // document.getElementById('background').style.background = `repeating-linear-gradient(45deg, rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1) 0 1rem, rgba(${palette2[0]}, ${palette2[1]}, ${palette2[2]}, 1) 1rem 2rem, rgba(${palette3[0]}, ${palette3[1]}, ${palette3[2]}, 1) 2rem 3rem);`
+      console.log(`repeating-linear-gradient(45deg, rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1) 0 1rem, rgba(${palette2[0]}, ${palette2[1]}, ${palette2[2]}, 1) 1rem 2rem, rgba(${palette3[0]}, ${palette3[1]}, ${palette3[2]}, 1) 2rem 3rem);`);
+    } catch (error) {
+      console.error(error)
+    }
   },
   async fetch({ store, params }) {
     const id = parseInt(params.id)

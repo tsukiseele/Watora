@@ -55,7 +55,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .__nuxt-error-page {
   padding: 1rem;
   background: #f7f8fb;

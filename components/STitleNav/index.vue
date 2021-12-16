@@ -1,7 +1,7 @@
 <template lang="pug">
 .title-nav-view
   ul.title-nav
-    li.title-nav-item(v-for='(item, i) in nav', :key='i', :class='`h${item.level} ${isActive(i)}`' @click='onNavItemClick(item)') 
+    li.title-nav-item(v-for='(item, i) in nav', :key='item.id', :class='[`h${item.level}`, isActive(i)]' @click='onNavItemClick(item)') 
       span.title-nav-text {{ item.title }}
 </template>
 
@@ -14,8 +14,8 @@ export default {
     },
     activeIndex: {
       type: Number,
-      default: null
-    }
+      default: null,
+    },
   },
   data: () => ({}),
   methods: {
@@ -26,12 +26,12 @@ export default {
       }
     },
     isActive(i) {
-      return this.activeIndex == i ? "active" : '';
-    }
+      return this.activeIndex == i ? 'active' : ''
+    },
   },
   mounted() {
-    console.log(this.nav);
-  }
+    console.log(this.nav)
+  },
 }
 </script>
 

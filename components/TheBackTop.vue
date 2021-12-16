@@ -28,7 +28,7 @@ export default {
   transition: bottom 0.3s ease;
   animation: float 3s linear infinite;
   cursor: pointer;
-  z-index: 99;
+  z-index: 9;
   user-select: none;
   &.hide {
     bottom: 100%;

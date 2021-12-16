@@ -4,7 +4,7 @@ export default {
     host: process.env.BASE_HOST || 'localhost',
     port: process.env.BASE_PORT || 3000,
   },
-  ssr: true,
+  ssr: process.env.SSR != 'false',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Watora - TsukiSeele的个人小站',
@@ -31,14 +31,17 @@ export default {
         type: 'image/x-icon',
         href: '/favicon.ico',
       },
-    ],
-    link: [
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href: 'https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css',
+        href: '//cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css',
       },
     ],
+    script: [
+      {
+        src: '//cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js'
+      }
+    ]
   },
   axios: {
     // baseURL: 'https://api.github.com/repos/chanshiyucx/blog',
