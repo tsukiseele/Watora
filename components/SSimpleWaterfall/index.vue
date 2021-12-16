@@ -60,21 +60,21 @@ export default {
       }
     },
     fall() {
-      // 获取当前页面的宽度
+      // 获取当前组件的宽度
       const containerWidth = this.$el.offsetWidth
       // 若传入列数，则使用，否则自动计算：实际列数 = 页面宽度 / (图片宽度 + 间距)
       this.column = Math.floor((containerWidth - this.gap) / (this.itemWidth + this.gap))
       this.column = this.maxColumn && this.column > this.maxColumn ? this.maxColumn : this.column || 1
-      // 若传入平均间距，则自动计算，否则使用传入的间距
+      // 若传入平均间距，则自动计算，否则为传入的间距
       const realGap = this.evenly ? (containerWidth - this.itemWidth * this.column) / (this.column - 1) : this.gap
-      // 若传入平均间距，则为0，否则自动计算
+      // 若传入平均间距，则为传入的间距，否则自动计算
       const margin = this.evenly ? realGap : (containerWidth - (this.itemWidth + realGap) * this.column + realGap) / 2
       // 获取所有需要布局的项
       const itemEls = this.$el.querySelectorAll('.list-item')
       // 数组，保存最低高度
       const heightArr = []
-      // 保存偏移量
-      let top, left
+      // x, y轴偏移量
+      let x, y
       // 遍历并通过已知高度布局
       itemEls.forEach((itemEl, i) => {
         itemEl.style.width = this.itemWidth + 'px'
@@ -83,18 +83,18 @@ export default {
         const height = itemEl.offsetHeight
         // 如果当前处在第一行
         if (i < this.column) {
-          top = 0
-          left = (this.itemWidth + realGap) * i + margin
+          x = (this.itemWidth + realGap) * i + margin
+          y = 0
           heightArr.push(height)
         } else {
           const minHeight = Math.min(...heightArr)
           const minIndex = heightArr.indexOf(minHeight)
-          top = minHeight + realGap
-          left = (this.itemWidth + realGap) * minIndex + margin
+          x = (this.itemWidth + realGap) * minIndex + margin
+          y = minHeight + realGap
           heightArr[minIndex] = minHeight + realGap + height
         }
-        itemEl.style.top = top + 'px'
-        itemEl.style.left = left + 'px'
+        itemEl.style.left = x + 'px'
+        itemEl.style.top = y + 'px'
       })
       this.$el.style.height = this.height ? this.height : Math.max(...heightArr) + 'px'
     },
@@ -121,10 +121,7 @@ export default {
         if (entries && entries.length) {
           if (this.resizeTimer) return
           this.resizeTimer = setTimeout(() => {
-            // entries.forEach(ele => {
-            console.log('this.responsive()')
             this.responsive()
-            // })
             clearTimeout(this.resizeTimer)
             this.resizeTimer = null
           }, 300)

@@ -122,7 +122,7 @@ export default {
 #watora {
   position: relative;
   #background {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
