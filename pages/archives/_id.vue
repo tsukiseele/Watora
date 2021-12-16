@@ -60,10 +60,9 @@ export default {
   async mounted() {
     try {
       const [dominant, palette1, palette2, palette3] = await this.getColor(this.archive.cover.url)
-      document.getElementById('background').style.background = `rgba(${dominant[0]}, ${dominant[1]}, ${dominant[2]}, 1)`
+      // document.getElementById('background').style.background = `rgba(${dominant[0]}, ${dominant[1]}, ${dominant[2]}, 1)`
       // document.getElementById('background').style.background = `rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1)`
-      // document.getElementById('background').style.background = `repeating-linear-gradient(45deg, rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1) 0 1rem, rgba(${palette2[0]}, ${palette2[1]}, ${palette2[2]}, 1) 1rem 2rem, rgba(${palette3[0]}, ${palette3[1]}, ${palette3[2]}, 1) 2rem 3rem);`
-      console.log(`repeating-linear-gradient(45deg, rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1) 0 1rem, rgba(${palette2[0]}, ${palette2[1]}, ${palette2[2]}, 1) 1rem 2rem, rgba(${palette3[0]}, ${palette3[1]}, ${palette3[2]}, 1) 2rem 3rem);`);
+      document.getElementById('background').style.backgroundImage = `repeating-linear-gradient(45deg, rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1) 0 2rem, rgba(${palette2[0]}, ${palette2[1]}, ${palette2[2]}, 1) 2rem 4rem, rgba(${palette3[0]}, ${palette3[1]}, ${palette3[2]}, 1) 4rem 6rem)`
     } catch (error) {
       console.error(error)
     }
