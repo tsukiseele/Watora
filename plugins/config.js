@@ -7,8 +7,9 @@ export default {
   token: 'ghp+WJ0EBltUhdwG4QnGa0Arhxa6wkSWoP3boZv7',
   // Github 用户名
   username: 'tsukiseele',
-
   // username: 'chanshiyucx',
-  // Github 仓库名
-  repository: 'blog'
+  // Github 文章仓库名
+  repository: 'blog',
+  // Github 评论仓库名
+  commentRepository: 'comment'
 }

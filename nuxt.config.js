@@ -4,7 +4,7 @@ export default {
     host: process.env.BASE_HOST || 'localhost',
     port: process.env.BASE_PORT || 3000,
   },
-  ssr: process.env.SSR != 'false',
+  ssr: !(process.env.MODE && process.env.MODE.toLocaleLowerCase() == 'spa'),
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Watora - TsukiSeele的个人小站',

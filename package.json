@@ -5,7 +5,7 @@
   "homepage": "https://tsukiseele.github.io/Watora",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev nuxt",
-    "dev-spa": "cross-env NODE_ENV=dev SSR=false nuxt",
+    "dev-spa": "cross-env NODE_ENV=dev MODE=SPA nuxt",
     "build": "cross-env NODE_ENV=prod nuxt build",
     "start": "cross-env NODE_ENV=prod nuxt start ",
     "analyze": "nuxt build --analyze",
