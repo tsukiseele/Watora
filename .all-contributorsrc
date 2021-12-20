@@ -1,0 +1,21 @@
+{
+  "projectName": "watora",
+  "projectOwner": "Watora",
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=for-the-badge)](#contributors)",
+  "commit": false,
+  "contributors": [
+    {
+      "login": "tsukiseele",
+      "name": "TsukiSeele",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20062482?v=4",
+      "profile": "https://tsukiseele.com",
+      "contributions": [
+        "code",
+        "bug",
+        "doc",
+        "test"
+      ]
+    }
+  ],
+  "repoType": "github"
+}
