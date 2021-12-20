@@ -12,6 +12,24 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "satoutoshio",
+      "name": "satoutoshio",
+      "avatar_url": "https://avatars.githubusercontent.com/u/88788387?v=4",
+      "profile": "https://github.com/satoutoshio",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "all-contributors",
+      "name": "All Contributors",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46410174?v=4",
+      "profile": "https://allcontributors.org",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "projectName": "Watora",
