@@ -8,9 +8,6 @@ export default ({ app }, inject) => {
   inject('placeholder', 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=')
   inject('src', initResource())
   inject('isNight', isNight)
-
-  // inject('colorThief', new ColorThief())
-
 }
 
 function isNight() {
