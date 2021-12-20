@@ -1,9 +1,6 @@
 {
-  "projectName": "watora",
-  "projectOwner": "Watora",
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=for-the-badge)](#contributors)",
   "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
-  "commit": false,
   "contributors": [
     {
       "login": "tsukiseele",
@@ -11,12 +8,12 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/20062482?v=4",
       "profile": "https://tsukiseele.com",
       "contributions": [
+        "design",
         "code",
         "bug",
         "doc",
         "test"
       ]
     }
-  ],
-  "repoType": "github"
+  ]
 }
