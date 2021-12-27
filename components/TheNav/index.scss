@@ -31,6 +31,10 @@
     color: var(--color-text);
     background-color: var(--color-light);
     box-shadow: var(--shadow);
+
+    .nav-title {
+      opacity: 1;
+    }
   }
 }
 
@@ -118,11 +122,14 @@
 
 .nav-title {
   font-size: 1.2rem;
-  font-family: InfoDisplay;
+  font-family: var(--font-serif);
   font-weight: 500;
   padding-right: 2rem;
   cursor: pointer;
   align-self: center;
+  opacity: 0;
+  // color: white;
+  // text-shadow: 0px 1px 0px #c7c8ca, 0px 2px 0px #b1b3b6, 0px 3px 0px #9d9fa2, 0px 4px 0px #8a8c8e, 0px 5px 0px #77787b, 0px 6px 0px #636466, 0px 7px 0px #4d4d4f, 0px 8px 7px #001135;
 }
 
 .nav-menu {

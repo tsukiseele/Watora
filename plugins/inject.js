@@ -3,9 +3,7 @@ import Statics from '@/assets/resource/statics.js'
 
 export default ({ app }, inject) => {
   // 静态资源位置
-  inject('static', 'https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static')
-  // 占位符
-  inject('placeholder', 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=')
+  inject('static', 'https://cdn.jsdelivr.net/gh/tsukiseele/awsl.re/static') 
   inject('src', initResource())
   inject('isNight', isNight)
 }

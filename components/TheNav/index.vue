@@ -32,7 +32,7 @@
 import { mapState, mapGetters } from "vuex"
 export default {
   data: () => ({
-    title: "雫『Watora』",
+    title: "WATORA",
     drawer: false,
     links: [
       {

@@ -7,7 +7,7 @@ export default {
   ssr: !(process.env.MODE && process.env.MODE.toLocaleLowerCase() == 'spa'),
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Watora - TsukiSeele的个人小站',
+    title: 'Watora - TsukiSeele个人博客',
     htmlAttrs: {
       lang: 'zh-CN',
     },

@@ -61,8 +61,6 @@ export default {
     try {
       const [dominant, palette1, palette2, palette3] = await this.getColor(this.archive.cover.url)
       document.getElementById('background').style.background = `rgba(${dominant[0]}, ${dominant[1]}, ${dominant[2]}, 1)`
-      // document.getElementById('background').style.background = `rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1)`
-      // document.getElementById('background').style.backgroundImage = `repeating-linear-gradient(45deg, rgba(${palette1[0]}, ${palette1[1]}, ${palette1[2]}, 1) 0 2rem, rgba(${palette2[0]}, ${palette2[1]}, ${palette2[2]}, 1) 2rem 4rem, rgba(${palette3[0]}, ${palette3[1]}, ${palette3[2]}, 1) 4rem 6rem, rgba(${dominant[0]}, ${dominant[1]}, ${dominant[2]}, 1) 6rem 8rem)`
     } catch (error) {
       console.error(error)
     }
@@ -70,6 +68,9 @@ export default {
   async fetch({ store, params }) {
     const id = parseInt(params.id)
     await store.dispatch('archive', { id })
+  },
+  async beforeDestroy() {
+    document.getElementById('background').style.backgroundColor = `rgba(0, 0, 0, 0.12)`
   },
 }
 </script>

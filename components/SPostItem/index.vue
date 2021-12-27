@@ -1,7 +1,7 @@
 <template lang="pug">
 .post-item(@click="$router.push(to)" :style="backgroundColor")
   .item-cover-box
-    img.item-cover(v-lazy="cover || placeholder")
+    img.item-cover(v-lazy="cover")
   .item-info 
     .item-title {{ title }}
     span.item-preview {{ description }}
@@ -40,10 +40,6 @@ export default {
     },
     category: {
       type: Object,
-      default: null,
-    },
-    placeholder: {
-      type: String,
       default: null,
     },
     description: {

@@ -47,7 +47,10 @@
     font-weight: 500;
     font-family: var(--font-sans-serif);
     cursor: pointer;
-    text-shadow: 2px 2px 0px white;
+    // text-shadow: 2px 2px 0px white;
+    color: white;
+    text-shadow: 0px 1px 0px #c7c8ca, 0px 2px 0px #b1b3b6, 0px 3px 0px #9d9fa2, 0px 4px 0px #8a8c8e, 0px 5px 0px #77787b, 0px 6px 0px #636466, 0px 7px 0px #4d4d4f, 0px 8px 7px #001135;
+
     span {
       transition: color 0.3s ease;
     }

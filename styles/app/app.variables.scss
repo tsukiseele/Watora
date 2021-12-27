@@ -1,9 +1,9 @@
-:root {  
+:root {
   --redius: 5px;
   --nav-height: 3rem;
   --font-monospace: 0;
   --font-serif: 'Patrick Hand', Georgia, Times, STSong, SimSun, FangSong, KaiTi, STKaiti;
-  --font-sans-serif: 'Noto Sans TC', InfoDisplay, Titillium Web, 'Sarasa Gothic SC', 'Source Han Sans CN', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-sans-serif: rubik, helvetica, arial, sans-serif;
 }
 // 移动端断点
 $mobile: 876px;

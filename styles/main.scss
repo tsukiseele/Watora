@@ -18,12 +18,6 @@
   }
 }
 
-/** 全局图标字体 **/
-@font-face {
-  font-family: 'Fontello';
-  src: url('/fonts/fontello.woff2');
-}
-
 /** 全局英文字体 **/
 @font-face {
   font-family: 'InfoDisplay';
@@ -112,14 +106,15 @@ a {
   }
 
   &::before {
-    content: ' ' attr(href);
-    font-family: Fontello, InfoDisplay;
+    content: '\e226 ' attr(href);
     position: absolute;
+    display: inline-block;
     left: 0;
     bottom: 100%;
     width: max-content;
-    line-height: 1.25rem;
-    padding: 0.1rem 0.25rem;
+    font-family: InfoDisplay, "Material Icons";
+    line-height: 1.2rem;
+    padding: 0 0.25rem;
     border-radius: 3px;
     background: white;
     box-shadow: var(--shadow);

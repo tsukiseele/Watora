@@ -26,7 +26,6 @@
           :description='item.description',
           :category='item.category'
           :to='`/archives/${item.id || ""}`',
-          :placeholder='res.placeholder',
           :data-aos='index % 2 == 0 ? "fade-left" : "fade-right"',
           :data-aos-once='isAosOnce'
         )
@@ -87,10 +86,10 @@ export default {
     },
     res() {
       const icon = `${this.$static}/icon/icon.png`
-      const placeholder = this.$src.images.placeholder
+      // const placeholder = this.$src.images.placeholder
       return {
         icon,
-        placeholder,
+        // placeholder,
       }
     },
   },
