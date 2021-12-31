@@ -67,12 +67,13 @@ export default {
     },
   },
   async mounted() {
+    /*
     try {
       const [dominant, palette1, palette2, palette3] = await this.getColor(this.cover)
       this.backgroundColor = { backgroundColor: `rgba(${dominant[0]}, ${dominant[1]}, ${dominant[2]}, .33)` }
     } catch (error) {
       console.log(error)
-    }
+    }*/
   },
 }
 </script>
