@@ -12,7 +12,7 @@
 - `live2d-vue` - Live2d看板娘
 - `katex` - 数学公式支持
 ### 常见问题
-- 如何关闭SSR，部署为静态页面
+- 如何关闭SSR，部署为单页面
   >将 `nuxt.config.js` 中的 `ssr: true` 改为 `ssr: false`
 
 ### 安装与搭建
