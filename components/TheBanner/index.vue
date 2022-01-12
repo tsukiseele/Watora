@@ -1,5 +1,5 @@
 <template lang="pug">
-#banner(ref='banner', :class='{ full: isFull, hide: isHide }', :style='{ "background-image": background }')
+#banner(ref='banner', :class='{ full: isFull, hide: isHide }', :style='{ "background-image": isHide ? null : background }')
   .banner--card(v-if='!isHide')
     .banner--title(@click='scrollToContent()')
       span {{ title }}

@@ -28,9 +28,9 @@ export default {
       return {
         title: this.archive ? this.archive.title : '无题',
         subtitle: this.archive ? this.archive.description : '',
-        cover: this.archive ? this.archive.cover.url : null,
+        cover: null, //this.archive ? this.archive.cover.url : null,
         isHideSubtitle: true,
-        // isHide: true,
+        isHide: true,
       }
     },
   },
