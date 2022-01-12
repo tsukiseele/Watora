@@ -127,7 +127,8 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    background: url('/bg.webp');  
+    // background: url('/bg.webp');
+    background-color: rgba(192, 224, 224, 1);  
     // background: url(https://api.paugram.com/wallpaper?source=gt);
     // background: repeating-linear-gradient(45deg, rgba(0, 128, 128, 1) 0 1rem, transparent 1rem 2rem, rgba(0, 128, 128, 1) 2rem 3rem);
     background-size: cover;
