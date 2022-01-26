@@ -47,7 +47,7 @@ function getTitles(markdown) {
 
 function getCover(markdown) {
   const match = regCover.exec(markdown)
-  return match && match.length > 2 ? { title: match[1], cover: match[2] } : null;
+  return match && match.length > 2 ? { title: match[1], cover: match[2] } : null
 }
 /**
  * 获取Markdown文本的图片数据
