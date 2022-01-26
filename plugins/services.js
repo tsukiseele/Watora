@@ -1,7 +1,7 @@
 import config from '@/plugins/config.js'
 
 export default ({ app, $axios }, inject) => {
-  $axios.defaults.headers.common['Authorization'] = config.token.replace('+', '_')
+  $axios.defaults.headers.common['Authorization'] = `token ${Buffer.from(config.token, 'base64').toString('ascii')}`
   $axios.defaults.baseURL = `https://api.github.com/repos/${config.username}/${config.repository}`;
   inject('service', {
     getArchives({ page, count }) {

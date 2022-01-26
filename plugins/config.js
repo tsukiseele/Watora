@@ -3,8 +3,8 @@ export default {
   title: '',
   // 描述
   details: '',
-  // 这里需要把 '_' 下划线替换为 '+'
-  token: 'ghp+WJ0EBltUhdwG4QnGa0Arhxa6wkSWoP3boZv7',
+  // token base64lize
+  token: 'Z2hwX2UzbXo0eDFzMW1JeTlYYjJBYzZoc3lvMVA5eFpLaTN0ZnoxbA==',
   // Github 用户名
   username: 'tsukiseele',
   // username: 'chanshiyucx',

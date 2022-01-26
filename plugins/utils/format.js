@@ -1,4 +1,7 @@
+import markdown from "highlight.js/lib/languages/markdown"
+
 const regLines = new RegExp('.+', 'gm')
+const regCover = new RegExp('\\[(.*?)\\]:\\s#\\s\\((.*?)\\)')
 const regImages = new RegExp('!\\[(.*?)\\].*?\\(((?:https?:\\/\\/|\\/\\/).+?\\.(?:webp|png|gif|jpg|jpeg|jfif)(?:\\?[\\w_=\\-%]+?|))\\)', 'g')
 const regTitles = new RegExp('^(#+)\\s+(.+)', 'gm')
 const regBranches = new RegExp('(main|master)\\/', 'g')
@@ -40,6 +43,11 @@ function getTitles(markdown) {
     }
   }
   return menu
+}
+
+function getCover(markdown) {
+  const match = regCover.exec(markdown)
+  return match && match.length > 2 ? { title: match[1], cover: match[2] } : null;
 }
 /**
  * 获取Markdown文本的图片数据
