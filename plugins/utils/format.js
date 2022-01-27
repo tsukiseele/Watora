@@ -1,4 +1,4 @@
-const regDesc = /^([^\s\[!#].*\n)+/gm//new RegExp('^([^\\[\\s\\\\!#`<>].*?\\\\n)+', 'gm')// new RegExp(/^([^\[\s\\#`>].*?\n)+/gm)
+const regDesc = new RegExp('(^[^-_!#<>`\\s\\[][\\s\\S]+?\\n)+', 'm')
 const regCover = new RegExp('\\[(.*?)\\]:\\s#\\s\\((.*?)\\)')
 const regLines = new RegExp('.+', 'gm')
 const regImages = new RegExp('!\\[(.*?)\\].*?\\(((?:https?:\\/\\/|\\/\\/).+?\\.(?:webp|png|gif|jpg|jpeg|jfif)(?:\\?[\\w_=\\-%]+?|))\\)', 'g')
@@ -44,13 +44,8 @@ function getTitles(markdown) {
   return menu
 }
 function getDesc(markdown) {
-  console.log('=====================================');
-  console.log(regDesc);
-  console.log(markdown);
   const match = regDesc.exec(markdown)
-  console.log('DESC', match);
-  console.log('-------------------------------------');
-  return match ? match[0] : ''
+  return match ? match[0] : null
 }
 
 function getCover(markdown) {
