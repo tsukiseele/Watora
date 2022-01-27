@@ -1,7 +1,6 @@
-import markdown from "highlight.js/lib/languages/markdown"
-
-const regLines = new RegExp('.+', 'gm')
+const regDesc = /^([^\s\[!#].*\n)+/gm//new RegExp('^([^\\[\\s\\\\!#`<>].*?\\\\n)+', 'gm')// new RegExp(/^([^\[\s\\#`>].*?\n)+/gm)
 const regCover = new RegExp('\\[(.*?)\\]:\\s#\\s\\((.*?)\\)')
+const regLines = new RegExp('.+', 'gm')
 const regImages = new RegExp('!\\[(.*?)\\].*?\\(((?:https?:\\/\\/|\\/\\/).+?\\.(?:webp|png|gif|jpg|jpeg|jfif)(?:\\?[\\w_=\\-%]+?|))\\)', 'g')
 const regTitles = new RegExp('^(#+)\\s+(.+)', 'gm')
 const regBranches = new RegExp('(main|master)\\/', 'g')
@@ -43,6 +42,15 @@ function getTitles(markdown) {
     }
   }
   return menu
+}
+function getDesc(markdown) {
+  console.log('=====================================');
+  console.log(regDesc);
+  console.log(markdown);
+  const match = regDesc.exec(markdown)
+  console.log('DESC', match);
+  console.log('-------------------------------------');
+  return match ? match[0] : ''
 }
 
 function getCover(markdown) {
@@ -92,14 +100,13 @@ export const formatGallery = ({ body }) => {
  */
 export const formatPost = ({ body, title, created_at: createAt, labels, milestone: category, number: id }) => {
   // 使用 CDN
-  const { markdown, images } = initMarkdown(body)
+  const { markdown } = initMarkdown(body)
   // 获取封面图 （默认为第一张图片）
-  const cover = images[0] || {
-    title: '',
-    url: 'x',
-  }
+  const cover = getCover(markdown) || {}
+  console.log('cover', cover);
   // 获取描述，查找首个非图片行
-  const description = getLines(markdown).find(line => !getImages(line).length)
+  const description = getDesc(markdown)//getLines(markdown).find(line => !getImages(line).length)
+  console.log('description', description);
   // 生成导航菜单
   const nav = getTitles(markdown)
   return { markdown, cover, description, title, createAt, labels, category, id, nav }
