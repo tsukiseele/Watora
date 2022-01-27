@@ -1,9 +1,8 @@
 const regDesc = new RegExp('(^[^-_!#<>`\\s\\[][\\s\\S]+?\\n)+', 'm')
 const regCover = new RegExp('\\[(.*?)\\]:\\s#\\s\\((.*?)\\)')
-const regLines = new RegExp('.+', 'gm')
 const regImages = new RegExp('!\\[(.*?)\\].*?\\(((?:https?:\\/\\/|\\/\\/).+?\\.(?:webp|png|gif|jpg|jpeg|jfif)(?:\\?[\\w_=\\-%]+?|))\\)', 'g')
 const regTitles = new RegExp('^(#+)\\s+(.+)', 'gm')
-const regBranches = new RegExp('(main|master)\\/', 'g')
+const regBranches = new RegExp('(main|master)\\/')
 
 const RAW_URL = 'raw.githubusercontent.com'
 const CDN_URL = 'cdn.jsdelivr.net/gh'
@@ -45,12 +44,12 @@ function getTitles(markdown) {
 }
 function getDesc(markdown) {
   const match = regDesc.exec(markdown)
-  return match ? match[0] : null
+  return match ? match[0] : ''
 }
 
 function getCover(markdown) {
   const match = regCover.exec(markdown)
-  return match && match.length > 2 ? { title: match[1], cover: match[2] } : null
+  return match && match.length > 2 ? { title: match[1], url: match[2] } : {}
 }
 /**
  * 获取Markdown文本的图片数据
@@ -71,20 +70,8 @@ function getImages(markdown) {
   return images
 }
 /**
- * 将文本行转换为列表
- * @param {String} markdown
- */
-function getLines(markdown) {
-  let match
-  const result = []
-  while ((match = regLines.exec(markdown))) {
-    result.push(match[0])
-  }
-  return result
-}
-/**
  *
- * @param {*} param0
+ * @param {*} param
  * @returns
  */
 export const formatGallery = ({ body }) => {
@@ -96,12 +83,10 @@ export const formatGallery = ({ body }) => {
 export const formatPost = ({ body, title, created_at: createAt, labels, milestone: category, number: id }) => {
   // 使用 CDN
   const { markdown } = initMarkdown(body)
-  // 获取封面图 （默认为第一张图片）
-  const cover = getCover(markdown) || {}
-  console.log('cover', cover);
-  // 获取描述，查找首个非图片行
-  const description = getDesc(markdown)//getLines(markdown).find(line => !getImages(line).length)
-  console.log('description', description);
+  // 获取封面图（读取第一条注释）
+  const cover = getCover(markdown)
+  // 获取描述（读取第一段落）
+  const description = getDesc(markdown)
   // 生成导航菜单
   const nav = getTitles(markdown)
   return { markdown, cover, description, title, createAt, labels, category, id, nav }
